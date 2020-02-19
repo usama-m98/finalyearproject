@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <header>
+        <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
+    </header>
+    <div id="signup_div">
+        <h2>{{ page_heading2 }}</h2>
+        <form action="{{ action }}" method="post">
+            <label for="signup_username">Enter a Username* </label>
+            <input type="text" name="signup_username" id="signup_username" required />
+            <label for="signup_email">Enter a Email* </label>
+            <input type="email" name="signup_email" id="signup_email" required />
+            <label for="signup_password">Enter a Password* </label>
+            <input type="password" name="signup_password" id="signup_password" required />
+            <input type="submit" name="signup_button" value="Sign Up" id="signup_button" />
+        </form>
+    </div>
+{% endblock %}

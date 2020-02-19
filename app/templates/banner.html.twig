@@ -1,0 +1,27 @@
+{% extends 'layout.html.twig' %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block banner %}
+<div id="banner-div">
+    <header>
+        <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
+
+        <div id="login_bar">
+            <a href="{{ login }}">Login</a>
+            <a href="{{ signup }}">Sign Up</a>
+        </div>
+
+        <nav>
+            <a href="#">Desktop PC</a>
+            <a href="#">Laptops</a>
+            <a href="#">Contact Us</a>
+            <a href="#">Monitors</a>
+            <a href="#">Peripherals</a>
+        </nav>
+
+        <form action="{{ action }}" method="post" id="search">
+            <input type="text" maxlength="100" size="100">
+            <input type="submit" value="search">
+        </form>
+    </header>
+<div id="clear-div"></div>
+{% endblock %}
