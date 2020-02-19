@@ -26,6 +26,11 @@ $container['db'] = function ($container) {
     return $capsule;
 };
 
+$container['bcryptWrapper'] = function ($container) {
+    $wrapper = new \FinalYear\BcryptWrapper();
+    return $wrapper;
+};
+
 $container['processOutput'] = function ($container){
     $model = new FinalYear\ProcessOutput();
     return $model;
