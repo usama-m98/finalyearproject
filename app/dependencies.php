@@ -26,6 +26,11 @@ $container['db'] = function ($container) {
     return $capsule;
 };
 
+$container['validator'] = function ($container) {
+    $validator = new \FinalYear\Validator();
+    return $validator;
+};
+
 $container['bcryptWrapper'] = function ($container) {
     $wrapper = new \FinalYear\BcryptWrapper();
     return $wrapper;

@@ -27,6 +27,8 @@ CREATE TABLE `users` (
   `email` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
   `role` enum('Member', 'Admin') NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
