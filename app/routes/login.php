@@ -11,8 +11,9 @@ $app->get('/login', function(Request $request, Response $response) use ($app)
             'page_title' => 'Login Form',
             'css_path' => CSS_PATH,
             'landing_page' => LANDING_PAGE,
+            'js_path' => JS_PATH,
             'heading' => 'Login',
-            'action' => '#',
+            'action' => 'signin',
         ]);
 
     processOutput($app, $html_output);

@@ -3,15 +3,15 @@
     <header>
         <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
     </header>
-    <div id="signup_div">
-        <h2>{{ page_heading2 }}</h2>
+    <div class="content-div" id="signup_div">
+        <h2 id="signup_heading">{{ page_heading2 }}</h2>
         <form action="{{ action }}" method="post">
             <label for="signup_username">Enter a Username* </label>
-            <input type="text" name="signup_username" id="signup_username" required />
+            <input type="text" name="signup_username" id="signup_username"  />
             <label for="signup_email">Enter a Email* </label>
-            <input type="email" name="signup_email" id="signup_email" required />
+            <input type="email" name="signup_email" id="signup_email"  />
             <label for="signup_password">Enter a Password* </label>
-            <input type="password" name="signup_password" id="signup_password" required />
+            <input type="password" name="signup_password" id="signup_password" />
             <input type="submit" name="signup_button" value="Sign Up" id="signup_button" />
         </form>
     </div>

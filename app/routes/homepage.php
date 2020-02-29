@@ -13,6 +13,8 @@ $app->get('/', function(Request $request, Response $response) use ($app)
             'page_title' => 'Homepage',
             'css_path' => CSS_PATH,
             'landing_page' => LANDING_PAGE,
+            'js_path' => JS_PATH,
+            'homepage_banner' => HOMEPAGE_BANNER,
             'login' => 'login',
             'signup' => 'signup',
         ]);

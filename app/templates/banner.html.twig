@@ -1,15 +1,22 @@
 {% extends 'layout.html.twig' %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block banner %}
-<div id="banner-div">
+    <div id="banner-div">
     <header>
         <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
-
-        <div id="login_bar">
-            <a href="{{ login }}">Login</a>
-            <a href="{{ signup }}">Sign Up</a>
-        </div>
-
+        {% if auth.check %}
+            <div class="menu" id="menu-toggle">{{ auth.user.username }}</div>
+            <nav id="menu-nav">
+                <a href="youraccount">Your Account</a>
+                <a href="#">Your Orders</a>
+                <a href="#">Logout</a>
+            </nav>
+        {% else %}
+            <div id="login-bar">
+                <a href="{{ login }}">Login</a>
+                <a href="{{ signup }}">Sign Up</a>
+            </div>
+        {% endif %}
         <nav>
             <a href="#">Desktop PC</a>
             <a href="#">Laptops</a>
@@ -23,5 +30,5 @@
             <input type="submit" value="search">
         </form>
     </header>
-<div id="clear-div"></div>
+    <div id="clear-div"></div>
 {% endblock %}

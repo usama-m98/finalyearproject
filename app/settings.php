@@ -2,8 +2,12 @@
 
 $app_url = dirname($_SERVER['SCRIPT_NAME']);
 $css_file_path = $app_url . '/css/styles.css';
+$js_file_path = $app_url . '/js/scripts.js';
+$homepage_banner = $app_url . '/media/Gaming_PC_Banner_Hyper_Liquid.jpg';
 define('CSS_PATH', $css_file_path);
+define('JS_PATH', $js_file_path);
 define('APPLICATION_NAME', 'CustomPcSpecialists');
+define('HOMEPAGE_BANNER', $homepage_banner);
 
 $url_root = $_SERVER['SCRIPT_NAME'];
 $url_root = implode('/', explode('/', $url_root, -1));

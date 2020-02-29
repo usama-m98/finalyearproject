@@ -12,7 +12,8 @@ $app->get('/signup', function (Request $request, Response $response) use ($app)
             'page_title' => 'Signup Form',
             'css_path' => CSS_PATH,
             'landing_page' => LANDING_PAGE,
-            'page_heading' => 'Sign up',
+            'js_path' => JS_PATH,
+            'page_heading2' => 'Sign up',
             'action' => 'registered',
         ]);
 
