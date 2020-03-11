@@ -1,13 +1,16 @@
 <?php
+
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 
-$app->post('/usernamechanged', function(Request $request, Response $response) use ($app)
+$app->post('/emailchanged', function(Request $request, Response $response) use ($app)
 {
     $tainted = $request->getParsedBody();
-    $cleaned_username = validateUsername($app, $tainted);
+    $cleaned_email = validateEmail($app, $tainted);
+
+    var_dump($cleaned_email);
     $auth_info = getAuthInfo($app, $_SESSION['user']);
-    $update_username = updateUsernameInDatabase($app, $cleaned_username, $auth_info);
+    $update_username = updateEmailInDatabase($app, $cleaned_email, $auth_info);
 
 
     return $response->withRedirect('personaldetails');
@@ -28,17 +31,17 @@ $app->post('/usernamechanged', function(Request $request, Response $response) us
 
 });
 
-function validateUsername($app, $tainted)
+function validateEmail($app, $tainted)
 {
     $validator = $app->getContainer()->get('validator');
-    $username = $tainted['edit-username'];
+    $email = $tainted['edit-email'];
 
-    $cleaned_username = $validator->sanitiseString($username);
+    $cleaned_email = $validator->sanitiseEmail($email);
 
-    return $cleaned_username;
+    return $cleaned_email;
 }
 
-function updateUsernameInDatabase($app, $cleaned_username, $auth)
+function updateEmailInDatabase($app, $cleaned_email, $auth)
 {
     $database_wrapper = $app->getContainer()->get('databaseWrapper');
     $sql_queries = $app->getContainer()->get('dbQueries');
@@ -49,24 +52,15 @@ function updateUsernameInDatabase($app, $cleaned_username, $auth)
     $database_wrapper->setDatabaseConnectionSettings($database_connection_settings);
     $database_wrapper->makeDatabaseConnection();
 
-    $query = $sql_queries->updateUsername();
+    $query = $sql_queries->updateEmail();
     $user_id = $auth['user_id'];
 
     $parameters = [
-        ':username' => $cleaned_username,
+        ':email' => $cleaned_email,
         ':user_id' => $user_id
     ];
 
-    $database_wrapper->safeQuery($query, $parameters);
+    $result = $database_wrapper->safeQuery($query, $parameters);
 
-    $new_username = switchSessionUser($cleaned_username);
-
-    return $new_username;
-
-}
-
-function switchSessionUser($username)
-{
-    $_SESSION['user'] = $username;
-    return $username;
+    return $result;
 }

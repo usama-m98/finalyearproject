@@ -3,7 +3,11 @@
     <header>
         <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
     </header>
-    <div class="content-div" id="signup_div">
 
-    </div>
+    <form action="{{ action }}" method="post">
+        <label for="edit-username">Enter new username:</label>
+        <input type="text" name="edit-username" id="edit-username">
+        <br>
+        <input type="submit" name="edit-username-submit" value="submit">
+    </form>
 {% endblock %}

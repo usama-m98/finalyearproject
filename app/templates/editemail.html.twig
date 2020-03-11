@@ -1,0 +1,13 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <header>
+        <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
+    </header>
+
+    <form action="{{ action }}" method="post">
+        <label for="edit-email">Enter new Email:</label>
+        <input type="text" name="edit-email" id="edit-email">
+        <br>
+        <input type="submit" name="edit-email-submit" value="submit">
+    </form>
+{% endblock %}
