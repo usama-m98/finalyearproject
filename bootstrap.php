@@ -16,8 +16,5 @@ require __DIR__ . '/app/middleware.php';
 
 require __DIR__ . '/app/routes.php';
 
-$capsule = $app->getContainer()->get('db');
-$capsule->bootEloquent();
-
 $app->run();
 

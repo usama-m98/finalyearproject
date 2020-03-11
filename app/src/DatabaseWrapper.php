@@ -13,7 +13,7 @@
  * @copyright CFI
  */
 
-namespace StockQuotes;
+namespace FinalYear;
 
 class DatabaseWrapper
 {

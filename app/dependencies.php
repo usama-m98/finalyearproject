@@ -1,17 +1,5 @@
 <?php
 
-$container['db'] = function ($container) {
-    $capsule = new \Illuminate\Database\Capsule\Manager;
-    $capsule->addConnection($container['settings']['db']);
-
-    $capsule->setAsGlobal();
-    return $capsule;
-};
-
-$container['auth'] = function ($container) {
-    $auth = new FinalYear\UserAuth();
-    return $auth;
-};
 
 // Register component on container
 $container['view'] = function ($container) {
@@ -26,17 +14,9 @@ $container['view'] = function ($container) {
     $basePath = rtrim(str_ireplace('index.php', '', $container['request']->getUri()->getBasePath()), '/');
     $view->addExtension(new Slim\Views\TwigExtension($container['router'], $basePath));
 
-    $view->getEnvironment()->addGlobal('auth', [
-        'check' => $container->auth->check(),
-        'user' => $container->auth->user(),
-    ]);
+    $view->getEnvironment()->addGlobal('signIn', $_SESSION);
 
     return $view;
-};
-
-$container['user'] = function ($container) {
-    $user = new \FinalYear\User();
-    return $user;
 };
 
 
@@ -48,6 +28,16 @@ $container['validator'] = function ($container) {
 $container['bcryptWrapper'] = function ($container) {
     $wrapper = new \FinalYear\BcryptWrapper();
     return $wrapper;
+};
+
+$container['dbQueries'] = function ($container){
+    $db_query = new \FinalYear\DbQueries();
+    return $db_query;
+};
+
+$container['databaseWrapper'] = function ($container){
+    $database_wrapper = new \FinalYear\DatabaseWrapper();
+    return $database_wrapper;
 };
 
 $container['processOutput'] = function ($container){

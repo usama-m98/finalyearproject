@@ -29,15 +29,20 @@ $settings = [
                 'cache' => false,
                 'auto_reload' => true
             ]],
-        'db' => [
-            'driver' => 'mysql',
+        'pdo_settings' => [
+            'rdbms' => 'mysql',
             'host' => 'localhost',
-            'database' => 'final_year_db',
-            'username' => 'final_year_user',
-            'password' => 'final_year_pass',
-            'charset'   => 'utf8',
+            'db_name' => 'final_year_db',
+            'port' => '3306',
+            'user_name' => 'final_year_user',
+            'user_password' => 'final_year_pass',
+            'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
-            'prefix'    => '',
+            'options' => [
+                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES   => true,
+            ],
         ]
     ],
 ];

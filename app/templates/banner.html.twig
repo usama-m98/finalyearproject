@@ -4,8 +4,8 @@
     <div id="banner-div">
     <header>
         <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
-        {% if auth.check %}
-            <div class="menu" id="menu-toggle">{{ auth.user.username }}</div>
+        {% if signIn.active %}
+            <div class="menu" id="menu-toggle">{{ signIn.user }}</div>
             <nav id="menu-nav">
                 <a href="youraccount">Your Account</a>
                 <a href="#">Your Orders</a>

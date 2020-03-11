@@ -30,4 +30,5 @@ class Validator
         }
         return $cleaned_string;
     }
+
 }

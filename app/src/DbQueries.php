@@ -4,42 +4,74 @@
 namespace FinalYear;
 
 
-class DoctrineSqlQueries
+class DbQueries
 {
     public function __construct(){}
 
     public function __destruct(){}
 
-    public static function queryStoreUserLoginData($queryBuilder, array $cleaned_parameters, string $hashed_password)
+    public function storeUserLoginData()
     {
-        $store_result = [];
-        $username = $cleaned_parameters['sanitised_username'];
-        $email = $cleaned_parameters['sanitised_email'];
-        $role = $cleaned_parameters['role'];
+        $query_string = "INSERT INTO users";
+        $query_string .= " SET ";
+        $query_string .= "username = :username, ";
+        $query_string .= "email = :email, ";
+        $query_string .= "password = :password, ";
+        $query_string .= "role = :role";
 
-        $queryBuilder = $queryBuilder->insert('users')
-            ->values([
-                'username' => ':name',
-                'email' => ':email',
-                'password' => ':password',
-                'role' => ':role'
-            ])
-            ->setParameters([
-                ':name' => $username,
-                ':email' => $email,
-                ':password' => $hashed_password,
-                ':role' => $role
-            ]);
-
-        $store_result['outcome'] = $queryBuilder->execute();
-        $store_result['sql_query'] = $queryBuilder->getSQL();
-
-        return $store_result;
+        return $query_string;
     }
 
-    public static function queryRetrieveUserData()
+    public function retrieveUserData()
     {
-        $sql_query_string = '';
-        return $sql_query_string;
+        $query_string = 'SELECT user_id, username, email, password ';
+        $query_string .= 'FROM users ';
+        $query_string .= 'WHERE username = :username';
+
+        return $query_string;
+    }
+
+    public function updateUsername()
+    {
+        $query_string = 'UPDATE users';
+        $query_string .= ' SET ';
+        $query_string .= 'username = :username ';
+        $query_string .= 'WHERE user_id = :user_id';
+
+        return $query_string;
+    }
+
+    public function updateEmail()
+    {
+        $query_string = 'UPDATE users';
+        $query_string .= ' SET ';
+        $query_string .= 'email = :email ';
+        $query_string .= 'WHERE user_id = :user_id';
+
+        return $query_string;
+    }
+
+    public function updatePassword()
+    {
+        $query_string = 'UPDATE users';
+        $query_string .= ' SET ';
+        $query_string .= 'password = :password ';
+        $query_string .= 'WHERE user_id = :user_id';
+
+        return $query_string;
+    }
+
+
+    public function insertPersonalDetails()
+    {
+        $query_string = "INSERT INTO customer";
+        $query_string .= " SET ";
+        $query_string .= "first_name = :firstname, ";
+        $query_string .= "surname = :surname, ";
+        $query_string .= "address = :address, ";
+        $query_string .= "phone_number = :phonenumber, ";
+        $query_string .= "user_id = :userid";
+
+        return $query_string;
     }
 }

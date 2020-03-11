@@ -2,32 +2,28 @@
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
+use Doctrine\DBAL\DriverManager;
+
 
 $app->post('/signin', function (Request $request, Response $response) use ($app)
 {
     $tainted = $request->getParsedBody();
     $cleaned_params = cleanSignInParameters($app, $tainted);
-    $sign_in = signIn($app, $cleaned_params['username'], $cleaned_params['password']);
+    $auth_info = getAuthInfo($app, $cleaned_params['username']);
+    $sign_in = signIn($auth_info ,$cleaned_params['password']);
+    sessionCheck();
+    user();
+
 
     if(!$sign_in)
     {
         return $response->withRedirect('login');
-
     }
 
     return $response->withRedirect(LANDING_PAGE);
 
+
 });
-
-function signIn($app, $username, $password)
-{
-    $db = $app->getContainer()->get('db');
-    $auth = $app->getContainer()->get('auth');
-    $signin_result = $auth->signInAttempt($username, $password);
-
-    return $signin_result;
-}
-
 
 function cleanSignInParameters($app, $tainted)
 {
@@ -40,3 +36,54 @@ function cleanSignInParameters($app, $tainted)
 
     return $cleaned_parameters;
 }
+
+function getAuthInfo($app, $username)
+{
+    $database_wrapper = $app->getContainer()->get('databaseWrapper');
+    $sql_queries = $app->getContainer()->get('dbQueries');
+    $settings = $app->getContainer()->get('settings');
+
+    $database_connection_settings = $settings['pdo_settings'];
+
+    $database_wrapper->setDatabaseConnectionSettings($database_connection_settings);
+    $database_wrapper->makeDatabaseConnection();
+
+    $query = $sql_queries->retrieveUserData();
+    $parameters = [':username' => $username];
+
+    $database_wrapper->safeQuery($query, $parameters);
+    $result =$database_wrapper->safeFetchArray();
+
+    return $result;
+}
+
+function signIn( $auth_info, $password)
+{
+    $signed_in = false;
+    $hashed_password = $auth_info['password'];
+
+    if(password_verify($password, $hashed_password))
+    {
+        $_SESSION['user'] = $auth_info['username'];
+        $signed_in = true;
+    }
+
+    return $signed_in;
+}
+
+function sessionCheck()
+{
+    if(isset($_SESSION['user'])){
+        return $_SESSION['active'] = true;
+    }
+}
+
+function user()
+{
+    if(isset($_SESSION['user'])){
+        return $_SESSION['user'];
+    }
+}
+
+
+

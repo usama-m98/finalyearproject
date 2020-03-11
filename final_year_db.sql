@@ -27,9 +27,6 @@ CREATE TABLE `users` (
   `email` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
   `role` enum('Member', 'Admin') NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -39,10 +36,10 @@ CREATE TABLE `customer` (
   `surname` varchar(256) NOT NULL,
   `address` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
   `phone_number` int(16) NOT NULL,
-  `user_id` int(10) NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`customer_id`),
-  FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`),
-)ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 CREATE TABLE `products` (

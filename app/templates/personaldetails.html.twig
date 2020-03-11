@@ -5,8 +5,20 @@
         <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
     </header>
 
-    <div>
         <h2>{{ page_heading2 }}</h2>
 
+        <h3>{{ page_heading3 }}</h3>
+
+    <div>
+        <label>username: {{ username }}</label>
+        <a href="editusername">edit username</a>
+        <br>
+        <label>email: {{ email }}</label>
+        <a href="editemail">edit email</a>
+        <br>
+        <label>password: *********</label>
+        <a href="editpassword">edit password</a>
+        <br>
     </div>
+
 {% endblock %}
