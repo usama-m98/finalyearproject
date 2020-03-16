@@ -18,6 +18,7 @@ GRANT ALL PRIVILEGES ON final_year_db.* TO 'final_year_user'@localhost IDENTIFIE
 USE final_year_db;
 
 DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `customers`;
 
 --- users tables
 
@@ -30,17 +31,19 @@ CREATE TABLE `users` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `customer` (
+
+CREATE TABLE `customers` (
   `customer_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `first_name` varchar(256) NOT NULL,
   `surname` varchar(256) NOT NULL,
   `address` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone_number` int(16) NOT NULL,
+  `postcode` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone_number` varchar(20) NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`customer_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
 
 CREATE TABLE `products` (
   `product_id` int(10) unsigned NOT NULL AUTO_INCREMENT,

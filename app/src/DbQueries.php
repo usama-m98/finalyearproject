@@ -64,11 +64,13 @@ class DbQueries
 
     public function insertPersonalDetails()
     {
-        $query_string = "INSERT INTO customer";
+        $query_string = "INSERT INTO customers";
         $query_string .= " SET ";
         $query_string .= "first_name = :firstname, ";
         $query_string .= "surname = :surname, ";
         $query_string .= "address = :address, ";
+        $query_string .= "postcode = :postcode, ";
+        $query_string .= "city = :city, ";
         $query_string .= "phone_number = :phonenumber, ";
         $query_string .= "user_id = :userid";
 

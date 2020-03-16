@@ -15,4 +15,5 @@ require 'routes/usernamechanged.php';
 require 'routes/emailchanged.php';
 require 'routes/passwordchanged.php';
 require 'routes/addpersonalinfo.php';
+require 'routes/addpersonalinfoform.php';
 

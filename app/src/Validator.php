@@ -31,4 +31,17 @@ class Validator
         return $cleaned_string;
     }
 
+    public function sanitiseNumber(string $numbers_to_sanitise): string
+    {
+        $cleaned_string = false;
+
+        if (!empty($numbers_to_sanitise))
+        {
+            $sanitised_number = filter_var($numbers_to_sanitise, FILTER_SANITIZE_NUMBER_INT);
+            $cleaned_string = filter_var($sanitised_number, FILTER_VALIDATE_INT);
+        }
+
+        return $cleaned_string;
+    }
+
 }

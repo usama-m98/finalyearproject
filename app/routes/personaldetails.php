@@ -17,8 +17,8 @@ $app->get('/personaldetails', function(Request $request, Response $response) use
             'css_path' => CSS_PATH,
             'landing_page' => LANDING_PAGE,
             'js_path' => JS_PATH,
-            'page_heading2' => 'Personal Details',
-            'page_heading3' => 'User Information',
+            'page_heading2' => 'User Account Information',
+            'page_heading3' => 'Personal Details',
             'username' => $username,
             'email' => $email
         ]);
