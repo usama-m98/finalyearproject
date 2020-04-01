@@ -24,7 +24,7 @@ class DbQueries
 
     public function retrieveUserData()
     {
-        $query_string = 'SELECT user_id, username, email, password ';
+        $query_string = 'SELECT user_id, username, email, password, role ';
         $query_string .= 'FROM users ';
         $query_string .= 'WHERE username = :username';
 
@@ -73,6 +73,15 @@ class DbQueries
         $query_string .= "city = :city, ";
         $query_string .= "phone_number = :phonenumber, ";
         $query_string .= "user_id = :userid";
+
+        return $query_string;
+    }
+
+    public function retrieveIntelProcessor()
+    {
+        $query_string = 'SELECT product_id, name, price, type ';
+        $query_string .= 'FROM products ';
+//        $query_string .= 'WHERE type = \'Intel-Processor\'';
 
         return $query_string;
     }

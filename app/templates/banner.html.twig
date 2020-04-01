@@ -4,18 +4,24 @@
     <div id="banner-div">
     <header>
         <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
-        {% if signIn.active %}
+        {% if signIn.active_admin %}
             <div class="menu" id="menu-toggle">{{ signIn.user }}</div>
             <nav id="menu-nav">
-                <a href="youraccount">Your Account</a>
-                <a href="#">Your Orders</a>
-                <a href="#">Logout</a>
+                <a href="Admininterface">Admin Interface</a>
+                <a href="logout">Logout</a>
             </nav>
-        {% else %}
-            <div id="login-bar">
-                <a href="{{ login }}">Login</a>
-                <a href="{{ signup }}">Sign Up</a>
-            </div>
+        {% elseif signIn.active_user %}
+        <div class="menu" id="menu-toggle">{{ signIn.user }}</div>
+        <nav id="menu-nav">
+            <a href="youraccount">Your Account</a>
+            <a href="#">Your Orders</a>
+            <a href="logout">Logout</a>
+        </nav>
+            {% else %}
+                <div id="login-bar">
+                    <a href="{{ login }}">Login</a>
+                    <a href="{{ signup }}">Sign Up</a>
+                </div>
         {% endif %}
         <nav>
             <a href="#">Desktop PC</a>

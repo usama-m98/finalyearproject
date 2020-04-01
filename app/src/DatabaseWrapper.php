@@ -87,7 +87,6 @@ class DatabaseWrapper
     {
         $this->errors['db_error'] = false;
         $query_parameters = $params;
-        var_dump($query_parameters);
 
         try
         {
@@ -134,5 +133,11 @@ class DatabaseWrapper
         $arr_last_inserted_id = $this->safeFetchArray();
         $last_inserted_id = $arr_last_inserted_id['LAST_INSERT_ID()'];
         return $last_inserted_id;
+    }
+
+    public function safeFetchAll()
+    {
+        $row = $this->prepared_statement->fetchAll();
+        return $row;
     }
 }

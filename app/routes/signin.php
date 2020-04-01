@@ -11,9 +11,10 @@ $app->post('/signin', function (Request $request, Response $response) use ($app)
     $cleaned_params = cleanSignInParameters($app, $tainted);
     $auth_info = getAuthInfo($app, $cleaned_params['username']);
     $sign_in = signIn($auth_info ,$cleaned_params['password']);
+
     sessionCheck();
     user();
-
+    role();
 
     if(!$sign_in)
     {
@@ -21,6 +22,19 @@ $app->post('/signin', function (Request $request, Response $response) use ($app)
     }
 
     return $response->withRedirect(LANDING_PAGE);
+
+//        $html_output = $this->view->render($response,
+//        'result.html.twig',
+//        [
+//            'page_title' => 'Personal Details',
+//            'css_path' => CSS_PATH,
+//            'landing_page' => LANDING_PAGE,
+//            'js_path' => JS_PATH,
+//        ]);
+//
+//    processOutput($app, $html_output);
+//
+//    return $html_output;
 
 
 });
@@ -65,6 +79,7 @@ function signIn( $auth_info, $password)
     if(password_verify($password, $hashed_password))
     {
         $_SESSION['user'] = $auth_info['username'];
+        $_SESSION['role'] = $auth_info['role'];
         $signed_in = true;
     }
 
@@ -74,14 +89,24 @@ function signIn( $auth_info, $password)
 function sessionCheck()
 {
     if(isset($_SESSION['user'])){
-        return $_SESSION['active'] = true;
-    }
+            if ($_SESSION['role'] == 'Admin') {
+                return $_SESSION['active_admin'] = true;
+            } else {
+                return $_SESSION['active_user'] = true;
+            }
+        }
 }
 
 function user()
 {
     if(isset($_SESSION['user'])){
         return $_SESSION['user'];
+    }
+}
+
+function role(){
+    if(isset($_SESSION['role'])){
+        return $_SESSION['role'];
     }
 }
 
