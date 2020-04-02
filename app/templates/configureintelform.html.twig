@@ -2,7 +2,7 @@
 {% block content %}
     <div class="content-div">
         <h2>{{ heading }}</h2>
-        <form action="{{ action }}" method="post" id="configure-form">
+        <form action="{{ action }}" method="post" class="configure-form">
             <label for="Cases">Choose a Case:</label>
             <select name="Cases" required>
                 <option value="" selected>Select a Case</option>
@@ -76,6 +76,7 @@
                     {% endif %}
                 {% endfor %}
             </select>
+            <input type="submit" name="intel-configure-submit" value="Proceed" style="width: 250px;">
         </form>
     </div>
 {% endblock %}

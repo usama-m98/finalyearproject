@@ -21,7 +21,7 @@ $app->get('/configureintelform', function(Request $request, Response $response) 
     processOutput($app, $html_output);
 
     return $html_output;
-})->setName('configureform');
+})->setName('configureintelform');
 
 function getStoredProducts($app){
     $database_wrapper = $app->getContainer()->get('databaseWrapper');

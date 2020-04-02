@@ -17,6 +17,7 @@ require 'routes/passwordchanged.php';
 require 'routes/addpersonalinfo.php';
 require 'routes/addpersonalinfoform.php';
 require 'routes/configureintelform.php';
+require 'routes/configureamdform.php';
 
 require 'routes/logout.php';
 

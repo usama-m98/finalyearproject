@@ -1,0 +1,82 @@
+{% extends 'banner.html.twig' %}
+{% block content %}
+    <div class="content-div">
+        <h2>{{ heading }}</h2>
+        <form action="{{ action }}" method="post" class="configure-form">
+            <label for="Cases">Choose a Case:</label>
+            <select name="Cases" required>
+                <option value="" selected>Select a Case</option>
+                {% for name in products %}
+                    {% if name['type'] == 'Case' %}
+                        <option value="{{name['product_id']}}">{{name['name']}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+
+            <label for="Intel-processor">Choose a CPU:</label>
+            <select name="Intel-processor" required>
+                <option value="" selected>Processor</option>
+                {% for name in products %}
+                    {% if name['type'] == 'AMD-Processor' %}
+                        <option value="{{name['product_id']}}">{{name['name']}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <label for="Motherboard">Choose a Motherboard:</label>
+            <select name="Motherboard" required>
+                <option value="" selected>Motherboard</option>
+                {% for name in products %}
+                    {% if name['type'] == 'AMD-Motherboard' %}
+                        <option value="{{name['product_id']}}">{{name['name']}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <label for="RAM">RAM:</label>
+            <select name="RAM" required>
+                <option value="" selected>RAM Memory</option>
+                {% for name in products %}
+                    {% if name['type'] == 'RAM' %}
+                        <option value="{{name['product_id']}}">{{name['name']}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <label for="Graphics-card">Graphics Card:</label>
+            <select name="Graphics-card" required>
+                <option value="" selected>Graphics Card</option>
+                {% for name in products %}
+                    {% if name['type'] == 'Graphics-Card' %}
+                        <option value="{{name['product_id']}}">{{name['name']}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <label for="Hard-drive">Storage:</label>
+            <select name="Hard-drive" required>
+                <option value="" selected>Harddrive Storage</option>
+                {% for name in products %}
+                    {% if name['type'] == 'Storage' %}
+                        <option value="{{name['product_id']}}">{{name['name']}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <label for="Cooling-fan">Cooling Fan:</label>
+            <select name="Cooling-fan" required>
+                <option value="" selected>Cooling Fan</option>
+                {% for name in products %}
+                    {% if name['type'] == 'Cooler' %}
+                        <option value="{{name['product_id']}}">{{name['name']}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <label for="Power-Supply">Power Supply:</label>
+            <select name="Power-Supply" required>
+                <option value="" selected>Power Supply</option>
+                {% for name in products %}
+                    {% if name['type'] == 'Power-Supply' %}
+                        <option value="{{name['product_id']}}">{{name['name']}}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <input type="submit" name="amd-configure-submit" value="Proceed" style="width: 250px;">
+        </form>
+    </div>
+{% endblock %}
