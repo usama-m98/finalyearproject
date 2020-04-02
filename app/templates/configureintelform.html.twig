@@ -8,7 +8,7 @@
                 <option value="" selected>Select a Case</option>
                 {% for name in products %}
                     {% if name['type'] == 'Case' %}
-                        <option value="{{name['product_id']}}">{{name['name']}}</option>
+                        <option value="{{name['name']}}">{{name['name']}}</option>
                     {% endif %}
                 {% endfor %}
             </select>
@@ -18,7 +18,7 @@
                 <option value="" selected>Processor</option>
                 {% for name in products %}
                 {% if name['type'] == 'Intel-Processor' %}
-                    <option value="{{name['product_id']}}">{{name['name']}}</option>
+                    <option value="{{name['name']}}">{{name['name']}}</option>
                 {% endif %}
                 {% endfor %}
             </select>
@@ -27,7 +27,7 @@
                 <option value="" selected>Motherboard</option>
                 {% for name in products %}
                     {% if name['type'] == 'Intel-Motherboard' %}
-                        <option value="{{name['product_id']}}">{{name['name']}}</option>
+                        <option value="{{name['name']}}">{{name['name']}}</option>
                     {% endif %}
                 {% endfor %}
             </select>
@@ -36,7 +36,7 @@
                 <option value="" selected>RAM Memory</option>
                 {% for name in products %}
                     {% if name['type'] == 'RAM' %}
-                        <option value="{{name['product_id']}}">{{name['name']}}</option>
+                        <option value="{{name['name']}}">{{name['name']}}</option>
                     {% endif %}
                 {% endfor %}
             </select>
@@ -45,7 +45,7 @@
                 <option value="" selected>Graphics Card</option>
                 {% for name in products %}
                     {% if name['type'] == 'Graphics-Card' %}
-                        <option value="{{name['product_id']}}">{{name['name']}}</option>
+                        <option value="{{name['name']}}">{{name['name']}}</option>
                     {% endif %}
                 {% endfor %}
             </select>
@@ -54,7 +54,7 @@
                 <option value="" selected>Harddrive Storage</option>
                 {% for name in products %}
                     {% if name['type'] == 'Storage' %}
-                        <option value="{{name['product_id']}}">{{name['name']}}</option>
+                        <option value="{{name['name']}}">{{name['name']}}</option>
                     {% endif %}
                 {% endfor %}
             </select>
@@ -63,7 +63,7 @@
                 <option value="" selected>Cooling Fan</option>
                 {% for name in products %}
                     {% if name['type'] == 'Cooler' %}
-                        <option value="{{name['product_id']}}">{{name['name']}}</option>
+                        <option value="{{name['name']}}">{{name['name']}}</option>
                     {% endif %}
                 {% endfor %}
             </select>
@@ -72,7 +72,7 @@
                 <option value="" selected>Power Supply</option>
                 {% for name in products %}
                     {% if name['type'] == 'Power-Supply' %}
-                        <option value="{{name['product_id']}}">{{name['name']}}</option>
+                        <option value="{{name['name']}}">{{name['name']}}</option>
                     {% endif %}
                 {% endfor %}
             </select>

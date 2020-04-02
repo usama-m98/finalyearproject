@@ -20,4 +20,5 @@ require 'routes/configureintelform.php';
 require 'routes/configureamdform.php';
 
 require 'routes/logout.php';
+require 'routes/vieworder.php';
 

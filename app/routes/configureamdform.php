@@ -15,7 +15,7 @@ $app->get('/configureamdform', function(Request $request, Response $response) us
             'landing_page' => LANDING_PAGE,
             'js_path' => JS_PATH,
             'heading' => 'Build Your Pc',
-            'action' => 'ViewOrder',
+            'action' => 'vieworder',
             'products' => $products,
         ]);
 
