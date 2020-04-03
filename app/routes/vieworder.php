@@ -7,8 +7,10 @@ $app->post('/vieworder', function(Request $request, Response $response) use ($ap
 {
     $tainted = $request->getParsedBody();
     $cleaned = validateFormInput($app, $tainted);
+    $products = getStoredProducts($app);
+    $price = getPrice($products, $cleaned);
+    $total = getTotal($price);
 
-   var_dump($tainted);
 
    $html_output = $this->view->render($response,
        'vieworder.html.twig',
@@ -18,6 +20,8 @@ $app->post('/vieworder', function(Request $request, Response $response) use ($ap
            'landing_page' => LANDING_PAGE,
            'js_path' => JS_PATH,
            'heading' => 'Configuration Order Details',
+           'products' => $price,
+           'total' => $total
        ]);
 
    processOutput($app, $html_output);
@@ -39,4 +43,36 @@ function validateFormInput($app, $tainted)
     $cleaned['power_supply'] = $validator->sanitiseString($tainted['Power-Supply']);
 
     return $cleaned;
+}
+
+function getPrice($products, $order)
+{
+    $product_price_list = array();
+    $order_prices = array();
+
+    foreach($products as $item)
+    {
+        $product_price_list[$item['name']] = $item['price'];
+    }
+
+
+    foreach ($order as $item)
+    {
+        if (array_key_exists($item, $product_price_list)){
+            $order_prices[$item] = $product_price_list[$item];
+        }
+    }
+
+    return $order_prices;
+}
+
+function getTotal($prices)
+{
+    $total = 0;
+    foreach ($prices as $price)
+    {
+        $total += $price;
+    }
+
+    return $total;
 }
