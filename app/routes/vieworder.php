@@ -10,7 +10,15 @@ $app->post('/vieworder', function(Request $request, Response $response) use ($ap
     $products = getStoredProducts($app);
     $price = getPrice($products, $cleaned);
     $total = getTotal($price);
-
+    $checkout = array();
+    if (isset($_SESSION['user']))
+    {
+        $checkout['message'] = 'checkout';
+        $checkout['action'] = 'checkout';
+    }else{
+        $checkout['message'] = 'please login first and enter your personal info';
+        $checkout['action'] = 'login';
+    }
 
    $html_output = $this->view->render($response,
        'vieworder.html.twig',
@@ -19,9 +27,13 @@ $app->post('/vieworder', function(Request $request, Response $response) use ($ap
            'css_path' => CSS_PATH,
            'landing_page' => LANDING_PAGE,
            'js_path' => JS_PATH,
+           'login' => 'login',
+           'signup' => 'signup',
            'heading' => 'Configuration Order Details',
            'products' => $price,
-           'total' => $total
+           'total' => $total,
+           'message' => $checkout['message'],
+           'src' => $checkout['action']
        ]);
 
    processOutput($app, $html_output);
@@ -76,3 +88,4 @@ function getTotal($prices)
 
     return $total;
 }
+

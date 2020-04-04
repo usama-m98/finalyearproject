@@ -13,6 +13,8 @@ $app->get('/configureintelform', function(Request $request, Response $response) 
             'css_path' => CSS_PATH,
             'landing_page' => LANDING_PAGE,
             'js_path' => JS_PATH,
+            'login' => 'login',
+            'signup' => 'signup',
             'heading' => 'Build Your Pc',
             'action' => 'vieworder',
             'products' => $products,
