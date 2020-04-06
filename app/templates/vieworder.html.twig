@@ -1,20 +1,51 @@
 {% extends 'banner.html.twig' %}
 {% block content %}
-<div class="content-div">
-    <h2>{{ heading }}</h2>
-
-    {% for item, price in products %}
-        <div class="products">
-            <label class="item">{{ item }}</label>
-            <label class="price">{{ price }}</label>
+    <div id="view-order">
+        <h2>{{ heading }}</h2>
+        {% for item, price in products %}
+            <div id="order">
+                <div class="products">
+                    <label >{{ item }}</label>
+                </div>
+                <div class="price">
+                    <label>£{{ price }}</label>
+                </div>
+            </div>
+        {% endfor %}
+        <div id="total">
+            <label>Total is:  £{{ total }}</label>
         </div>
-    {% endfor %}
-    <div class="total">
-        <label>Total is:  £{{ total }}</label>
-    </div>
 
-    <a href="{{ src }}">
-        <button type="submit">{{ message }}</button>
-    </a>
-</div>
+        {% if info_state == true %}
+
+            <a href="{{ src }}">
+                <button id="checkout" type="submit">{{ message }}</button>
+            </a>
+        {% else %}
+        <form action="{{ action }}" method="post">
+            <label for="firstname">Enter Firstname:</label>
+            <input type="text" name="firstname" id="firstname">
+            <br>
+            <label for="surname">Enter Surname:</label>
+            <input type="text" name="surname" id="surname">
+            <br>
+            <label for="address">Enter Address:</label>
+            <input type="text" name="address" id="address">
+            <br>
+            <label for="postcode">Enter Postcode:</label>
+            <input type="text" name="postcode" id="postcode">
+            <br>
+            <label for="city">Enter City:</label>
+            <input type="text" name="city" id="city">
+            <br>
+            <label for="phone-number">Enter Phone number:</label>
+            <input type="text" name="phone-number" id="phone-number">
+            <br>
+            <input value="checkout">
+        </form>
+        {% endif %}
+        <a href="{{ src }}">
+            <button id="checkout" type="submit">{{ message }}</button>
+        </a>
+    </div>
 {% endblock %}

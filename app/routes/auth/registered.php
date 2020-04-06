@@ -2,7 +2,6 @@
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
-use Doctrine\DBAL\DriverManager;
 
 
 $app->post('/registered', function(Request $request, Response $response) use ($app)

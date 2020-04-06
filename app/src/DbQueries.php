@@ -77,11 +77,34 @@ class DbQueries
         return $query_string;
     }
 
+    public function retrievePersonalDetails()
+    {
+        $query_string = "SELECT first_name, surname, address, postcode, city, phone_number ";
+        $query_string .= "FROM customers ";
+        $query_string .= "WHERE user_id = :user_id";
+
+        return $query_string;
+    }
+
     public function retrieveIntelProcessor()
     {
         $query_string = 'SELECT product_id, name, price, type ';
         $query_string .= 'FROM products ';
-//        $query_string .= 'WHERE type = \'Intel-Processor\'';
+
+        return $query_string;
+    }
+
+    public function storeOrderData()
+    {
+        $query_string = "INSERT INTO order_detail";
+        $query_string .= " SET ";
+        $query_string .= "order_date = :date_of_order, ";
+        $query_string .= "desc = :description, ";
+        $query_string .= "total = :total, ";
+        $query_string .= "address = :address, ";
+        $query_string .= "admin_assigned = :assigned, ";
+        $query_string .= "status = :status, ";
+        $query_string .= "customer_id = :customer_id";
 
         return $query_string;
     }

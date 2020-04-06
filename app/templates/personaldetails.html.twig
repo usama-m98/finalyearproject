@@ -21,9 +21,18 @@
 
     <h3>{{ page_heading3 }}</h3>
 
+    {% if personal_info_exists == true %}
+        <div id="personal-info">
+            {% for details, info in personal_info %}
+                <label>{{ details }}: {{ info }}</label>
+                <a href="edit{{ details }}">edit {{ details }}</a>
+                <br>
+            {% endfor %}
+        </div>
+    {% else %}
     <div id="personal-info">
         <label>Address:</label>
         <a href="addpersonalinfo">Add Personal Info</a>
     </div>
-
+    {% endif %}
 {% endblock %}

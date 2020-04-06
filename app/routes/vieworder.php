@@ -10,9 +10,23 @@ $app->post('/vieworder', function(Request $request, Response $response) use ($ap
     $products = getStoredProducts($app);
     $price = getPrice($products, $cleaned);
     $total = getTotal($price);
+    order();
+
+    $auth_info = getAuthInfo($app, $_SESSION['user']);
+    $personal_details = getUserPersonalInfo($app, $auth_info);
+    $action = null;
+    $info_state = true;
+
+    if(!$personal_details)
+    {
+        $info_state = false;
+        $action = "checkout";
+    }
+
     $checkout = array();
     if (isset($_SESSION['user']))
     {
+        $checkout['state'] = true;
         $checkout['message'] = 'checkout';
         $checkout['action'] = 'checkout';
     }else{
@@ -32,8 +46,11 @@ $app->post('/vieworder', function(Request $request, Response $response) use ($ap
            'heading' => 'Configuration Order Details',
            'products' => $price,
            'total' => $total,
+           'state' => $checkout['state'],
            'message' => $checkout['message'],
-           'src' => $checkout['action']
+           'src' => $checkout['action'],
+           'info_state' => $info_state,
+           'action' => $action,
        ]);
 
    processOutput($app, $html_output);
@@ -75,6 +92,7 @@ function getPrice($products, $order)
         }
     }
 
+    $_SESSION['order'] = $order_prices;
     return $order_prices;
 }
 
@@ -88,4 +106,14 @@ function getTotal($prices)
 
     return $total;
 }
+
+
+function order()
+{
+    if (isset($_SESSION['order']))
+    {
+        return $_SESSION['order'];
+    }
+}
+
 
