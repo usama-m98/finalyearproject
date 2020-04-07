@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block content %}
+    <header>
+        <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
+    </header>
+
+    <div class="content-div">
+        <h2>{{ page_heading2 }}</h2>
+        <table>
+            <tr>
+                <th></th><th>User ID</th><th>Username</th><th>Email</th><th>Role</th>
+            </tr>
+            {% for user in users  %}
+                <tr>
+                    <td><input type="checkbox" name="data" value="{{ user['user_id'] }}"></td>
+                    <td>{{ user['user_id'] }}</td>
+                    <td>{{ user['username'] }}</td>
+                    <td>{{ user['email'] }}</td>
+                    <td>{{ user['role'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

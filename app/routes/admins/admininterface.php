@@ -13,7 +13,8 @@ $app->get('/admininterface', function (Request $request, Response $response) use
             'landing_page' => LANDING_PAGE,
             'js_path' => JS_PATH,
             'page_heading2' => 'Admin Lounge',
-            'add_admin' => 'addadmin'
+            'add_admin' => 'addadmin',
+            'view_user' => 'viewusers'
         ]);
 
     processOutput($app, $html_output);

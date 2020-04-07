@@ -31,6 +31,14 @@ class DbQueries
         return $query_string;
     }
 
+    public function retrieveAllUserData()
+    {
+        $query_string = 'SELECT user_id, username, email, role ';
+        $query_string .= 'FROM users ';
+
+        return $query_string;
+    }
+
     public function updateUsername()
     {
         $query_string = 'UPDATE users';
