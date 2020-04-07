@@ -30,3 +30,5 @@ require 'routes/checkout.php';
 require 'routes/contact.php';
 
 require 'routes/admins/admininterface.php';
+require 'routes/admins/addadmin.php';
+require 'routes/admins/addadminuser.php';

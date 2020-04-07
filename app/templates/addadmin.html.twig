@@ -1,0 +1,28 @@
+{% extends 'layout.html.twig' %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block content %}
+    <header>
+        <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
+    </header>
+
+    <div class="content-div" id="signup_div">
+        <h2>{{ page_heading2 }}</h2>
+
+        <form action="{{ action }}" method="post">
+            <label for="username">Enter Username:</label>
+            <input type="text" name="signup_username" class="signup_username"  />
+            <label for="email">Enter an Email: </label>
+            <input type="email" name="signup_email" class="signup_email"  />
+            <label for="password">Enter a Password* </label>
+            <input type="password" name="signup_password" class="signup_password" />
+            <div>
+                <label>Enter Role:</label><br>
+                <input type="radio" class="role" name="role" value="Member">
+                <label for="role">Member</label><br>
+                <input type="radio" class="role" name="role" value="Admin">
+                <label for="role">Admin</label><br>
+            </div>
+            <input type="submit" value="submit" class="signup_button" />
+        </form>
+    </div>
+{% endblock %}

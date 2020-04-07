@@ -2,7 +2,6 @@
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
-use Doctrine\DBAL\DriverManager;
 
 
 $app->post('/signin', function (Request $request, Response $response) use ($app)
@@ -89,7 +88,7 @@ function signIn( $auth_info, $password)
 function sessionCheck()
 {
     if(isset($_SESSION['user'])){
-            if ($_SESSION['role'] == 'Admin') {
+            if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Root') {
                 return $_SESSION['active_admin'] = true;
             } else {
                 return $_SESSION['active_user'] = true;

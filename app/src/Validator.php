@@ -44,4 +44,22 @@ class Validator
         return $cleaned_string;
     }
 
+    public function sanitiseRole($role_to_sanitise)
+    {
+        $checked_roles = false;
+        $expected_values = [
+            'Member' => 'Member',
+            'Admin' => 'Admin',
+        ];
+
+        $result = array_key_exists($role_to_sanitise, $expected_values);
+
+        if ($result===true)
+        {
+            $checked_roles = $expected_values[$role_to_sanitise];
+        }
+
+        return $checked_roles;
+    }
+
 }

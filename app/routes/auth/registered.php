@@ -29,13 +29,22 @@ function cleanSignUpParameters($app, $tainted_parameters)
     $cleaned_parameters = [];
     $validator = $app->getContainer()->get('validator');
 
+    var_dump($tainted_parameters);
     $tainted_username = $tainted_parameters['signup_username'];
     $tainted_email = $tainted_parameters['signup_email'];
+    $tainted_role = '';
+
+    if (array_key_exists('role', $tainted_parameters))
+    {
+        $tainted_role = $tainted_parameters['role'];
+    }else{
+        $tainted_role = 'Member';
+    }
 
     $cleaned_parameters['password'] = $tainted_parameters['signup_password'];
     $cleaned_parameters['sanitised_username'] = $validator->sanitiseString($tainted_username);
     $cleaned_parameters['sanitised_email'] = $validator->sanitiseEmail($tainted_email);
-    $cleaned_parameters['role'] = 'Member';
+    $cleaned_parameters['role'] = $validator->sanitiseRole($tainted_role);
 
     return $cleaned_parameters;
 }
