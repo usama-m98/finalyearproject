@@ -33,3 +33,6 @@ require 'routes/admins/admininterface.php';
 require 'routes/admins/addadmin.php';
 require 'routes/admins/addadminuser.php';
 require 'routes/admins/viewusers.php';
+require 'routes/admins/viewuseroptions.php';
+
+require 'routes/productsview/desktops.php';

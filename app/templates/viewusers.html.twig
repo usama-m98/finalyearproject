@@ -7,19 +7,26 @@
 
     <div class="content-div">
         <h2>{{ page_heading2 }}</h2>
-        <table>
-            <tr>
-                <th></th><th>User ID</th><th>Username</th><th>Email</th><th>Role</th>
-            </tr>
-            {% for user in users  %}
+        <form action="{{ action }}" method="post">
+            <div id="options">
+                <input type="submit" name="delete" value="Delete User">
+                <input type="submit" name="filter_admin" value="Filter Admin">
+                <input type="submit" name="filter_user" value="Filter User">
+            </div>
+            <table>
                 <tr>
-                    <td><input type="checkbox" name="data" value="{{ user['user_id'] }}"></td>
-                    <td>{{ user['user_id'] }}</td>
-                    <td>{{ user['username'] }}</td>
-                    <td>{{ user['email'] }}</td>
-                    <td>{{ user['role'] }}</td>
+                    <th></th><th>User ID</th><th>Username</th><th>Email</th><th>Role</th>
                 </tr>
-            {% endfor %}
-        </table>
+                {% for user in users  %}
+                    <tr>
+                        <td><input type="checkbox" name="data" value="{{ user['user_id'] }}"></td>
+                        <td>{{ user['user_id'] }}</td>
+                        <td>{{ user['username'] }}</td>
+                        <td>{{ user['email'] }}</td>
+                        <td>{{ user['role'] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </form>
     </div>
 {% endblock %}

@@ -53,7 +53,7 @@ CREATE TABLE `products` (
   `type` varchar(255) NOT NULL,
   `description` TEXT,
   `stock` int(10) NOT NULL,
-  `price` varchar(5) NOT NULL,
+  `price` varchar(7) NOT NULL,
   `product_image` varchar(255),
   PRIMARY KEY (`product_id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -217,3 +217,95 @@ INSERT INTO `products` VALUES('65', '1GB NVIDIA GEFORCE 710', 'Graphics-Card', '
 INSERT INTO `products` VALUES('66', '2GB NVIDIA GEFORCE 1030', 'Graphics-Card', 'Empty', '5', '65', '');
 INSERT INTO `products` VALUES('67', '4GB NVIDIA GEFORCE GTX 1650', 'Graphics-Card', 'Empty', '5', '130', '');
 INSERT INTO `products` VALUES('68', '6GB NVIDIA GEFORCE GTX 1660', 'Graphics-Card', 'Empty', '5', '180', '');
+
+-- Laptops
+INSERT INTO `products` VALUES ('69', 'HP 255 G7 A6-9225 8GB 256GB FHD 15.6in', 'Laptops', '
+    AMD A6-9225 2.6GHz
+    8GB DDR4 RAM
+    256GB SSD Storage
+    15.6" Full HD (1920x1080) Display
+    FreeDOS (Windows 10 NOT Included)', '5', '350', '/finalyearproject/media/940891-914414-800.jpg');
+
+INSERT INTO `products` VALUES('70', 'Lenovo IdeaPad C340 Core i3 8GB 128GB SSD 15.6"', 'Laptops',
+    'Intel Core i3-8145U 2.1GHz
+    8GB RAM + 128GB SSD
+    13.3" FHD Display
+    Touchscreen
+    Windows 10 Home', '5', '480', '/finalyearproject/media/961693-972659-800.jpg');
+INSERT INTO `products` VALUES('71', 'Asus A509JA Core i5 8GB 512GB SSD 15.6in', 'Laptops',
+    'Intel Core i5-1035G1 1.0GHz
+    8GB RAM + 512GB SSD
+    15.6" FHD Display
+    Intel UHD Graphics
+    Windows 10 Home', '7', '590', '/finalyearproject/media/958492-947183-800.jpg');
+INSERT INTO `products` VALUES('72', 'ASUS X409FA-EK149T Core i7 8GB 256GB SSD 14"', 'Laptops',
+    'Intel Core i7-8565U 1.8GHz
+    8GB RAM + 256Gb SSD
+    14" FHD Display
+    Intel UHD Graphics 620
+    Windows 10 Home', '3', '699.98', '/finalyearproject/media/938195-900684-800.jpg');
+INSERT INTO `products` VALUES('73', 'HP ProBook 440 G6 14" Core i5 8GB 256GB SSD', 'Laptops',
+    'Intel Core i5-8265U 1.6 GHz
+    8GB DDR4 + 256GB SSD
+    14" HD LED Display
+    WIFI + Bluetooth
+    Windows 10 Home', '2', '799.99', '/finalyearproject/media/926173-882119-800.jpg');
+
+-- Desktops
+INSERT INTO `products` VALUES('74', 'ASUS VA24EHE 23.8" Eye Care Full HD Monitor', 'Monitor',
+    '1920 x 1080 Full HD
+    HDMI, VGA & DVI
+    75Hz / 5ms Response Time
+    Panel Type: IPS
+    VESA 100x100', '10', '99.99', '/finalyearproject/media/961616-966013-800.jpg');
+INSERT INTO `products` VALUES('75', 'Acer KA220HQbid 21.5" HD DVI HDMI Monitor', 'Monitor',
+    '1920 x 1080 Full HD
+    HDMI, DVI & VGA
+    60Hz / 5ms Response Time
+    Panel Type: TN
+    Wall Mountable', '10', '72.99', '/finalyearproject/media/721077-711063-800.jpg');
+INSERT INTO `products` VALUES('76', 'BenQ EL2870UE 28" 4K HDR Monitor', 'Monitor',
+    '3840 x 2160 4K UHD
+    HDMI & DisplayPort
+    60Hz / 1ms Response Time
+    Panel type: TN
+    AMD FreeSync', '10', '239.98', '/finalyearproject/media/961689-910955-800.jpg');
+INSERT INTO `products` VALUES('77', 'LG UltraGear 24GL600F 24" Full HD 144Hz 1ms Gaming Monitor', 'Monitor',
+    '1920 x 1080 Full HD
+    HDMI & DisplayPort
+    144Hz / 1ms Response Time
+    Panel Type: TN
+    Radeon FreeSync', '10', '179.99', '/finalyearproject/media/923381-883252-800.jpg');
+INSERT INTO `products` VALUES('78', 'LG 34WL750 34" WQHD IPS Ultrawide Monitor', 'Monitor',
+    '440 x 1440 WQHD
+    DisplayPort & HDMI
+    60Hz / 5ms Response Time
+    Panel Type: IPS
+    VESA Mount 100 x 100', '10', '379.98', '/finalyearproject/media/953046-914112-800.jpg');
+
+-- Desktop-pcs
+INSERT INTO `products` VALUES('79', 'Cyberpower Gaming Ryzen 3 8GB RAM 1TB HDD GTX 1650 WIFI Desktop PC', 'Desktops',
+                              'AMD Ryzen 3 3200G 3.6 GHz
+8GB RAM DDR4 + 1TB HDD
+Nvidia GeForce GTX 1650
+WIFI + Windows 10 Home', '7', '529.96', '/finalyearproject/media/Desktops/954313-958687-800.jpg');
+INSERT INTO `products` VALUES('80', 'AlphaSync Core i5 GTX 1060 16GB 1TB HDD 240GB SSD', 'Desktops',
+                              'Intel Core i5-9400F 6 Cores 2.9GHz
+16GB, 1TB HDD, 240GB SATA SSD
+MSI GTX 1060 6GB OCv1 GPU
+WIFI, Windows 10 Home', '7', '699.99', '/finalyearproject/media/Desktops/944950-913993-800.jpg');
+INSERT INTO `products` VALUES('81', 'AlphaSync Gaming Ryzen 7 16GB RAM 1TB HDD 240GB SSD RTX 2060', 'Desktops',
+                              'AMD Ryzen 7 2700X 3.7GHz
+16GB DDR4, 1TB HDD, 240GB SSD
+ASUS NVIDIA GeForce 2060 6GB
+WIFI + Windows 10 Home', '7', '939.99', '/finalyearproject/media/Desktops/958340-963563-800.jpg');
+INSERT INTO `products` VALUES('82', 'Cyberpower Gaming Core i5 9th Gen 16GB RAM 1TB HDD 240GB SSD RTX 2070', 'Desktops',
+                              'Intel Core i5-9600K 3.7GHz
+16GB DDR4, 1TB HDD, 240GB SSD
+NVidia GeForce RTX 2070
+WIFI + Windows 10 Home', '7', '1099.49', '/finalyearproject/media/Desktops/954655-958694-800.jpg');
+INSERT INTO `products` VALUES('83', 'HP Pavilion 690-0051na Core i5 9th Gen 8GB RAM 2TB HDD 256GB SSD GTX 1650', 'Desktops',
+                              'Intel Core i5-9400F 2.9GHz
+8GB DDR4, 2TB HDD, 256GB SSD
+DVD Writer
+NVIDIA GTX 1650 4GB', '7', '699.99', '/finalyearproject/media/Desktops/954385-958603-800.jpg');

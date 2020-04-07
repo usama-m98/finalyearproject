@@ -35,7 +35,7 @@ function getStoredProducts($app){
     $database_wrapper->setDatabaseConnectionSettings($database_connection_settings);
     $database_wrapper->makeDatabaseConnection();
 
-    $query = $sql_queries->retrieveIntelProcessor();
+    $query = $sql_queries->retrieveProducts();
     $database_wrapper->safeQuery($query);
     $result =$database_wrapper->safeFetchAll();
 

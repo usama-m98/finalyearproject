@@ -15,7 +15,8 @@ $app->get('/viewusers', function (Request $request, Response $response) use ($ap
             'landing_page' => LANDING_PAGE,
             'js_path' => JS_PATH,
             'page_heading2' => 'All Users',
-            'users' =>$user_data
+            'users' =>$user_data,
+            'action' => 'viewuseroptions'
         ]);
 
     processOutput($app, $html_output);

@@ -94,9 +94,9 @@ class DbQueries
         return $query_string;
     }
 
-    public function retrieveIntelProcessor()
+    public function retrieveProducts()
     {
-        $query_string = 'SELECT product_id, name, price, type ';
+        $query_string = 'SELECT product_id, name, type, description, stock, price, product_image ';
         $query_string .= 'FROM products ';
 
         return $query_string;
