@@ -8,10 +8,15 @@
     <div class="content-div">
         <h2>{{ page_heading2 }}</h2>
         <form action="{{ action }}" method="post">
-            <div id="options">
-                <input type="submit" name="delete" value="Delete User">
+            <div id="options-filter">
                 <input type="submit" name="filter_admin" value="Filter Admin">
                 <input type="submit" name="filter_user" value="Filter User">
+                <input type="submit" name="reset" value="reset">
+            </div>
+        </form>
+        <form action="{{ action2 }}" method="post">
+            <div id="options-delete">
+                <input type="submit" name="delete" value="Delete User">
             </div>
             <table>
                 <tr>
@@ -19,7 +24,7 @@
                 </tr>
                 {% for user in users  %}
                     <tr>
-                        <td><input type="checkbox" name="data" value="{{ user['user_id'] }}"></td>
+                        <td><input type="checkbox" name="data{{ user['user_id'] }}" value="{{ user['user_id'] }}"></td>
                         <td>{{ user['user_id'] }}</td>
                         <td>{{ user['username'] }}</td>
                         <td>{{ user['email'] }}</td>

@@ -5,23 +5,37 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 $app->get('/viewusers', function (Request $request, Response $response) use ($app)
 {
-    $user_data = getUserAccountDetails($app);
-    var_dump($user_data);
-    $html_output = $this->view->render($response,
-        'viewusers.html.twig',
-        [
-            'page_title' => 'View users',
-            'css_path' => CSS_PATH,
-            'landing_page' => LANDING_PAGE,
-            'js_path' => JS_PATH,
-            'page_heading2' => 'All Users',
-            'users' =>$user_data,
-            'action' => 'viewuseroptions'
-        ]);
+    if(isset($_SESSION['user'])){
+        if ($_SESSION['role'] == 'Root')
+        {
+            $user_data = getUserAccountDetails($app);
 
-    processOutput($app, $html_output);
+            if(isset($_SESSION['filtered_user_data']))
+            {
+                $user_data = $_SESSION['filtered_user_data'];
+            }
 
-    return $html_output;
+            $html_output = $this->view->render($response,
+                'viewusers.html.twig',
+                [
+                    'page_title' => 'View users',
+                    'css_path' => CSS_PATH,
+                    'landing_page' => LANDING_PAGE,
+                    'js_path' => JS_PATH,
+                    'page_heading2' => 'All Users',
+                    'users' =>$user_data,
+                    'action' => 'viewuseroptions',
+                    'action2' => 'deleteusers'
+                ]);
+
+            processOutput($app, $html_output);
+
+            return $html_output;
+        }
+    }else{
+        die();
+    }
+
 })->setName('viewusers');
 
 function getUserAccountDetails($app)

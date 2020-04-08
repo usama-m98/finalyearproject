@@ -7,27 +7,64 @@ $app->post('/viewuseroptions', function (Request $request, Response $response) u
 {
     $tainted= $request->getParsedBody();
     $action= directAction($app, $tainted);
-    var_dump($tainted);
+    $filtered = null;
 
-    $html_output = $this->view->render($response,
-        'result.html.twig',
-        [
-            'page_title' => 'Personal Details',
-            'css_path' => CSS_PATH,
-            'landing_page' => LANDING_PAGE,
-            'js_path' => JS_PATH,
-        ]);
+    if ($action === 'reset'){
+        if(isset($_SESSION['filtered_user_data']))
+        {
+            unset($_SESSION['filtered_user_data']);
+            $filtered = getUserAccountDetails($app);
+        }
+    } else{
+        $filtered = filterUser($app, $action);
+    }
+    isFilteredUserDataSet();
 
-    processOutput($app, $html_output);
-
-    return $html_output;
+    return $response->withRedirect('viewusers');
 });
 
 function directAction($app, $action)
 {
+    $data = '';
+    foreach($action as $key => $value)
+    {
+        if ($key=== 'filter_admin'){
+            $data = 'Member';
+        }elseif ($key === 'filter_user'){
+            $data = 'Admin';
+        }elseif ($key === 'reset'){
+            $data = 'reset';
+        }
+    }
+    return $data;
 }
 
-function filterUser()
+function filterUser($app, $user)
 {
+    $database_wrapper = $app->getContainer()->get('databaseWrapper');
+    $sql_queries = $app->getContainer()->get('dbQueries');
+    $settings = $app->getContainer()->get('settings');
 
+    $database_connection_settings = $settings['pdo_settings'];
+
+    $database_wrapper->setDatabaseConnectionSettings($database_connection_settings);
+    $database_wrapper->makeDatabaseConnection();
+
+    $query = $sql_queries->filterUserAndRetrieve();
+
+    $parameters = [
+        ':role' => $user,
+    ];
+
+    $database_wrapper->safeQuery($query, $parameters);
+    $_SESSION['filtered_user_data'] = $database_wrapper->safeFetchAll();
+
+}
+
+function isFilteredUserDataSet()
+{
+    if (isset($_SESSION['filtered_user_data']))
+    {
+        return $_SESSION['filtered_user_data'];
+    }
 }
