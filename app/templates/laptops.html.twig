@@ -1,0 +1,22 @@
+{% extends 'banner.html.twig' %}
+{% block content %}
+
+    <article class="products">
+        {% for items in products %}
+            {% if items['type'] == 'Laptops' %}
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="{{ items['product_image'] }}">
+                    </div>
+                    <div class="product-info">
+                        <h5>{{ items['name'] }}</h5>
+                        <h6>£{{ items['price'] }}</h6>
+                    </div>
+                    <a>
+                        <button type="button" value="Add to basket">Add to basket</button>
+                    </a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </article>
+{% endblock %}

@@ -36,3 +36,6 @@ require 'routes/admins/viewusers.php';
 require 'routes/admins/viewuseroptions.php';
 
 require 'routes/productsview/desktops.php';
+require 'routes/productsview/laptops.php';
+require 'routes/productsview/monitor.php';
+require 'routes/productsview/peripherals.php';
