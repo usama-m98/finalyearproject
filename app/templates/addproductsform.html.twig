@@ -8,30 +8,31 @@
 <div class="content-div">
     <h2>{{ page_heading2 }}</h2>
 
-    <form action="{{ action }}" method="post">
+    <form action="{{ action }}" method="post" enctype="multipart/form-data">
         <label for="product_name">*Name </label>
-        <input type="text" name="product_name" >
+        <input type="text" name="product_name" required>
 
         <label for="type">*Type </label>
-        <select>
+        <select name="type" required>
             {% for type in types %}
                 <option value="{{ type }}">{{ type }}</option>
             {% endfor %}
         </select>
 
         <label for="description">Description </label>
-        <textarea name="description" rows="10" cols="100"></textarea>
+        <textarea name="description" rows="10" cols="100" ></textarea>
 
         <label for="stock">*Stock </label>
-        <input name="text" maxlength="4" name="stock" size="5">
+        <input type="text" maxlength="4" name="stock" size="5" required>
 
         <label for="price">*Price </label>
-        <input type="text" name="price" maxlength="7" size="7">
+        <input type="text" name="price" maxlength="7" size="7" required>
 
         <label for="product_image">Image Url</label>
-        <input type="url" name="product_image">
+        <input type="file" name="product_image">
 
         <input type="submit" name="product_submit" value="Add Product">
     </form>
+    <span>{{ message }}</span>
 </div>
 {% endblock %}

@@ -45,3 +45,8 @@ $container['processOutput'] = function ($container){
     return $model;
 };
 
+$container['cart'] = function ($container){
+    $cart = new FinalYear\Cart();
+    return $cart;
+};
+

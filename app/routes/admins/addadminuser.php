@@ -11,8 +11,8 @@ $app->post('/addadminuser', function (Request $request, Response $response) use 
     $hashed_password = hash_password($app, $clean_parameters['password']);
     $stored_user_details = storeUserAccountDetails($app, $clean_parameters, $hashed_password);
 
-    echo 'User has been added';
-    return $response->withRedirect(LANDING_PAGE);
+
+    return $response->withRedirect('viewusers');
 
 
 })->setName('addadminuser');

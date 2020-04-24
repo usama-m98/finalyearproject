@@ -28,6 +28,7 @@ require 'routes/vieworder.php';
 require 'routes/infoform.php';
 require 'routes/checkout.php';
 require 'routes/contact.php';
+require 'routes/shoppingcart.php';
 
 // admin routes
 require 'routes/admins/admininterface.php';
@@ -36,6 +37,7 @@ require 'routes/admins/addadminuser.php';
 require 'routes/admins/viewusers.php';
 require 'routes/admins/viewuseroptions.php';
 require 'routes/admins/addproductsform.php';
+require 'routes/admins/addproducts.php';
 
 // webpage products route
 require 'routes/productsview/desktops.php';

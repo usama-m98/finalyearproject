@@ -6,6 +6,12 @@ use Psr\Http\Message\ResponseInterface as Response;
 $app->get('/addproductsform', function (Request $request, Response $response) use ($app)
 {
     $product_types = productTypes();
+    $error_message = "";
+
+    if (isset($_SESSION['add-product-error']))
+    {
+        $error_message = $_SESSION['add-product-error'];
+    }
 
     if(isset($_SESSION['user'])) {
         if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Root') {
@@ -18,7 +24,8 @@ $app->get('/addproductsform', function (Request $request, Response $response) us
                     'js_path' => JS_PATH,
                     'page_heading2' => 'Add Items',
                     'action' => 'addproducts',
-                    'types' => $product_types
+                    'types' => $product_types,
+                    'message' => $error_message
                 ]);
 
             processOutput($app, $html_output);

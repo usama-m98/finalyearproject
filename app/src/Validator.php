@@ -62,4 +62,19 @@ class Validator
         return $checked_roles;
     }
 
+    public function sanitiseImageFile($image_file)
+    {
+        $checked_image = false;
+        $extensions= ["jpeg","jpg","png"];
+        $tmp_file= explode('.',$image_file);
+        $file_ext = strtolower(end($tmp_file));
+        $result = in_array($file_ext, $extensions);
+
+        if ($result===true){
+            $checked_image = $image_file;
+        }
+
+        return $checked_image;
+    }
+
 }
