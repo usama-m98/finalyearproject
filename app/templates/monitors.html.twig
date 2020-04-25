@@ -12,9 +12,11 @@
                         <h5>{{ items['name'] }}</h5>
                         <h6>£{{ items['price'] }}</h6>
                     </div>
-                    <a>
-                        <button type="button" value="Add to basket">Add to basket</button>
-                    </a>
+                    <form action="{{ action }}" method="post">
+                        <input type="hidden" name="product_id" value="{{ items['product_id'] }}">
+                        <input type="hidden" name="quantity" value="1">
+                        <input type="submit" name="add_button" value="Add to basket">
+                    </form>
                 </div>
             {% endif %}
         {% endfor %}

@@ -5,13 +5,13 @@
     <header>
         <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
         {% if signIn.active_admin %}
-            <div class="menu" id="menu-toggle">{{ signIn.user }}</div>
+            <div class="menu" id="menu-toggle">{{ session.user }}</div>
             <nav id="menu-nav">
                 <a href="admininterface">Admin Interface</a>
                 <a href="logout">Logout</a>
             </nav>
         {% elseif signIn.active_user %}
-        <div class="menu" id="menu-toggle">{{ signIn.user }}</div>
+        <div class="menu" id="menu-toggle">{{ session.user }}</div>
         <nav id="menu-nav">
             <a href="youraccount">Your Account</a>
             <a href="#">Your Orders</a>
@@ -30,7 +30,7 @@
             <a href="monitor">Monitors</a>
             <a href="peripherals">Peripherals</a>
         </nav>
-
+        <a href="#" id="cart"><span id="cart_count">{{ cart_count }}</span> Cart</a>
         <form action="{{ action }}" method="post" id="search">
             <input type="text" maxlength="100" size="100">
             <input type="submit" value="search">

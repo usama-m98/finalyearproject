@@ -14,7 +14,8 @@ $app->get('/peripherals', function (Request $request, Response $response) use ($
             'js_path' => JS_PATH,
             'login' => 'login',
             'signup' => 'signup',
-            'products' => $products
+            'products' => $products,
+            'action' => 'shoppingcart'
         ]);
 
     processOutput($app, $html_output);
