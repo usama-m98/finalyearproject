@@ -5,14 +5,14 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 $app->get('/checkout', function(Request $request, Response $response) use ($app)
 {
-    $order = $_SESSION['order'];
-    $order_details = getOrderStringAndTotal($order);
-    var_dump($order_details);
-    $tainted = $request->getParsedBody();
-    var_dump($tainted);
-    $cleaned_params = cleanPersonalInfoParams($app, $tainted);
-    $auth_info = getAuthInfo($app, $_SESSION['user']);
-    $store_personal_info = storeUserPersonalInfo($app, $cleaned_params, $auth_info);
+//    $order = $_SESSION['order'];
+//    $order_details = getOrderStringAndTotal($order);
+//    var_dump($order_details);
+//    $tainted = $request->getParsedBody();
+//    var_dump($tainted);
+//    $cleaned_params = cleanPersonalInfoParams($app, $tainted);
+//    $auth_info = getAuthInfo($app, $_SESSION['user']);
+//    $store_personal_info = storeUserPersonalInfo($app, $cleaned_params, $auth_info);
 
     $html_output = $this->view->render($response,
         'checkoutview.html.twig',

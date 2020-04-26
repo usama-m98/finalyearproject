@@ -17,7 +17,7 @@ $app->get('/configureamdform', function(Request $request, Response $response) us
             'login' => 'login',
             'signup' => 'signup',
             'heading' => 'Build Your Pc',
-            'action' => 'vieworder',
+            'action' => 'processconfiguration',
             'products' => $products,
         ]);
 

@@ -10,18 +10,8 @@ $app->post('/addpersonalinfoform', function(Request $request, Response $response
     $auth_info = getAuthInfo($app, $_SESSION['user']);
     $store_personal_info = storeUserPersonalInfo($app, $cleaned_params, $auth_info);
 
-//    $html_output = $this->view->render($response,
-//        'result.html.twig',
-//        [
-//            'page_title' => 'Personal Details',
-//            'css_path' => CSS_PATH,
-//            'landing_page' => LANDING_PAGE,
-//            'js_path' => JS_PATH,
-//        ]);
-//
-//    processOutput($app, $html_output);
 
-    return $response->withRedirect('personaldetails');
+    return $response->withRedirect($_SERVER['HTTP_REFERER']);
 });
 
 function cleanPersonalInfoParams($app, $tainted)

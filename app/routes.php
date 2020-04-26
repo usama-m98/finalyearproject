@@ -29,6 +29,7 @@ require 'routes/infoform.php';
 require 'routes/checkout.php';
 require 'routes/contact.php';
 require 'routes/shoppingcart.php';
+require 'routes/processconfiguration.php';
 
 // admin routes
 require 'routes/admins/admininterface.php';

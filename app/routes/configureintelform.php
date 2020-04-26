@@ -16,7 +16,7 @@ $app->get('/configureintelform', function(Request $request, Response $response) 
             'login' => 'login',
             'signup' => 'signup',
             'heading' => 'Build Your Pc',
-            'action' => 'vieworder',
+            'action' => 'processconfiguration',
             'products' => $products,
         ]);
 

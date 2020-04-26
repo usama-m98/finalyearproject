@@ -4,13 +4,13 @@
     <div id="banner-div">
     <header>
         <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
-        {% if signIn.active_admin %}
+        {% if session.active_admin %}
             <div class="menu" id="menu-toggle">{{ session.user }}</div>
             <nav id="menu-nav">
                 <a href="admininterface">Admin Interface</a>
                 <a href="logout">Logout</a>
             </nav>
-        {% elseif signIn.active_user %}
+        {% elseif session.active_user %}
         <div class="menu" id="menu-toggle">{{ session.user }}</div>
         <nav id="menu-nav">
             <a href="youraccount">Your Account</a>
@@ -36,5 +36,5 @@
             <input type="submit" value="search">
         </form>
     </header>
-    <div id="clear-div"></div>
+    </div>
 {% endblock %}

@@ -16,36 +16,39 @@
             <label>Total is:  £{{ total }}</label>
         </div>
 
-        {% if info_state == true %}
+        {% if session.user %}
+            {% if info_state == true %}
 
             <a href="{{ src }}">
                 <button id="checkout" type="submit">{{ message }}</button>
             </a>
+                {% else %}
+                    <form action="{{ action }}" method="post">
+                        <label for="firstname">Enter Firstname:</label>
+                        <input type="text" name="firstname" id="firstname">
+                        <br>
+                        <label for="surname">Enter Surname:</label>
+                        <input type="text" name="surname" id="surname">
+                        <br>
+                        <label for="address">Enter Address:</label>
+                        <input type="text" name="address" id="address">
+                        <br>
+                        <label for="postcode">Enter Postcode:</label>
+                        <input type="text" name="postcode" id="postcode">
+                        <br>
+                        <label for="city">Enter City:</label>
+                        <input type="text" name="city" id="city">
+                        <br>
+                        <label for="phone-number">Enter Phone number:</label>
+                        <input type="text" name="phone-number" id="phone-number">
+                        <br>
+                        <input type="submit" name="checkout_address_sumbit" value="Submit Address Details">
+                    </form>
+            {% endif %}
         {% else %}
-        <form action="{{ action }}" method="post">
-            <label for="firstname">Enter Firstname:</label>
-            <input type="text" name="firstname" id="firstname">
-            <br>
-            <label for="surname">Enter Surname:</label>
-            <input type="text" name="surname" id="surname">
-            <br>
-            <label for="address">Enter Address:</label>
-            <input type="text" name="address" id="address">
-            <br>
-            <label for="postcode">Enter Postcode:</label>
-            <input type="text" name="postcode" id="postcode">
-            <br>
-            <label for="city">Enter City:</label>
-            <input type="text" name="city" id="city">
-            <br>
-            <label for="phone-number">Enter Phone number:</label>
-            <input type="text" name="phone-number" id="phone-number">
-            <br>
-            <input value="checkout">
-        </form>
+                    <a href="{{ src }}">
+                        <button id="checkout" type="submit">{{ message }}</button>
+                    </a>
         {% endif %}
-        <a href="{{ src }}">
-            <button id="checkout" type="submit">{{ message }}</button>
-        </a>
     </div>
 {% endblock %}
