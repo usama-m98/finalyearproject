@@ -5,14 +5,15 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 $app->get('/checkout', function(Request $request, Response $response) use ($app)
 {
-    if(isset($_SESSION['user']) && isset($_SESSION['order']))
-    {
+//    if(isset($_SESSION['user']) && isset($_SESSION['order']))
+//    {
         $order = $_SESSION['order'];
         $order_details = getOrderStringAndTotal($order);
         $auth_info = getAuthInfo($app, $_SESSION['user']);
         $personal_details = getUserPersonalInfo($app, $auth_info);
+        updateQuantityAfterConfig($app, $order);
 
-        storeOrderDetails($app, $order_details, $personal_details);
+//        storeOrderDetails($app, $order_details, $personal_details);
 
         $message = 'Your order has been placed';
 
@@ -28,12 +29,12 @@ $app->get('/checkout', function(Request $request, Response $response) use ($app)
             ]);
 
         processOutput($app, $html_output);
-        unset($_SESSION['order']);
+//        unset($_SESSION['order']);
 
         return $html_output;
-    }else {
-        return $response->withRedirect(LANDING_PAGE);
-    }
+//    }else {
+//        return $response->withRedirect(LANDING_PAGE);
+//    }
 })->setName('checkout');
 
 function getOrderStringAndTotal($order)
@@ -43,7 +44,7 @@ function getOrderStringAndTotal($order)
     $order_total = 0;
     foreach ($order as $item => $price){
         $order_string .= $item . " ";
-        $order_total += $price;
+        $order_total += $price['price'];
     }
     $order_detail['order'] = $order_string;
     $order_detail['total'] = $order_total;
@@ -77,5 +78,30 @@ function storeOrderDetails($app, $order_details, $personal_details){
 
 
     $database_wrapper->safeQuery($query, $params);
+}
 
+function updateQuantityAfterConfig($app, $product_array)
+{
+    $database_wrapper = $app->getContainer()->get('databaseWrapper');
+    $sql_queries = $app->getContainer()->get('dbQueries');
+    $settings = $app->getContainer()->get('settings');
+
+    $database_connection_settings = $settings['pdo_settings'];
+
+    $database_wrapper->setDatabaseConnectionSettings($database_connection_settings);
+    $database_wrapper->makeDatabaseConnection();
+
+    foreach($product_array as $item_array)
+    {
+        $product_id = $item_array['id'];
+        $stock = $item_array['stock'] - 1;
+        $query = $sql_queries->updateStock();
+
+        $params = [
+            ':quantity' => $stock,
+            ':product_id' => $product_id
+        ];
+
+        $database_wrapper->safeQuery($query, $params);
+    }
 }

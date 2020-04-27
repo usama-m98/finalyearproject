@@ -37,7 +37,11 @@ function getPrice($products, $order)
 
     foreach($products as $item)
     {
-        $product_price_list[$item['name']] = [ 'price' =>$item['price'], 'id' => $item['product_id']];
+        $product_price_list[$item['name']] = [
+            'price' =>$item['price'],
+            'id' => $item['product_id'],
+            'stock' => $item['stock']
+        ];
     }
 
     foreach ($order as $item)
@@ -49,17 +53,6 @@ function getPrice($products, $order)
 
     $_SESSION['order'] = $order_prices;
     return $order_prices;
-}
-
-function getTotal($prices)
-{
-    $total = 0;
-    foreach ($prices as $price)
-    {
-        $total += $price['price'];
-    }
-
-    return $total;
 }
 
 

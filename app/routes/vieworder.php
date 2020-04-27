@@ -53,4 +53,14 @@ $app->get('/vieworder', function(Request $request, Response $response) use ($app
    return $html_output;
 });
 
+function getTotal($prices)
+{
+    $total = 0;
+    foreach ($prices as $price)
+    {
+        $total += $price['price'];
+    }
+
+    return $total;
+}
 
