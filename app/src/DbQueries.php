@@ -125,6 +125,16 @@ class DbQueries
         return $query_string;
     }
 
+    public function updateQuantity()
+    {
+        $query_string = "UPDATE products";
+        $query_string .= " SET ";
+        $query_string .= "stock = :quantity";
+        $query_string .= "WHERE product_id = :product_id";
+
+        return $query_string;
+    }
+
     public function storeOrderData()
     {
         $query_string = "INSERT INTO order_detail";
