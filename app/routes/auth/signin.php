@@ -20,6 +20,10 @@ $app->post('/signin', function (Request $request, Response $response) use ($app)
         return $response->withRedirect('login');
     }
 
+    if(isset($_SESSION['order']))
+    {
+        return $response->withRedirect('vieworder');
+    }
     return $response->withRedirect(LANDING_PAGE);
 
 //        $html_output = $this->view->render($response,

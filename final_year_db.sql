@@ -61,17 +61,19 @@ CREATE TABLE `products` (
 
 CREATE TABLE `order_detail` (
   `order_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `order_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP  ON UPDATE CURRENT_TIMESTAMP,
-  `desc` TEXT,
+  `order_date` varchar(64) NOT NULL,
+  `description` TEXT,
   `total` DECIMAL(7,2) NOT NULL,
   `address` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `postcode` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `city` varchar(256) COLLATE utf8mb4_unicode_ci NOT NULL,
   `admin_assigned` int(10) unsigned NOT NULL,
   `status` ENUM('Processing', 'Building', 'Dispatched', 'Cancelled') NOT NULL,
   `customer_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`order_id`),
   FOREIGN KEY (`admin_assigned`) REFERENCES `users`(`user_id`),
   FOREIGN KEY (`customer_id`) REFERENCES `customers`(`customer_id`)
-)ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 
 FLUSH PRIVILEGES;

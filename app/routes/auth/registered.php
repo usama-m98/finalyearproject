@@ -29,7 +29,6 @@ function cleanSignUpParameters($app, $tainted_parameters)
     $cleaned_parameters = [];
     $validator = $app->getContainer()->get('validator');
 
-    var_dump($tainted_parameters);
     $tainted_username = $tainted_parameters['signup_username'];
     $tainted_email = $tainted_parameters['signup_email'];
     $tainted_role = '';

@@ -87,7 +87,6 @@ class DatabaseWrapper
     {
         $this->errors['db_error'] = false;
         $query_parameters = $params;
-
         try
         {
             $this->prepared_statement = $this->db_handle->prepare($query_string);

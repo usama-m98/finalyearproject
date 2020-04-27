@@ -25,7 +25,6 @@ require 'routes/user/addpersonalinfoform.php';
 require 'routes/configureintelform.php';
 require 'routes/configureamdform.php';
 require 'routes/vieworder.php';
-require 'routes/infoform.php';
 require 'routes/checkout.php';
 require 'routes/contact.php';
 require 'routes/shoppingcart.php';

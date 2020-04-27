@@ -20,7 +20,7 @@
             {% if info_state == true %}
 
             <a href="{{ src }}">
-                <button id="checkout" type="submit">{{ message }}</button>
+                <button class="checkout" type="submit">{{ message }}</button>
             </a>
                 {% else %}
                     <form action="{{ action }}" method="post">
@@ -47,7 +47,7 @@
             {% endif %}
         {% else %}
                     <a href="{{ src }}">
-                        <button id="checkout" type="submit">{{ message }}</button>
+                        <button class="checkout" type="submit">{{ message }}</button>
                     </a>
         {% endif %}
     </div>

@@ -96,7 +96,7 @@ class DbQueries
 
     public function retrievePersonalDetails()
     {
-        $query_string = "SELECT first_name, surname, address, postcode, city, phone_number ";
+        $query_string = "SELECT customer_id, first_name, surname, address, postcode, city, phone_number ";
         $query_string .= "FROM customers ";
         $query_string .= "WHERE user_id = :user_id";
 
@@ -130,9 +130,11 @@ class DbQueries
         $query_string = "INSERT INTO order_detail";
         $query_string .= " SET ";
         $query_string .= "order_date = :date_of_order, ";
-        $query_string .= "desc = :description, ";
+        $query_string .= "description = :description, ";
         $query_string .= "total = :total, ";
         $query_string .= "address = :address, ";
+        $query_string .= "postcode = :postcode, ";
+        $query_string .= "city = :city, ";
         $query_string .= "admin_assigned = :assigned, ";
         $query_string .= "status = :status, ";
         $query_string .= "customer_id = :customer_id";
