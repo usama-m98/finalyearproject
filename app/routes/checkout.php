@@ -5,36 +5,32 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 $app->get('/checkout', function(Request $request, Response $response) use ($app)
 {
-    if(isset($_SESSION['user']))
+    if(isset($_SESSION['user']) && isset($_SESSION['order']))
     {
-        if(isset($_SESSION['order']))
-        {
-            $order = $_SESSION['order'];
-            $order_details = getOrderStringAndTotal($order);
-            $auth_info = getAuthInfo($app, $_SESSION['user']);
-            $personal_details = getUserPersonalInfo($app, $auth_info);
+        $order = $_SESSION['order'];
+        $order_details = getOrderStringAndTotal($order);
+        $auth_info = getAuthInfo($app, $_SESSION['user']);
+        $personal_details = getUserPersonalInfo($app, $auth_info);
 
-            storeOrderDetails($app, $order_details, $personal_details);
+        storeOrderDetails($app, $order_details, $personal_details);
 
-            $message = 'Your order has been placed';
+        $message = 'Your order has been placed';
 
-            $html_output = $this->view->render($response,
-                'checkoutview.html.twig',
-                [
-                    'page_title' => 'Configure Form',
-                    'css_path' => CSS_PATH,
-                    'landing_page' => LANDING_PAGE,
-                    'js_path' => JS_PATH,
-                    'heading' => 'Checkout',
-                    'message' => $message
-                ]);
+        $html_output = $this->view->render($response,
+            'checkoutview.html.twig',
+            [
+                'page_title' => 'Configure Form',
+                'css_path' => CSS_PATH,
+                'landing_page' => LANDING_PAGE,
+                'js_path' => JS_PATH,
+                'heading' => 'Checkout',
+                'message' => $message
+            ]);
 
-            processOutput($app, $html_output);
+        processOutput($app, $html_output);
+        unset($_SESSION['order']);
 
-            return $html_output;
-        }else{
-            return $response->withRedirect(LANDING_PAGE);
-        }
+        return $html_output;
     }else {
         return $response->withRedirect(LANDING_PAGE);
     }
