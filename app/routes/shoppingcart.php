@@ -8,7 +8,7 @@ $app->post('/shoppingcart', function(Request $request, Response $response) use (
     $tainted = $request->getParsedBody();
     $cleaned = cleanInteger($app, $tainted);
     $stored_products = getStoredProducts($app);
-    $product = getCartProduct($stored_products, $cleaned['product_id']);
+    $product = getProduct($stored_products, $cleaned['product_id']);
     $session = storeCartValues($app, $product, $cleaned['quantity']);
 
 
@@ -51,7 +51,7 @@ function storeCartValues($app, $product_details, $quantity)
     var_dump($cart->getSession());
 }
 
-function getCartProduct($products, $product_to_get)
+function getProduct($products, $product_to_get)
 {
 
     $product_details = false;

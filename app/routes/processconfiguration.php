@@ -37,8 +37,8 @@ function getPrice($products, $order)
 
     foreach($products as $item)
     {
-        $product_price_list[$item['name']] = $item['price'];}
-
+        $product_price_list[$item['name']] = [ 'price' =>$item['price'], 'id' => $item['product_id']];
+    }
 
     foreach ($order as $item)
     {
@@ -56,7 +56,7 @@ function getTotal($prices)
     $total = 0;
     foreach ($prices as $price)
     {
-        $total += $price;
+        $total += $price['price'];
     }
 
     return $total;

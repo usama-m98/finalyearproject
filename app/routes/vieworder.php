@@ -6,8 +6,8 @@ use Psr\Http\Message\ResponseInterface as Response;
 $app->get('/vieworder', function(Request $request, Response $response) use ($app)
 {
 
-    $price = $_SESSION['order'];
-    $total = getTotal($price);
+    $order = $_SESSION['order'];
+    $total = getTotal($order);
 
     $auth_info = getAuthInfo($app, $_SESSION['user']);
     $personal_details = getUserPersonalInfo($app, $auth_info);
@@ -40,7 +40,7 @@ $app->get('/vieworder', function(Request $request, Response $response) use ($app
            'login' => 'login',
            'signup' => 'signup',
            'heading' => 'Configuration Order Details',
-           'products' => $price,
+           'products' => $order,
            'total' => $total,
            'message' => $checkout['message'],
            'src' => $checkout['action'],
