@@ -29,9 +29,9 @@ function directAction($app, $action)
     foreach($action as $key => $value)
     {
         if ($key=== 'filter_admin'){
-            $data = 'Member';
-        }elseif ($key === 'filter_user'){
             $data = 'Admin';
+        }elseif ($key === 'filter_user'){
+            $data = 'Member';
         }elseif ($key === 'reset'){
             $data = 'reset';
         }

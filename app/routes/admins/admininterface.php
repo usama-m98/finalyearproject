@@ -16,7 +16,8 @@ $app->get('/admininterface', function (Request $request, Response $response) use
                     'js_path' => JS_PATH,
                     'page_heading2' => 'Admin Lounge',
                     'add_admin' => 'addadmin',
-                    'view_user' => 'viewusers'
+                    'view_user' => 'viewusers',
+                    'assign_build' => 'assignbuilds '
                 ]);
 
             processOutput($app, $html_output);

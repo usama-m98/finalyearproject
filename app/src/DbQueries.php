@@ -160,5 +160,14 @@ class DbQueries
 
         return $query_string;
     }
+
+    public function retrieveOrderDataToBeAssigned()
+    {
+        $query_string = "SELECT order_id, order_date, description, total, status, admin_assigned ";
+        $query_string .= "FROM order_detail ";
+        $query_string .= "WHERE admin_assigned = '1'";
+
+        return $query_string;
+    }
 }
 

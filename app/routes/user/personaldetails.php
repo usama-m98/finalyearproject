@@ -38,7 +38,7 @@ $app->get('/personaldetails', function(Request $request, Response $response) use
 
         return $html_output;
     }else{
-        return $response->withRedirect(LANDING_PAGE)
+        return $response->withRedirect(LANDING_PAGE);
     }
 })->setName('personaldetails');
 
