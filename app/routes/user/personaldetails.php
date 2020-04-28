@@ -13,11 +13,9 @@ $app->get('/personaldetails', function(Request $request, Response $response) use
         $email = $auth_info['email'];
         $personal_details = getUserPersonalInfo($app, $auth_info);
         $personal_info_exists = false;
-        sessionAddress();
 
         if ($personal_details) {
             $personal_info_exists = true;
-            $_SESSION['address'] = $personal_details;
         }
 
         $html_output = $this->view->render($response,
@@ -33,13 +31,14 @@ $app->get('/personaldetails', function(Request $request, Response $response) use
                 'email' => $email,
                 'personal_info_exists' => $personal_info_exists,
                 'personal_info' => $personal_details,
+                'action' => 'addpersonalinfoform',
             ]);
 
         processOutput($app, $html_output);
 
         return $html_output;
     }else{
-        die();
+        return $response->withRedirect(LANDING_PAGE)
     }
 })->setName('personaldetails');
 
@@ -66,11 +65,3 @@ function getUserPersonalInfo($app, $auth_info)
     return $result[0];
 }
 
-function sessionAddress()
-{
-    if (isset($_SESSION['address']))
-    {
-        return $_SESSION['address'];
-    }
-
-}

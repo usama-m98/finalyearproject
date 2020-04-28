@@ -8,7 +8,9 @@ $app->get('/vieworder', function(Request $request, Response $response) use ($app
 
     $order = $_SESSION['order'];
     $total = getTotal($order);
-    $personal_details = $_SESSION['customer_details'];
+
+    $auth_info = getAuthInfo($app, $_SESSION['user']);
+    $personal_details = getUserPersonalInfo($app, $auth_info);
     $action = '';
     $info_state = true;
 

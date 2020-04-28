@@ -6,21 +6,29 @@ use Psr\Http\Message\ResponseInterface as Response;
 $app->get('/yourorder', function(Request $request, Response $response) use ($app)
 {
 
-    $customer_details = $_SESSION['customer_details'];
-    $order_detail_history = getOrderDetails($app, $customer_details['customer_id']);
-    $html_output = $this->view->render($response,
-        'yourorder.html.twig',
-        [
-            'page_title' => 'Configure Form',
-            'css_path' => CSS_PATH,
-            'landing_page' => LANDING_PAGE,
-            'js_path' => JS_PATH,
-            'heading' => 'Order Details',
-        ]);
+    if(isset($_SESSION['user'])) {
 
-    processOutput($app, $html_output);
+        $auth_info = getAuthInfo($app, $_SESSION['user']);
+        $customer_details = getUserPersonalInfo($app, $auth_info);
+        $order_detail_history = getOrderDetails($app, $customer_details['customer_id']);
 
-    return $html_output;
+        $html_output = $this->view->render($response,
+            'yourorder.html.twig',
+            [
+                'page_title' => 'Configure Form',
+                'css_path' => CSS_PATH,
+                'landing_page' => LANDING_PAGE,
+                'js_path' => JS_PATH,
+                'heading' => 'Order Details',
+                'orders' => $order_detail_history,
+            ]);
+
+        processOutput($app, $html_output);
+
+        return $html_output;
+    }else{
+        return $response->withRedirect(LANDING_PAGE);
+    }
 })->setName('yourorder');
 
 function getOrderDetails($app, $customer_id)

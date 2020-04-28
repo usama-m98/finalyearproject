@@ -18,7 +18,6 @@ require 'routes/user/editpassword.php';
 require 'routes/user/usernamechanged.php';
 require 'routes/user/emailchanged.php';
 require 'routes/user/passwordchanged.php';
-require 'routes/user/addpersonalinfo.php';
 require 'routes/user/addpersonalinfoform.php';
 require 'routes/user/yourorder.php';
 
