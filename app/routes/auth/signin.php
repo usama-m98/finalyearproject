@@ -9,11 +9,18 @@ $app->post('/signin', function (Request $request, Response $response) use ($app)
     $tainted = $request->getParsedBody();
     $cleaned_params = cleanSignInParameters($app, $tainted);
     $auth_info = getAuthInfo($app, $cleaned_params['username']);
+    $personal_details = getUserPersonalInfo($app, $auth_info);
+
+    // Setting session user personal info when the user sign's in
+
+    $_SESSION['customer_details'] = $personal_details;
     $sign_in = signIn($auth_info ,$cleaned_params['password']);
 
+    //checking that sessions have been set
     sessionCheck();
     user();
     role();
+    customerDetails();
 
     if(!$sign_in)
     {
@@ -110,6 +117,14 @@ function user()
 function role(){
     if(isset($_SESSION['role'])){
         return $_SESSION['role'];
+    }
+}
+
+function customerDetails()
+{
+    if(isset($_SESSION['customer_details']))
+    {
+        return $_SESSION['customer_details'];
     }
 }
 

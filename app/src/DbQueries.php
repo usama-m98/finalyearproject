@@ -151,4 +151,14 @@ class DbQueries
 
         return $query_string;
     }
+
+    public function retrieveOrderData()
+    {
+        $query_string = "SELECT order_id, order_date, description, total, status ";
+        $query_string .= "FROM order_detail ";
+        $query_string .= "WHERE customer_id = :customer_id";
+
+        return $query_string;
+    }
 }
+

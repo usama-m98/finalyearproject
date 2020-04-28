@@ -5,15 +5,15 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 $app->get('/checkout', function(Request $request, Response $response) use ($app)
 {
-//    if(isset($_SESSION['user']) && isset($_SESSION['order']))
-//    {
+    if(isset($_SESSION['user']) && isset($_SESSION['order']))
+    {
         $order = $_SESSION['order'];
         $order_details = getOrderStringAndTotal($order);
         $auth_info = getAuthInfo($app, $_SESSION['user']);
         $personal_details = getUserPersonalInfo($app, $auth_info);
         updateQuantityAfterConfig($app, $order);
 
-//        storeOrderDetails($app, $order_details, $personal_details);
+        storeOrderDetails($app, $order_details, $personal_details);
 
         $message = 'Your order has been placed';
 
@@ -29,12 +29,12 @@ $app->get('/checkout', function(Request $request, Response $response) use ($app)
             ]);
 
         processOutput($app, $html_output);
-//        unset($_SESSION['order']);
+        unset($_SESSION['order']);
 
         return $html_output;
-//    }else {
-//        return $response->withRedirect(LANDING_PAGE);
-//    }
+    }else {
+        return $response->withRedirect(LANDING_PAGE);
+    }
 })->setName('checkout');
 
 function getOrderStringAndTotal($order)
