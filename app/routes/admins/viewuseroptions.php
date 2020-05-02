@@ -5,8 +5,8 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 $app->post('/viewuseroptions', function (Request $request, Response $response) use ($app)
 {
-    $tainted= $request->getParsedBody();
-    $action= directAction($app, $tainted);
+    $body= $request->getParsedBody();
+    $action= directAction($app, $body);
     $filtered = null;
 
     if ($action === 'reset'){
@@ -35,6 +35,8 @@ function directAction($app, $action)
             $data = 'Member';
         }elseif ($key === 'reset'){
             $data = 'reset';
+        }else{
+            die();
         }
     }
     return $data;

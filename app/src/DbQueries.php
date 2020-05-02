@@ -197,5 +197,15 @@ class DbQueries
 
         return $query_string;
     }
+
+    public function updateCancelOrder()
+    {
+        $query_string = "UPDATE order_detail";
+        $query_string .= " SET ";
+        $query_string .= "status = :order_status ";
+        $query_string .= "WHERE order_id = :order_id_value";
+
+        return $query_string;
+    }
 }
 

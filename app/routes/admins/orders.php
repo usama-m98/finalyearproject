@@ -17,6 +17,7 @@ $app->get('/orders', function (Request $request, Response $response) use ($app)
                     'landing_page' => LANDING_PAGE,
                     'js_path' => JS_PATH,
                     'orders' => $all_orders,
+                    'action' => 'orderoption'
                 ]);
 
             processOutput($app, $html_output);
@@ -45,14 +46,4 @@ function getAllOrderData($app)
     $result = $database_wrapper->safeFetchAll();
 
     return $result;
-}
-
-function filterProcessing($order_array)
-{
-    $o_array = $order_array;
-
-    foreach ($order_array as $order)
-    {
-        var_dump($order);
-    }
 }

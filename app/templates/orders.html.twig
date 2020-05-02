@@ -1,36 +1,47 @@
 {% extends 'layout.html.twig' %}
 {% block title %}{{ page_title }}{% endblock %}
 {% block content %}
-<header>
-    <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
-</header>
+    <header>
+        <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
+    </header>
 
     <div>
-        <form>
-            <div id="order-options">
-                <input type="submit" name="cancel-order" value="Cancel Order">
-            </div>
-            <table>
+        <h2>All Orders</h2>
+        <table>
+            <tr>
+                <th>Actions</th><th>Order ID</th></th><th>Description</th><th>Price</th><th>address</th><th>postcode</th><th>city</th>
+                <th>Date Sold</th><th>Order Status</th><th>Customer ID</th><th>Admin Assigned</th>
+            </tr>
+            {% for order in orders %}
                 <tr>
-                    <th></th><th>Order ID</th></th><th>Description</th><th>Price</th><th>address</th><th>postcode</th><th>city</th>
-                    <th>Date Sold</th><th>Order Status</th><th>Customer ID</th><th>Admin Assigned</th>
+                    <td>
+                        <form method="post" action="{{ action }}">
+                            <div class="dropdown">
+                                <div class="dropbtn">&#x25BC;</div>
+                                <div class="order-menu">
+                                    <input type="hidden" name="orderID" value="{{ order['order_id'] }}">
+                                    {% if order['status'] != 'Processed' %}
+                                    <input type="submit" name="option" class="order-options" value="Set-Processed">
+                                    {% endif %}
+                                    <input type="submit" name="option" class="order-options" value="Building">
+                                    <input type="submit" name="option" class="order-options" value="Dispatch">
+                                    <input type="submit" name="option" class="order-options" value="Cancel-Order">
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                    <td>{{ order['order_id'] }}</td>
+                    <td>{{ order['description'] }}</td>
+                    <td>£{{ order['total'] }}</td>
+                    <td>{{ order['address'] }}</td>
+                    <td>{{ order['postcode'] }}</td>
+                    <td>{{ order['city'] }}</td>
+                    <td>{{ order['order_date'] }}</td>
+                    <td>{{ order['status'] }}</td>
+                    <td>{{ order['customer_id'] }}</td>
+                    <td>{{ order['admin_assigned'] }}</td>
                 </tr>
-                {% for order in orders %}
-                    <tr>
-                        <th><input type="checkbox" name="data{{ order['user_id'] }}" value="{{ order['user_id'] }}"></th>
-                        <td>{{ order['order_id'] }}</td>
-                        <td>{{ order['description'] }}</td>
-                        <td>£{{ order['total'] }}</td>
-                        <td>{{ order['address'] }}</td>
-                        <td>{{ order['postcode'] }}</td>
-                        <td>{{ order['city'] }}</td>
-                        <td>{{ order['order_date'] }}</td>
-                        <td>{{ order['status'] }}</td>
-                        <td>{{ order['customer_id'] }}</td>
-                        <td>{{ order['admin_assigned'] }}</td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </form>
+            {% endfor %}
+        </table>
     </div>
 {% endblock %}

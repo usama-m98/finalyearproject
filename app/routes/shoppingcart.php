@@ -19,12 +19,16 @@ $app->post('/shoppingcart', function(Request $request, Response $response) use (
 function cleanInteger($app, $tainted)
 {
     $validator = $app->getContainer()->get('validator');
-
-    $clean_integer = array();
-
-    foreach ($tainted as $key => $value)
+    $not_clean = $tainted;
+    $clean_integer = null;
+    if(is_array($not_clean))
     {
-        $clean_integer[$key] = $validator->sanitiseNumber($value);
+        foreach ($not_clean as $key => $value)
+        {
+            $clean_integer[$key] = $validator->sanitiseNumber($value);
+        }
+    }else{
+        $clean_integer = $validator->sanitiseNumber($not_clean);
     }
 
     return $clean_integer;
