@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block content %}
+<header>
+    <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
+</header>
+
+    <div>
+        <form>
+            <div id="order-options">
+                <input type="submit" name="cancel-order" value="Cancel Order">
+            </div>
+            <table>
+                <tr>
+                    <th></th><th>Order ID</th></th><th>Description</th><th>Price</th><th>address</th><th>postcode</th><th>city</th>
+                    <th>Date Sold</th><th>Order Status</th><th>Customer ID</th><th>Admin Assigned</th>
+                </tr>
+                {% for order in orders %}
+                    <tr>
+                        <th><input type="checkbox" name="data{{ order['user_id'] }}" value="{{ order['user_id'] }}"></th>
+                        <td>{{ order['order_id'] }}</td>
+                        <td>{{ order['description'] }}</td>
+                        <td>£{{ order['total'] }}</td>
+                        <td>{{ order['address'] }}</td>
+                        <td>{{ order['postcode'] }}</td>
+                        <td>{{ order['city'] }}</td>
+                        <td>{{ order['order_date'] }}</td>
+                        <td>{{ order['status'] }}</td>
+                        <td>{{ order['customer_id'] }}</td>
+                        <td>{{ order['admin_assigned'] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </form>
+    </div>
+{% endblock %}

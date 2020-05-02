@@ -4,32 +4,36 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 $app->get('/assignbuilds', function (Request $request, Response $response) use ($app)
 {
+    if(isset($_SESSION['user'])){
+        if ($_SESSION['role'] == 'Root') {
+            if (isset($_GET['success']) && $_GET['success'] == 1) {
+                echo "<script>alert('Assignment Complete')</script>";
+            }
 
-    if ( isset($_GET['success']) && $_GET['success'] == 1 )
-    {
-        echo "<script>alert('Assignment Complete')</script>";
+            $orders = ordersToBeAssigned($app);
+            $count_of_assigned = countOfAssigned($app);
+            $admins = filterUser($app, 'Admin');
+
+            $html_output = $this->view->render($response,
+                'assignbuilds.html.twig',
+                [
+                    'page_title' => 'Assign Build',
+                    'css_path' => CSS_PATH,
+                    'landing_page' => LANDING_PAGE,
+                    'js_path' => JS_PATH,
+                    'orders' => $orders,
+                    'assigned' => $count_of_assigned,
+                    'action' => 'assignmentform',
+                    'admins' => $admins
+                ]);
+
+            processOutput($app, $html_output);
+
+            return $html_output;
+        }else{
+            return $response->withHeader('Location', 'homepage');
+        }
     }
-
-    $orders = ordersToBeAssigned($app);
-    $count_of_assigned = countOfAssigned($app);
-    $admins = filterUser($app, 'Admin');
-
-    $html_output = $this->view->render($response,
-        'assignbuilds.html.twig',
-        [
-            'page_title' => 'Assign Build',
-            'css_path' => CSS_PATH,
-            'landing_page' => LANDING_PAGE,
-            'js_path' => JS_PATH,
-            'orders' => $orders,
-            'assigned' => $count_of_assigned,
-            'action' => 'assignmentform',
-            'admins' => $admins
-        ]);
-
-    processOutput($app, $html_output);
-
-    return $html_output;
 })->setName('assignbuilds');
 
 function ordersToBeAssigned($app)

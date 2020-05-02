@@ -17,7 +17,8 @@ $app->get('/admininterface', function (Request $request, Response $response) use
                     'page_heading2' => 'Admin Lounge',
                     'add_admin' => 'addadmin',
                     'view_user' => 'viewusers',
-                    'assign_build' => 'assignbuilds '
+                    'assign_build' => 'assignbuilds',
+                    'order_interface' => 'orders'
                 ]);
 
             processOutput($app, $html_output);

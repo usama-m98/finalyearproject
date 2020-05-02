@@ -5,9 +5,11 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 $app->post('/assignmentform', function (Request $request, Response $response) use ($app)
 {
+
     $tainted = $request->getParsedBody();
     $cleaned = cleanInteger($app, $tainted);
     updateOrderDetailsWithReassignment($app, $cleaned);
+
 
 
     return $response->withHeader('Location', 'assignbuilds' . '?success=1');
