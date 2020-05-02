@@ -163,9 +163,29 @@ class DbQueries
 
     public function retrieveOrderDataToBeAssigned()
     {
-        $query_string = "SELECT order_id, order_date, description, total, status, admin_assigned ";
+        $query_string = "SELECT order_id, order_date, description, total, status, customer_id,   admin_assigned ";
         $query_string .= "FROM order_detail ";
         $query_string .= "WHERE admin_assigned = '1'";
+
+        return $query_string;
+    }
+
+    public function countOfOrdersAssignedToAdmins()
+    {
+        $query_string = 'select u.user_id, username, count(o.admin_assigned) AS no_of_assigned ';
+        $query_string .= 'FROM users u, order_detail o ';
+        $query_string .=  'WHERE u.user_id = o.admin_assigned ';
+        $query_string .= 'GROUP BY u.user_id';
+
+        return $query_string;
+    }
+
+    public function reassignAdminAssignment()
+    {
+        $query_string = 'UPDATE order_detail';
+        $query_string .= ' SET ';
+        $query_string .= 'admin_assigned = :assignment_value ';
+        $query_string .= 'WHERE order_id = :order_id_value';
 
         return $query_string;
     }

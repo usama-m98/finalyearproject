@@ -16,7 +16,8 @@ $app->post('/viewuseroptions', function (Request $request, Response $response) u
             $filtered = getUserAccountDetails($app);
         }
     } else{
-        $filtered = filterUser($app, $action);
+        $_SESSION['filtered_user_data'] = filterUser($app, $action);
+        $filtered = $_SESSION['filtered_user_data'];
     }
     isFilteredUserDataSet();
 
@@ -57,7 +58,7 @@ function filterUser($app, $user)
     ];
 
     $database_wrapper->safeQuery($query, $parameters);
-    $_SESSION['filtered_user_data'] = $database_wrapper->safeFetchAll();
+    return $database_wrapper->safeFetchAll();
 
 }
 

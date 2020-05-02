@@ -4,4 +4,62 @@
     <header>
         <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
     </header>
+
+    <div>
+
+    </div>
+    <div class="content-div">
+        <div>
+            <form method="post" action="{{ action }}">
+                <label for="order-id">Enter Order ID to Assign:</label>
+                <input type="text" name="order-id">
+                <label for="admin-id">Enter Admin ID you wish to assign this to:</label>
+                <input type="text" name="admin-id">
+                <input type="submit">
+            </form>
+        </div>
+        <table>
+            <tr>
+                <th>User ID</th><th>Username</th><th>Role</th>
+            </tr>
+            {% for admin in admins  %}
+                <tr>
+                    <td>{{ admin['user_id'] }}</td>
+                    <td>{{ admin['username'] }}</td>
+                    <td>{{ admin['role'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <table>
+            <tr>
+                <th>Admin ID</th><th>Username</th><th>Assignment Count</th>
+            </tr>
+            {% for assignment in assigned %}
+                <tr>
+                    <td>{{ assignment['user_id'] }}</td>
+                    <td>{{ assignment['username'] }}</td>
+                    <td>{{ assignment['no_of_assigned'] }}</td>
+                </tr>
+            {% endfor %}
+
+        </table>
+
+        <table>
+            <tr>
+                <th>Order ID</th></th><th>Description</th><th>Price</th><th>Date Sold</th><th>Order Status</th><th>Customer ID</th><th>Admin Assigned</th>
+            </tr>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order['order_id'] }}</td>
+                    <td>{{ order['description'] }}</td>
+                    <td>£{{ order['total'] }}</td>
+                    <td>{{ order['order_date'] }}</td>
+                    <td>{{ order['status'] }}</td>
+                    <td>{{ order['customer_id'] }}</td>
+                    <td>{{ order['admin_assigned'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
 {% endblock %}

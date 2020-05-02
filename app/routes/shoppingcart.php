@@ -20,8 +20,12 @@ function cleanInteger($app, $tainted)
 {
     $validator = $app->getContainer()->get('validator');
 
-    $clean_integer['product_id'] = $validator->sanitiseNumber($tainted['product_id']);
-    $clean_integer['quantity'] = $validator->sanitiseNumber($tainted['quantity']);
+    $clean_integer = array();
+
+    foreach ($tainted as $key => $value)
+    {
+        $clean_integer[$key] = $validator->sanitiseNumber($value);
+    }
 
     return $clean_integer;
 }

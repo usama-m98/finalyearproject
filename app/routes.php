@@ -39,6 +39,7 @@ require 'routes/admins/viewuseroptions.php';
 require 'routes/admins/addproductsform.php';
 require 'routes/admins/addproducts.php';
 require 'routes/admins/assignbuilds.php';
+require 'routes/admins/assignmentform.php';
 
 // webpage products route
 require 'routes/productsview/desktops.php';
