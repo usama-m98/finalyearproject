@@ -21,7 +21,8 @@ $app->get('/admininterface', function (Request $request, Response $response) use
                     'assign_build' => 'assignbuilds',
                     'order_interface' => 'orders',
                     'add_products' => 'addproductsform',
-                    'products_list' => 'productslist'
+                    'products_list' => 'productslist',
+                    'admin_details' => 'personaldetails'
                 ]);
 
             processOutput($app, $html_output);

@@ -125,6 +125,21 @@ class DbQueries
         return $query_string;
     }
 
+    public function updateItem()
+    {
+        $query_string = "UPDATE products";
+        $query_string .= " SET ";
+        $query_string .= "name = :product_name, ";
+        $query_string .= "type = :product_type, ";
+        $query_string .= "description = :product_description, ";
+        $query_string .= "stock = :product_stock, ";
+        $query_string .= "price = :product_price, ";
+        $query_string .= "product_image = :image ";
+        $query_string .= "WHERE product_id = :product_id";
+
+        return $query_string;
+    }
+
     public function removeProduct()
     {
         $query_string = "DELETE FROM products ";

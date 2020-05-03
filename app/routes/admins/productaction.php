@@ -24,9 +24,9 @@ $app->post('/productaction', function(Request $request, Response $response) use 
                         'landing_page' => LANDING_PAGE,
                         'js_path' => JS_PATH,
                         'page_heading2' => 'Update Items',
-                        'action' => 'updateItem',
+                        'action' => 'updateitem',
                         'types' => $product_types,
-                        'item' => $item
+                        'item' => $item,
                     ]);
 
                 processOutput($app, $html_output);
@@ -91,7 +91,7 @@ function removeItem($app, $product_id)
     $query = $sql_queries->removeProduct();
 
     $params = [
-      ':product_id' => $product_id
+        ':product_id' => $product_id
     ];
 
     $database_wrapper->safeQuery($query, $params);

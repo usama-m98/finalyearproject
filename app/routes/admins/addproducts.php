@@ -21,7 +21,7 @@ $app->post('/addproducts', function (Request $request, Response $response) use (
             unset($_SESSION['add-product-error']);
         }
 
-        return $response->withRedirect('peripherals');
+        return $response->withHeader('Location','productslist');
 
     }
 });
@@ -63,7 +63,7 @@ function cleanProductData($app, $product_image, $product_data)
         $cleaned_data['error'] = 'Image File is too large';
     }
 
-
+    $cleaned_data['product_id'] = $validator->sanitiseNumber($product_data['product_id']);
     $cleaned_data['product_name'] = $validator->sanitiseString($product_data['product_name']);
     $cleaned_data['type'] = $validator->sanitiseString($product_data['type']);
     $cleaned_data['description'] = $validator->sanitiseString($product_data['description']);
@@ -83,7 +83,6 @@ function checkIfFormIsFilled($tainted)
         $isEmpty = true;
         $_SESSION['add-product-error'] = "Please Fill the Form Fully";
     }
-    var_dump($isEmpty);
     return $isEmpty;
 }
 

@@ -11,6 +11,9 @@ $app->get('/productslist', function(Request $request, Response $response) use ($
             if(isset($_SESSION['removed_item']) && $_SESSION['removed_item'] == true)
             {
                 echo "<script>alert('Item Removed')</script>";
+            }elseif (isset($_SESSION['updated']) && $_SESSION['updated'] == true)
+            {
+                echo "<script>alert('Item Updated')</script>";
             }
 
             $html_output = $this->view->render($response,
@@ -26,6 +29,7 @@ $app->get('/productslist', function(Request $request, Response $response) use ($
 
             processOutput($app, $html_output);
             unset($_SESSION['removed_item']);
+            unset($_SESSION['updated']);
             return $html_output;
         }
     }else{
