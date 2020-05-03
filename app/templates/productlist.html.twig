@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block content %}
+    <header>
+        <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
+    </header>
+
+    <div>
+        <table>
+            <tr>
+                <th>Actions</th><th>Product ID</th><th>Name</th><th>Description</th><th>Type</th><th>Stock</th>
+                <th>Price</th><th>Image</th>
+            </tr>
+            {% for product in products %}
+                <tr>
+                    <td>
+                        <form method="post" action="{{ action }}">
+                            <div class="dropdown">
+                                <div class="dropbtn">&#x25BC;</div>
+                                <div class="order-menu">
+                                    <input type="hidden" name="productID" value="{{ product['product_id'] }}">
+                                    <input type="submit" name="option" class="order-options" value="Edit-Item">
+                                    <input type="submit" name="option" class="order-options" value="Remove-Item">
+                                </div>
+                            </div>
+                        </form>
+                    </td>
+                    <td>{{ product['product_id'] }}</td>
+                    <td>{{ product['name'] }}</td>
+                    <td>{{ product['description'] }}</td>
+                    <td>{{ product['type'] }}</td>
+                    <td>{{ product['stock'] }}</td>
+                    <td>{{ product['price'] }}</td>
+                    <td><img class="table-image" src="{{ product['product_image'] }}"></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

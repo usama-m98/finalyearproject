@@ -79,6 +79,7 @@ CREATE TABLE `messages` (
     `message_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
     `message` TEXT,
     `message_state` ENUM('Read', 'Unread', 'Flag') NOT NULL,
+    `message_date` varchar(64) NOT NULL,
     `order_id` int(10) unsigned,
     `user_id` int(10) unsigned NOT NULL,
     PRIMARY KEY (`message_id`),

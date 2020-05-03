@@ -125,6 +125,14 @@ class DbQueries
         return $query_string;
     }
 
+    public function removeProduct()
+    {
+        $query_string = "DELETE FROM products ";
+        $query_string .= "WHERE product_id = :product_id";
+
+        return $query_string;
+    }
+
     public function updateStock()
     {
         $query_string = "UPDATE products";
@@ -214,6 +222,7 @@ class DbQueries
         $query_string .= " SET ";
         $query_string .= "message = :message_string, ";
         $query_string .= "message_state = 'Unread', ";
+        $query_string .= "message_date = :date, ";
         $query_string .= "order_id = :order_id_value, ";
         $query_string .= "user_id = :user_id_value";
 
@@ -230,7 +239,7 @@ class DbQueries
 
     public function retrieveUserMessages()
     {
-        $query_string = "SELECT message_id, message, message_state, order_id ";
+        $query_string = "SELECT message_id, message, message_state, order_id, message_date";
         $query_string .= "FROM messages ";
         $query_string .= "WHERE user_id = :user_id_value";
     }

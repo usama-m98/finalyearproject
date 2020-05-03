@@ -17,8 +17,11 @@ $app->get('/admininterface', function (Request $request, Response $response) use
                     'page_heading2' => 'Admin Lounge',
                     'add_admin' => 'addadmin',
                     'view_user' => 'viewusers',
+                    'view_messages' => 'viewallmessages',
                     'assign_build' => 'assignbuilds',
-                    'order_interface' => 'orders'
+                    'order_interface' => 'orders',
+                    'add_products' => 'addproductsform',
+                    'products_list' => 'productslist'
                 ]);
 
             processOutput($app, $html_output);

@@ -47,8 +47,10 @@ function storeMessageInDatabase($app, $message, $order_id, $user_id)
 
     $query = $sql_queries->storeMessage();
 
+    $date = date('m/d/Y');
     $params = [
         ':message_string' => $message,
+        ':date' => $date,
         ':order_id_value' => $order_id,
         ':user_id_value' => $user_id,
     ];

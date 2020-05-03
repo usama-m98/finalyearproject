@@ -1,0 +1,41 @@
+{% extends 'layout.html.twig' %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block content %}
+    <header>
+        <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
+    </header>
+
+    <div class="content-div">
+        <h2>{{ page_heading2 }}</h2>
+
+        <form action="{{ action }}" method="post" enctype="multipart/form-data">
+            <label for="product_name">*Name </label>
+            <input type="text" name="product_name" value="{{ item['name'] }}" required>
+
+            <label for="type">*Type </label>
+            <select name="type" required>
+                {% for type in types %}
+                    {% if item['type'] == type %}
+                        <option value="{{ type }}" selected>{{ type }}</option>
+                    {% else %}
+                        <option value="{{ type }}">{{ type }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+
+            <label for="description">Description </label>
+            <textarea name="description" rows="10" cols="100" >{{ item['description'] }}</textarea>
+
+            <label for="stock">*Stock </label>
+            <input type="text" maxlength="4" name="stock" size="5" value="{{ item['stock'] }}"  required>
+
+            <label for="price">*Price </label>
+            <input type="text" name="price" maxlength="7" size="7" value="{{ item['price'] }}"  required>
+
+            <label for="product_image">Image Url</label>
+            <input type="file" value="{{ item['product_image'] }}"  name="product_image">
+
+            <input type="submit" name="product_submit" value="Update Item">
+        </form>
+    </div>
+{% endblock %}
