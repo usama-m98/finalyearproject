@@ -8,6 +8,9 @@ $app->get('/yourorder', function(Request $request, Response $response) use ($app
 
     if(isset($_SESSION['user'])) {
 
+        if (isset($_SESSION['message_store']) && $_SESSION['message_store'] == true) {
+            echo "<script>alert('Message sent')</script>";
+        }
         $auth_info = getAuthInfo($app, $_SESSION['user']);
         $customer_details = getUserPersonalInfo($app, $auth_info);
         $order_detail_history = getOrderDetails($app, $customer_details['customer_id']);
@@ -24,7 +27,7 @@ $app->get('/yourorder', function(Request $request, Response $response) use ($app
             ]);
 
         processOutput($app, $html_output);
-
+        unset($_SESSION['message_store']);
         return $html_output;
     }else{
         return $response->withRedirect(LANDING_PAGE);

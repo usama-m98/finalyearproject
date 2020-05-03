@@ -15,6 +15,9 @@
                         <td>£{{ order['total'] }}</td>
                         <td>{{ order['order_date'] }}</td>
                         <td>{{ order['status'] }}</td>
+                        <td>
+                            <a href="contact?orderID={{ order['order_id'] }}">Contact Seller</a>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>

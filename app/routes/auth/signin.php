@@ -30,7 +30,7 @@ $app->post('/signin', function (Request $request, Response $response) use ($app)
     }
     return $response->withRedirect(LANDING_PAGE);
 
-//        $html_output = $this->view->render($response,
+//    $html_output = $this->view->render($response,
 //        'result.html.twig',
 //        [
 //            'page_title' => 'Personal Details',

@@ -6,7 +6,7 @@ $app->get('/assignbuilds', function (Request $request, Response $response) use (
 {
     if(isset($_SESSION['user'])){
         if ($_SESSION['role'] == 'Root') {
-            if (isset($_GET['success']) && $_GET['success'] == 1) {
+            if (isset($_SESSION['reassigned']) && $_SESSION['reassigned'] == true) {
                 echo "<script>alert('Assignment Complete')</script>";
             }
 
@@ -28,7 +28,7 @@ $app->get('/assignbuilds', function (Request $request, Response $response) use (
                 ]);
 
             processOutput($app, $html_output);
-
+            unset($_SESSION['reassigned']);
             return $html_output;
         }else{
             return $response->withHeader('Location', 'homepage');

@@ -1,0 +1,23 @@
+{% extends 'layout.html.twig' %}
+{% block title %}{{ page_title }}{% endblock %}
+{% block content %}
+    <header>
+        <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
+    </header>
+
+    <div>
+        <table>
+            <tr>
+                <th>Message ID</th><th>Message</th><th>Order ID</th><th>User ID</th>
+            </tr>
+            {% for message in messages %}
+                <tr>
+                    <td>{{ message['message_id'] }}</td>
+                    <td>{{ message['message'] }}</td>
+                    <td>{{ message['order_id'] }}</td>
+                    <td>{{ message['user_id'] }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}

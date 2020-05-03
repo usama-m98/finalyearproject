@@ -10,22 +10,14 @@ $app->post('/assignmentform', function (Request $request, Response $response) us
     $cleaned = cleanInteger($app, $tainted);
     updateOrderDetailsWithReassignment($app, $cleaned);
 
+    if (isset($_SESSION['reassigned']))
+    {
+        return $_SESSION['reassigned'];
+    }
 
 
-    return $response->withHeader('Location', 'assignbuilds' . '?success=1');
+    return $response->withHeader('Location', 'assignbuilds');
 
-//    $html_output = $this->view->render($response,
-//        'result.html.twig',
-//        [
-//            'page_title' => 'Personal Details',
-//            'css_path' => CSS_PATH,
-//            'landing_page' => LANDING_PAGE,
-//            'js_path' => JS_PATH,
-//        ]);
-//
-//    processOutput($app, $html_output);
-//
-//    return $html_output;
 });
 
 function updateOrderDetailsWithReassignment($app, $parameter)
@@ -47,5 +39,6 @@ function updateOrderDetailsWithReassignment($app, $parameter)
     ];
 
     $database_wrapper->safeQuery($query, $params);
+    $_SESSION['reassigned'] = true;
 }
 

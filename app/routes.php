@@ -20,13 +20,15 @@ require 'routes/user/emailchanged.php';
 require 'routes/user/passwordchanged.php';
 require 'routes/user/addpersonalinfoform.php';
 require 'routes/user/yourorder.php';
+require 'routes/user/contact.php';
+require 'routes/user/contactform.php';
+require 'routes/user/viewmessages.php';
 
 // webpage routes
 require 'routes/configureintelform.php';
 require 'routes/configureamdform.php';
 require 'routes/vieworder.php';
 require 'routes/checkout.php';
-require 'routes/contact.php';
 require 'routes/shoppingcart.php';
 require 'routes/processconfiguration.php';
 
@@ -42,6 +44,7 @@ require 'routes/admins/assignbuilds.php';
 require 'routes/admins/assignmentform.php';
 require 'routes/admins/orders.php';
 require 'routes/admins/orderoption.php';
+require 'routes/admins/viewallmessages.php';
 
 // webpage products route
 require 'routes/productsview/desktops.php';

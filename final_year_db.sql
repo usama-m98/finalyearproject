@@ -75,6 +75,16 @@ CREATE TABLE `order_detail` (
   FOREIGN KEY (`customer_id`) REFERENCES `customers`(`customer_id`)
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+CREATE TABLE `messages` (
+    `message_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+    `message` TEXT,
+    `message_state` ENUM('Read', 'Unread', 'Flag') NOT NULL,
+    `order_id` int(10) unsigned,
+    `user_id` int(10) unsigned NOT NULL,
+    PRIMARY KEY (`message_id`),
+    FOREIGN KEY (`order_id`) REFERENCES `order_detail`(`order_id`),
+    FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+)ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 FLUSH PRIVILEGES;
 
