@@ -22,6 +22,7 @@ $app->get('/admininterface', function (Request $request, Response $response) use
                     'order_interface' => 'orders',
                     'add_products' => 'addproductsform',
                     'products_list' => 'productslist',
+                    'slideshow' => 'changeslideshow',
                     'admin_details' => 'personaldetails'
                 ]);
 

@@ -48,6 +48,7 @@ require 'routes/admins/viewallmessages.php';
 require 'routes/admins/productslist.php';
 require 'routes/admins/productaction.php';
 require 'routes/admins/updateitem.php';
+require 'routes/admins/changeslideshow.php';
 
 // webpage products route
 require 'routes/productsview/desktops.php';

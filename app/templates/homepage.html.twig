@@ -1,7 +1,13 @@
 {% extends 'banner.html.twig' %}
 {% block content %}
-    <img src="{{ homepage_banner }}" id="homepage_banner_pic">
-
+    <div class="project-slideshow">
+        <div class="mySlides">
+            <img class="project-images" src="{{ homepage_banner }}" id="homepage_banner_pic">
+            <div class="text">Profile view</div>
+        </div>
+        <a class="prev" id="prev-slide">&#10094;</a>
+        <a class="next" id="next-slide">&#10095;</a>
+    </div>
     <div style="text-align: center;">
         <a href="configureintelform">
             <button type="submit">Build Your Intel PC</button>
