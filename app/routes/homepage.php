@@ -8,7 +8,7 @@ $app->get('/', function(Request $request, Response $response) use ($app)
 {
     $_SESSION['slideshow'] = array();
     $_SESSION['slideshow'][0] = APP_URL . '/media/homepage/gamingpcbundle.jpg';
-    $_SESSION['slideshow'][1] = APP_URL . '/media/homepage/homepagebanner1';
+    $_SESSION['slideshow'][1] = APP_URL . '/media/homepage/getyourownsetup.jpg';
     setSlideshow();
 
     $html_output = $this->view->render($response,
