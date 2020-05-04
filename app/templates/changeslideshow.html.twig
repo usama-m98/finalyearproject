@@ -6,5 +6,19 @@
 </header>
 <h2>{{ page_heading2 }}</h2>
 
-    <div></div>
+    <div id="current-slides">
+        <h3>Current Slides</h3>
+        <div id="slides-to-change">
+            {% for slide in slides %}
+                <div class="change-slides">
+                    <img src="{{ slide }}">
+                    <span>{{ slide }}</span>
+                    <form method="post" action="{{ action }}">
+                        <input type="hidden" name="slide" value="{{ slide }}">
+                        <button type="submit" value="Remove-Slide">Remove Slide</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
