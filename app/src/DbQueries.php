@@ -183,6 +183,15 @@ class DbQueries
         return $query_string;
     }
 
+    public function retrieveAssignedOrderData()
+    {
+        $query_string = "SELECT order_id, order_date, description, total, address, postcode, city, status, admin_assigned, customer_id ";
+        $query_string .= "FROM order_detail ";
+        $query_string .= "WHERE admin_assigned = :user_id";
+
+        return $query_string;
+    }
+
     public function retrieveOrderData()
     {
         $query_string = "SELECT order_id, order_date, description, total, status ";

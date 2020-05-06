@@ -7,6 +7,7 @@ $app->get('/admininterface', function (Request $request, Response $response) use
     if(isset($_SESSION['user'])){
         if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Root')
         {
+
             $html_output = $this->view->render($response,
                 'admininterface.html.twig',
                 [

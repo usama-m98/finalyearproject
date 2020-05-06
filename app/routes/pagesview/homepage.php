@@ -7,6 +7,8 @@ use \Psr\Http\Message\ResponseInterface as Response;
 $app->get('/', function(Request $request, Response $response) use ($app)
 {
     $slideshow = array(APP_URL . '/media/homepage/gamingpcbundle.jpg', APP_URL . '/media/homepage/getyourownsetup.jpg');
+    $amd = APP_URL . '/media/homepage/AMD.jpg';
+    $intel = APP_URL . '/media/homepage/Intel.jpg';
 
     $html_output = $this->view->render($response,
         'homepage.html.twig',
@@ -17,7 +19,9 @@ $app->get('/', function(Request $request, Response $response) use ($app)
             'js_path' => JS_PATH,
             'login' => 'login',
             'signup' => 'signup',
-            'slideshow' => $slideshow
+            'slideshow' => $slideshow,
+            'intel' => $intel,
+            'amd' => $amd
         ]);
 
     processOutput($app, $html_output);

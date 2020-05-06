@@ -8,15 +8,25 @@
     <div class="content-div">
         <h2>{{ page_heading2 }}</h2>
 
-        <div >
-            <a href="{{ add_admin }}">Add Admin Users</a>
-            <a href="{{ view_user }}">View all users</a>
-            <a href="{{ assign_build }}">Assign Builds</a>
-            <a href="{{ view_messages }}">Messages</a>
-            <a href="{{ order_interface }}">Orders</a>
-            <a href="{{ add_products }}">Add products</a>
-            <a href="{{ products_list }}">Products List</a>
-            <a href="{{ admin_details }}">Personal Details</a>
-        </div>
+        {% if session.role is same as ('Root') %}
+            <div class="admin-menu">
+                <a href="{{ add_admin }}">Add Admin Users</a>
+                <a href="{{ view_user }}">View all users</a>
+                <a href="{{ assign_build }}">Assign Builds</a>
+                <a href="{{ view_messages }}">Messages</a>
+                <a href="{{ order_interface }}">Orders</a>
+                <a href="{{ add_products }}">Add products</a>
+                <a href="{{ products_list }}">Products List</a>
+                <a href="{{ admin_details }}">Personal Details</a>
+            </div>
+        {% elseif session.role is same as ('Admin')%}
+            <div class="admin-menu">
+                <a href="{{ view_messages }}">Messages</a>
+                <a href="{{ order_interface }}">Orders</a>
+                <a href="{{ add_products }}">Add products</a>
+                <a href="{{ products_list }}">Products List</a>
+                <a href="{{ admin_details }}">Personal Details</a>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}

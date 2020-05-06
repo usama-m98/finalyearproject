@@ -11,13 +11,19 @@
             <a class="next" id="next-slide">&#10095;</a>
         </div>
     </section>
-    <div style="text-align: center;">
-        <a href="configureintelform">
-            <button type="submit">Build Your Intel PC</button>
-        </a>
-        <a href="configureamdform">
-            <button type="submit">Build Your AMD PC</button>
-        </a>
+    <div id="configure">
+        <div class="processor">
+            <img src="{{ intel }}" alt="Intel Image">
+            <a href="configureintelform">
+                <button type="submit">Build Your Intel PC</button>
+            </a>
+        </div>
+        <div class="processor">
+            <img src="{{ amd }}" alt="AMD Image" >
+            <a href="configureamdform">
+                <button type="submit">Build Your AMD PC</button>
+            </a>
+        </div>
     </div>
 
 {% endblock %}

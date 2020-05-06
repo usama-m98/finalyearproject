@@ -1,6 +1,6 @@
 <?php
 
-require 'routes/homepage.php';
+require 'routes/pagesview/homepage.php';
 
 // auth routes
 require 'routes/auth/login.php';
@@ -23,14 +23,15 @@ require 'routes/user/yourorder.php';
 require 'routes/user/contact.php';
 require 'routes/user/contactform.php';
 require 'routes/user/viewmessages.php';
+require 'routes/user/checkout.php';
+
 
 // webpage routes
-require 'routes/configureintelform.php';
-require 'routes/configureamdform.php';
-require 'routes/vieworder.php';
-require 'routes/checkout.php';
-require 'routes/shoppingcart.php';
-require 'routes/processconfiguration.php';
+require 'routes/pagesview/configureintelform.php';
+require 'routes/pagesview/configureamdform.php';
+require 'routes/pagesview/vieworder.php';
+require 'routes/pagesview/shoppingcart.php';
+require 'routes/pagesview/processconfiguration.php';
 
 // admin routes
 require 'routes/admins/admininterface.php';
@@ -50,7 +51,7 @@ require 'routes/admins/productaction.php';
 require 'routes/admins/updateitem.php';
 
 // webpage products route
-require 'routes/productsview/desktops.php';
-require 'routes/productsview/laptops.php';
-require 'routes/productsview/monitor.php';
-require 'routes/productsview/peripherals.php';
+require 'routes/pagesview/desktops.php';
+require 'routes/pagesview/laptops.php';
+require 'routes/pagesview/monitor.php';
+require 'routes/pagesview/peripherals.php';
