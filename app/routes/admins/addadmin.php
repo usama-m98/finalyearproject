@@ -17,7 +17,8 @@ $app->get('/addadmin', function (Request $request, Response $response) use ($app
                     'landing_page' => LANDING_PAGE,
                     'js_path' => JS_PATH,
                     'page_heading2' => 'Add Admin',
-                    'action' => 'addadminuser'
+                    'action' => 'addadminuser',
+                    'main_page' => 'admininterface'
                 ]);
 
             processOutput($app, $html_output);

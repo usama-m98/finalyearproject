@@ -24,7 +24,8 @@ $app->get('/assignbuilds', function (Request $request, Response $response) use (
                     'orders' => $orders,
                     'assigned' => $count_of_assigned,
                     'action' => 'assignmentform',
-                    'admins' => $admins
+                    'admins' => $admins,
+                    'main_page' => 'admininterface'
                 ]);
 
             processOutput($app, $html_output);

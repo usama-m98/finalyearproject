@@ -35,7 +35,8 @@ $app->get('/orders', function (Request $request, Response $response) use ($app)
                     'landing_page' => LANDING_PAGE,
                     'js_path' => JS_PATH,
                     'orders' => $assigned_orders,
-                    'action' => 'orderoption'
+                    'action' => 'orderoption',
+                    'main_page' => 'admininterface'
                 ]);
 
             processOutput($app, $html_output);

@@ -25,7 +25,8 @@ $app->get('/viewusers', function (Request $request, Response $response) use ($ap
                     'page_heading2' => 'All Users',
                     'users' =>$user_data,
                     'action' => 'viewuseroptions',
-                    'action2' => 'deleteuser'
+                    'action2' => 'deleteuser',
+                    'main_page' => 'admininterface'
                 ]);
 
             processOutput($app, $html_output);

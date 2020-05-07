@@ -14,7 +14,8 @@ $app->get('/viewallmessages', function(Request $request, Response $response) use
             'css_path' => CSS_PATH,
             'landing_page' => LANDING_PAGE,
             'js_path' => JS_PATH,
-            'messages' => $stored_messages
+            'messages' => $stored_messages,
+            'main_page' => 'admininterface'
         ]);
 
     processOutput($app, $html_output);

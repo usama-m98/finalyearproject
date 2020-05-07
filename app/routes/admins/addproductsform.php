@@ -25,7 +25,8 @@ $app->get('/addproductsform', function (Request $request, Response $response) us
                     'page_heading2' => 'Add Items',
                     'action' => 'addproducts',
                     'types' => $product_types,
-                    'message' => $error_message
+                    'message' => $error_message,
+                    'main_page' => 'admininterface'
                 ]);
 
             processOutput($app, $html_output);

@@ -24,7 +24,8 @@ $app->get('/productslist', function(Request $request, Response $response) use ($
                     'landing_page' => LANDING_PAGE,
                     'js_path' => JS_PATH,
                     'products' => $products,
-                    'action' => 'productaction'
+                    'action' => 'productaction',
+                    'main_page' => 'admininterface'
                 ]);
 
             processOutput($app, $html_output);

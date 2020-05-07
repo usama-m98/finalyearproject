@@ -27,6 +27,7 @@ $app->post('/productaction', function(Request $request, Response $response) use 
                         'action' => 'updateitem',
                         'types' => $product_types,
                         'item' => $item,
+                        'main_page' => 'productslist'
                     ]);
 
                 processOutput($app, $html_output);
