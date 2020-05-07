@@ -17,10 +17,12 @@ GRANT ALL PRIVILEGES ON final_year_db.* TO 'final_year_user'@localhost IDENTIFIE
 
 USE final_year_db;
 
-DROP TABLE IF EXISTS `users`;
-DROP TABLE IF EXISTS `customers`;
-DROP TABLE IF EXISTS `products`;
+DROP TABLE IF EXISTS `messages`;
 DROP TABLE IF EXISTS `order_detail`;
+DROP TABLE IF EXISTS `products`;
+DROP TABLE IF EXISTS `customers`;
+DROP TABLE IF EXISTS `users`;
+
 
 -- users tables
 
@@ -45,6 +47,7 @@ CREATE TABLE `customers` (
   `user_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`customer_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`)
+  ON DELETE CASCADE
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `products` (
@@ -72,7 +75,7 @@ CREATE TABLE `order_detail` (
   `customer_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`order_id`),
   FOREIGN KEY (`admin_assigned`) REFERENCES `users`(`user_id`),
-  FOREIGN KEY (`customer_id`) REFERENCES `customers`(`customer_id`)
+  FOREIGN KEY (`customer_id`) REFERENCES `customers`(`customer_id`) ON DELETE CASCADE
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 CREATE TABLE `messages` (
@@ -85,6 +88,7 @@ CREATE TABLE `messages` (
     PRIMARY KEY (`message_id`),
     FOREIGN KEY (`order_id`) REFERENCES `order_detail`(`order_id`),
     FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`)
+    ON DELETE CASCADE
 )ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 FLUSH PRIVILEGES;

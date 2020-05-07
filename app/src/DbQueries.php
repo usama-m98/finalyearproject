@@ -31,6 +31,13 @@ class DbQueries
         return $query_string;
     }
 
+    public function deleteUser()
+    {
+        $query_string = 'DELETE FROM users ';
+        $query_string .= 'WHERE user_id = :user_id';
+
+        return $query_string;
+    }
     public function retrieveAllUserData()
     {
         $query_string = 'SELECT user_id, username, email, role ';
