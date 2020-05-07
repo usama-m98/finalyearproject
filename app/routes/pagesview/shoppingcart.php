@@ -9,7 +9,7 @@ $app->post('/shoppingcart', function(Request $request, Response $response) use (
     $cleaned = cleanInteger($app, $tainted);
     $stored_products = getStoredProducts($app);
     $product = getProduct($stored_products, $cleaned['product_id']);
-    $session = storeCartValues($app, $product, $cleaned['quantity']);
+    storeCartValues($app, $product, $cleaned['quantity']);
 
 
     return $response->withRedirect($_SERVER['HTTP_REFERER']);

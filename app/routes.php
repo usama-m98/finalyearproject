@@ -32,6 +32,7 @@ require 'routes/pagesview/configureamdform.php';
 require 'routes/pagesview/vieworder.php';
 require 'routes/pagesview/shoppingcart.php';
 require 'routes/pagesview/processconfiguration.php';
+require 'routes/pagesview/cart.php';
 
 // admin routes
 require 'routes/admins/admininterface.php';
