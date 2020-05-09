@@ -58,6 +58,11 @@ class Cart
 
     }
 
+    public function removeSessionCartValue($index)
+    {
+        unset($_SESSION['cart'][$index]);
+    }
+
     public function getSession()
     {
         return $_SESSION['cart'];
@@ -76,6 +81,14 @@ class Cart
     public function incrementQuantity()
     {
         $this->quantity += 1;
+    }
+
+    public function decrementQuantity()
+    {
+        if ($this->quantity > 0)
+        {
+            $this->quantity -= 1;
+        }
     }
 
 }

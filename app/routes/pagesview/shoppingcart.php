@@ -43,9 +43,14 @@ function storeCartValues($app, $product_details, $quantity)
         {
             $index = $product_details['product_id'];
             $quantity = $_SESSION['cart'][$index]['quantity'];
-            $cart->setProductValues($_SESSION['cart'][$index], $quantity);
-            $cart->incrementQuantity();
-            $cart->setSessionValues();
+            if($quantity < $product_details['stock'])
+            {
+                $cart->setProductValues($_SESSION['cart'][$index], $quantity);
+                $cart->incrementQuantity();
+                $cart->setSessionValues();
+            }else{
+                $_SESSION['stock_error'] = "Cannot add item to cart, not enough of this item is in stock";
+            }
         }else{
             $cart->setProductValues($product_details, $quantity);
             $cart->setSessionValues($product_details['product_id']);
@@ -56,7 +61,6 @@ function storeCartValues($app, $product_details, $quantity)
         $cart->setSession();
     }
 
-    var_dump($cart->getSession());
 }
 
 function getProduct($products, $product_to_get)

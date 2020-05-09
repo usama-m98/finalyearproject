@@ -183,7 +183,8 @@ class DbQueries
     {
         $query = "SELECT o.order_id, o.order_date, o.description, o.total, o.admin_assigned, o.status, o.customer_id, ";
         $query .= " c.address, c.postcode, c.city, c.phone_number ";
-        $query .= "FROM order_detail o, customers c";
+        $query .= "FROM order_detail o, customers c ";
+        $query .= "WHERE o.customer_id = c.customer_id";
 
         return $query;
     }

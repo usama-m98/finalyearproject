@@ -6,7 +6,14 @@ use \Psr\Http\Message\ResponseInterface as Response;
 $app->get('/monitor', function(Request $request, Response $response) use ($app)
 {
     $products = getStoredProducts($app);
-    $html_output = $this->view->render($response,
+    if(isset($_SESSION['stock_error']))
+    {
+        echo "<script>alert('Cannot add anymore to cart not enough in stock')</script>";
+    }
+
+    unset($_SESSION['stock_error']);
+
+    return $this->view->render($response,
         'monitors.html.twig',
         [
             'page_title' => 'Monitors',
@@ -18,9 +25,5 @@ $app->get('/monitor', function(Request $request, Response $response) use ($app)
             'products' => $products,
             'action' => 'shoppingcart'
         ]);
-
-    processOutput($app, $html_output);
-
-    return $html_output;
 
 })->setName('monitor');

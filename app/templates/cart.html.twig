@@ -2,10 +2,12 @@
 {% block content %}
     <h2>{{ heading }}</h2>
 
+    <div id="cart-total">
+        <span>Total: £{{ total }}</span>
+    </div>
     <div id="all-items">
         {% for item in cart%}
             <div class="item">
-                <span hidden>{{ item['product_id'] }}</span>
                 <img class="cart-image" src="{{ item['product_image'] }}">
                 <div class="cart-details">
                     <h4>{{ item['name'] }}</h4>
@@ -13,8 +15,13 @@
                     <span class="item-price">Price: £{{ item['price'] }}</span>
                 </div>
                 <div class="cart-item-form">
-                    <form>
-                        <input class="item-delete" type="submit" name="delete" value="delete">
+                    <form method="post" action="{{ action }}">
+                        <input type="hidden" name="cart-index" value="{{ item['product_id'] }}">
+                        {% if item['quantity']  > 1 %}
+                            <input class="item-option" type="submit" name="cart" value="Decrease-Quantity">
+                        {% endif %}
+                        <input class="item-option" type="submit" name="cart" value="Increase-Quantity">
+                        <input class="item-option" type="submit" name="cart" value="Delete">
                     </form>
                 </div>
             </div>

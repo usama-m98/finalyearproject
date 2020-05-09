@@ -16,7 +16,9 @@ $app->get('/productslist', function(Request $request, Response $response) use ($
                 echo "<script>alert('Item Updated')</script>";
             }
 
-            $html_output = $this->view->render($response,
+            unset($_SESSION['removed_item']);
+            unset($_SESSION['updated']);
+            return $this->view->render($response,
                 'productlist.html.twig',
                 [
                     'page_title' => 'Personal Details',
@@ -27,11 +29,6 @@ $app->get('/productslist', function(Request $request, Response $response) use ($
                     'action' => 'productaction',
                     'main_page' => 'admininterface'
                 ]);
-
-            processOutput($app, $html_output);
-            unset($_SESSION['removed_item']);
-            unset($_SESSION['updated']);
-            return $html_output;
         }
     }else{
         return $response->withHeader('Location', LANDING_PAGE);

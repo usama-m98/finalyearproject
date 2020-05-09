@@ -7,7 +7,7 @@ $app->get('/configureamdform', function(Request $request, Response $response) us
 {
     $products = getStoredProducts($app);
 
-    $html_output = $this->view->render($response,
+    return $this->view->render($response,
         'configureamdform.html.twig',
         [
             'page_title' => 'Configure Form',
@@ -21,7 +21,4 @@ $app->get('/configureamdform', function(Request $request, Response $response) us
             'products' => $products,
         ]);
 
-    processOutput($app, $html_output);
-
-    return $html_output;
 })->setName('configureamdform');
