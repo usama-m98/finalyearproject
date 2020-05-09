@@ -13,7 +13,7 @@ $app->get('/checkout', function(Request $request, Response $response) use ($app)
         $personal_details = getUserPersonalInfo($app, $auth_info);
         updateQuantityAfterConfig($app, $order);
 
-        storeOrderDetails($app, $order_details, $personal_details);
+        storeOrderDetails($app, $order_details, $personal_details['customer_id']);
 
         $message = 'Your order has been placed';
 
@@ -67,9 +67,6 @@ function storeOrderDetails($app, $order_details, $personal_details){
         ":date_of_order" => $date,
         ":description" => $order_details['order'],
         ":total" => $order_details['total'],
-        ":address" => $personal_details['address'],
-        ":postcode" => $personal_details['postcode'],
-        ":city" => $personal_details['city'],
         ":assigned" => (int)'1',
         ":status" => 'Processing',
         ":customer_id" => (int)$personal_details['customer_id']

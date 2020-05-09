@@ -35,7 +35,7 @@ $app->get('/assignbuilds', function (Request $request, Response $response) use (
             return $response->withHeader('Location', 'homepage');
         }
     }
-})->setName('assignbuilds');
+});
 
 function ordersToBeAssigned($app)
 {

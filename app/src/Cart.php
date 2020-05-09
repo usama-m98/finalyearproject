@@ -11,6 +11,7 @@ class Cart
     private $quantity;
     private $price;
     private $total;
+    private $img;
 
     public function __construct()
     {
@@ -19,6 +20,7 @@ class Cart
         $this->quantity = 0;
         $this->price = null;
         $this->total = 0;
+        $this->img = null;
     }
 
     public function __destruct(){}
@@ -29,6 +31,7 @@ class Cart
         $this->name = $product_details['name'];
         $this->quantity = $quantity;
         $this->price = $product_details['price'];
+        $this->img = $product_details['product_image'];
     }
 
     public function setSession()
@@ -49,6 +52,7 @@ class Cart
             'quantity' => $this->quantity,
             'price' => $this->price,
             'total' => $this->total,
+            'product_image' => $this->img
         ];
         $_SESSION['cart'][$this->index] = $name;
 

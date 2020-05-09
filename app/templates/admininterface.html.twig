@@ -17,6 +17,7 @@
             <a href="{{ add_products }}">- Add products</a>
             <a href="{{ products_list }}">- Products List</a>
             <a href="{{ admin_details }}">- Personal Details</a>
+            <a href="logout">- Logout</a>
         </div>
     {% elseif session.role is same as ('Admin')%}
         <div class="admin-menu">
@@ -27,6 +28,7 @@
             <a href="{{ add_products }}">- Add products</a>
             <a href="{{ products_list }}">- Products List</a>
             <a href="{{ admin_details }}">- Personal Details</a>
+            <a href="logout">- Logout</a>
         </div>
     {% endif %}
 

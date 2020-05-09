@@ -1,0 +1,23 @@
+{% extends 'banner.html.twig' %}
+{% block content %}
+    <h2>{{ heading }}</h2>
+
+    <div id="all-items">
+        {% for item in cart%}
+            <div class="item">
+                <span hidden>{{ item['product_id'] }}</span>
+                <img class="cart-image" src="{{ item['product_image'] }}">
+                <div class="cart-details">
+                    <h4>{{ item['name'] }}</h4>
+                    <span class="item-quantity">Quantity: {{ item['quantity'] }}</span>
+                    <span class="item-price">Price: £{{ item['price'] }}</span>
+                </div>
+                <div class="cart-item-form">
+                    <form>
+                        <input class="item-delete" type="submit" name="delete" value="delete">
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

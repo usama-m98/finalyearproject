@@ -16,7 +16,7 @@ $app->post('/assignmentform', function (Request $request, Response $response) us
     }
 
 
-    return $response->withHeader('Location', 'assignbuilds');
+    return $response->withRedirect('assignbuilds');
 
 });
 

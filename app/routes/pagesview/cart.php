@@ -9,15 +9,17 @@ $app->get('/cart', function(Request $request, Response $response) use ($app)
     if(isset($_SESSION['cart']))
     {
         $cart= $_SESSION['cart'];
+        var_dump($_SESSION['cart']);
     }
 
     $this->view->render($response,
-        'result.html.twig',
+        'cart.html.twig',
         [
-            'page_title' => 'Personal Details',
+            'page_title' => 'Cart',
             'css_path' => CSS_PATH,
             'landing_page' => LANDING_PAGE,
             'js_path' => JS_PATH,
+            'heading' => 'Cart',
             'cart' => $cart
         ]);
 
