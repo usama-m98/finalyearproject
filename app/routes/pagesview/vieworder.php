@@ -9,28 +9,37 @@ $app->get('/vieworder', function(Request $request, Response $response) use ($app
     $order = $_SESSION['order'];
     $total = getTotal($order);
 
-    $auth_info = getAuthInfo($app, $_SESSION['user']);
-    $personal_details = getUserPersonalInfo($app, $auth_info);
+
     $action = '';
     $info_state = true;
-
-    if(!$personal_details)
-    {
-        $info_state = false;
-        $action = 'addpersonalinfoform';
-    }
-
     $checkout = array();
-    if (isset($_SESSION['user']))
-    {
-        $checkout['message'] = 'checkout';
-        $checkout['action'] = 'checkout';
+
+    if (isset($_SESSION['user'])) {
+        $auth_info = getAuthInfo($app, $_SESSION['user']);
+        $personal_details = getUserPersonalInfo($app, $auth_info);
+        if(!$personal_details)
+        {
+            $info_state = false;
+            $action = 'addpersonalinfoform';
+            $checkout['message'] = '';
+            $checkout['action'] = '';
+        }else{
+            $checkout['message'] = 'checkout';
+            $checkout['action'] = 'checkout';
+        }
     }else{
         $checkout['message'] = 'please login first and enter your personal info';
         $checkout['action'] = 'login';
     }
 
-   $html_output = $this->view->render($response,
+    if (isset($_SESSION['form-error']))
+    {
+        echo "<script>alert('Please Fill Form full and correctly')</script>";
+    }
+
+    unset($_SESSION['form-error']);
+
+   return $this->view->render($response,
        'vieworder.html.twig',
        [
            'page_title' => 'Configure Form',
@@ -48,9 +57,6 @@ $app->get('/vieworder', function(Request $request, Response $response) use ($app
            'action' => $action,
        ]);
 
-   processOutput($app, $html_output);
-
-   return $html_output;
 });
 
 function getTotal($prices)

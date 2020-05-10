@@ -103,7 +103,7 @@ class DbQueries
 
     public function retrievePersonalDetails()
     {
-        $query = "SELECT first_name, surname, address, postcode, city, phone_number ";
+        $query = "SELECT customer_id, first_name, surname, address, postcode, city, phone_number ";
         $query .= "FROM customers ";
         $query .= "WHERE user_id = :user_id";
 
@@ -172,6 +172,7 @@ class DbQueries
         $query .= "order_date = :date_of_order, ";
         $query .= "description = :description, ";
         $query .= "total = :total, ";
+        $query .= "quantity = :quantity, ";
         $query .= "admin_assigned = :assigned, ";
         $query .= "status = :status, ";
         $query .= "customer_id = :customer_id";
@@ -181,7 +182,7 @@ class DbQueries
 
     public function retrieveAllOrderData()
     {
-        $query = "SELECT o.order_id, o.order_date, o.description, o.total, o.admin_assigned, o.status, o.customer_id, ";
+        $query = "SELECT o.order_id, o.order_date, o.description, o.total, o.quantity, o.admin_assigned, o.status, o.customer_id, ";
         $query .= " c.address, c.postcode, c.city, c.phone_number ";
         $query .= "FROM order_detail o, customers c ";
         $query .= "WHERE o.customer_id = c.customer_id";
@@ -191,7 +192,7 @@ class DbQueries
 
     public function retrieveAssignedOrderData()
     {
-        $query = "SELECT o.order_id, o.order_date, o.description, o.total, o.status, o.admin_assigned, o.customer_id, ";
+        $query = "SELECT o.order_id, o.order_date, o.description, o.total, o.quantity o.status, o.admin_assigned, o.customer_id, ";
         $query .= "c.address, c.postcode, c.city, c.phone_number ";
         $query .= "FROM order_detail o, customers c ";
         $query .= "WHERE c.customer_id = o.customer_id AND admin_assigned =:user_id ";
@@ -201,7 +202,7 @@ class DbQueries
 
     public function retrieveOrderData()
     {
-        $query = "SELECT order_id, order_date, description, total, status ";
+        $query = "SELECT order_id, order_date, description, total, quantity, status ";
         $query .= "FROM order_detail ";
         $query .= "WHERE customer_id = :customer_id";
 
@@ -210,7 +211,7 @@ class DbQueries
 
     public function retrieveOrderDataToBeAssigned()
     {
-        $query = "SELECT order_id, order_date, description, total, status, customer_id, admin_assigned ";
+        $query = "SELECT order_id, order_date, description, total, quantity, status, customer_id, admin_assigned ";
         $query .= "FROM order_detail ";
         $query .= "WHERE admin_assigned = '1'";
 

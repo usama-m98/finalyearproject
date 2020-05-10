@@ -2,29 +2,72 @@
 {% block content %}
     <h2>{{ heading }}</h2>
 
-    <div id="cart-total">
-        <span>Total: £{{ total }}</span>
-    </div>
-    <div id="all-items">
-        {% for item in cart%}
-            <div class="item">
-                <img class="cart-image" src="{{ item['product_image'] }}">
-                <div class="cart-details">
-                    <h4>{{ item['name'] }}</h4>
-                    <span class="item-quantity">Quantity: {{ item['quantity'] }}</span>
-                    <span class="item-price">Price: £{{ item['price'] }}</span>
-                </div>
-                <div class="cart-item-form">
-                    <form method="post" action="{{ action }}">
-                        <input type="hidden" name="cart-index" value="{{ item['product_id'] }}">
-                        {% if item['quantity']  > 1 %}
-                            <input class="item-option" type="submit" name="cart" value="Decrease-Quantity">
-                        {% endif %}
-                        <input class="item-option" type="submit" name="cart" value="Increase-Quantity">
-                        <input class="item-option" type="submit" name="cart" value="Delete">
-                    </form>
-                </div>
+    <div id="cart-page">
+        {% if total == 0 %}
+            <div id="cart-message"><span>{{ cart }}</span></div>
+        {% else %}
+            <div id="all-items">
+                {% for item in cart%}
+                    <div class="item">
+                        <img class="cart-image" src="{{ item['product_image'] }}">
+                        <div class="cart-details">
+                            <h4>{{ item['name'] }}</h4>
+                            <span class="item-quantity">Quantity: {{ item['quantity'] }}</span>
+                            <span class="item-price">Price: £{{ item['price'] }}</span>
+                        </div>
+                        <div class="cart-item-form">
+                            <form method="post" action="{{ action }}">
+                                <input type="hidden" name="cart-index" value="{{ item['product_id'] }}">
+                                {% if item['quantity']  > 1 %}
+                                    <input class="item-option" type="submit" name="cart" value="Decrease-Quantity">
+                                {% endif %}
+                                <input class="item-option" type="submit" name="cart" value="Increase-Quantity">
+                                <input class="item-option" type="submit" name="cart" value="Delete">
+                            </form>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
-        {% endfor %}
+            <div id="cart-total">
+                {% if session.user %}
+                    {% if info_state == true %}
+                        <span>Total: £{{ total }}</span>
+                        <a href="{{ checkout['action'] }}">
+                            <button class="checkout" type="submit">{{ checkout['message'] }}</button>
+                        </a>
+                    {% else %}
+                        <span>Total: £{{ total }}</span>
+                        <form class="info-form" action="{{ checkout['action'] }}" method="post">
+                            <label for="firstname">Enter Firstname:</label>
+                            <input type="text" name="firstname" id="firstname">
+                            <br>
+                            <label for="surname">Enter Surname:</label>
+                            <input type="text" name="surname" id="surname">
+                            <br>
+                            <label for="address">Enter Address:</label>
+                            <input type="text" name="address" id="address">
+                            <br>
+                            <label for="postcode">Enter Postcode:</label>
+                            <input type="text" name="postcode" id="postcode">
+                            <br>
+                            <label for="city">Enter City:</label>
+                            <input type="text" name="city" id="city">
+                            <br>
+                            <label for="phone-number">Enter Phone number:</label>
+                            <input type="text" name="phone-number" id="phone-number">
+                            <br>
+                            <input type="submit" name="checkout_address_sumbit" value="Submit Address Details">
+                        </form>
+                    {% endif %}
+                {% else %}
+                    <span>Total: £{{ total }}</span>
+                    <a href="{{ checkout['action'] }}">
+                        <button class="checkout" type="submit">{{ checkout['message'] }}</button>
+                    </a>
+                {% endif %}
+
+            </div>
+        {% endif %}
     </div>
+
 {% endblock %}

@@ -13,11 +13,12 @@ $app->get('/checkout', function(Request $request, Response $response) use ($app)
         $personal_details = getUserPersonalInfo($app, $auth_info);
         updateQuantityAfterConfig($app, $order);
 
-        storeOrderDetails($app, $order_details, $personal_details['customer_id']);
+        storeConfigurationDetails($app, $order_details, $personal_details['customer_id']);
 
         $message = 'Your order has been placed';
 
-        $html_output = $this->view->render($response,
+        unset($_SESSION['order']);
+        return $this->view->render($response,
             'checkoutview.html.twig',
             [
                 'page_title' => 'Configure Form',
@@ -28,10 +29,7 @@ $app->get('/checkout', function(Request $request, Response $response) use ($app)
                 'message' => $message
             ]);
 
-        processOutput($app, $html_output);
-        unset($_SESSION['order']);
 
-        return $html_output;
     }else {
         return $response->withRedirect(LANDING_PAGE);
     }
@@ -52,7 +50,7 @@ function getOrderStringAndTotal($order)
     return $order_detail;
 }
 
-function storeOrderDetails($app, $order_details, $personal_details){
+function storeConfigurationDetails($app, $order_details, $customer_id){
     $database_wrapper = $app->getContainer()->get('databaseWrapper');
     $sql_queries = $app->getContainer()->get('dbQueries');
     $settings = $app->getContainer()->get('settings');
@@ -67,9 +65,10 @@ function storeOrderDetails($app, $order_details, $personal_details){
         ":date_of_order" => $date,
         ":description" => $order_details['order'],
         ":total" => $order_details['total'],
+        ":quantity" => 1,
         ":assigned" => (int)'1',
         ":status" => 'Processing',
-        ":customer_id" => (int)$personal_details['customer_id']
+        ":customer_id" => (int)$customer_id
     ];
     $query = $sql_queries->storeOrderData();
 

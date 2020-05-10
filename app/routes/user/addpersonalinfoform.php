@@ -8,11 +8,29 @@ $app->post('/addpersonalinfoform', function(Request $request, Response $response
     $tainted = $request->getParsedBody();
     $cleaned_params = cleanPersonalInfoParams($app, $tainted);
     $auth_info = getAuthInfo($app, $_SESSION['user']);
-    $store_personal_info = storeUserPersonalInfo($app, $cleaned_params, $auth_info);
+    $isFormEmpty = personalInfoFilled($tainted);
 
-
-    return $response->withRedirect($_SERVER['HTTP_REFERER']);
+    if ($isFormEmpty)
+    {
+        return $response->withRedirect($_SERVER['HTTP_REFERER']);
+    }else{
+        storeUserPersonalInfo($app, $cleaned_params, $auth_info);
+        return $response->withRedirect($_SERVER['HTTP_REFERER']);
+    }
 });
+
+function personalInfoFilled($tainted)
+{
+    $isEmpty = false;
+    if(empty($tainted['firstname']) || empty($tainted['surname']) || empty($tainted['address']) || empty($tainted['postcode']
+            || empty($tainted['city'])) || empty($tainted['phone-number']))
+    {
+        $isEmpty = true;
+        $_SESSION['form-error'] = "Please Fill Form fully";
+    }
+
+    return $isEmpty;
+}
 
 function cleanPersonalInfoParams($app, $tainted)
 {

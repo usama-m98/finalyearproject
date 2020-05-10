@@ -9,7 +9,7 @@ $app->get('/orders', function (Request $request, Response $response) use ($app)
         if ($_SESSION['role'] == 'Root') {
             $all_orders = getAllOrderData($app);
 
-            $html_output = $this->view->render($response,
+            return $this->view->render($response,
                 'orders.html.twig',
                 [
                     'page_title' => 'Assign Build',
@@ -21,14 +21,11 @@ $app->get('/orders', function (Request $request, Response $response) use ($app)
                     'main_page' => 'admininterface'
                 ]);
 
-            processOutput($app, $html_output);
-
-            return $html_output;
         }elseif ($_SESSION['role'] == 'Admin'){
             $auth_info = getAuthInfo($app, $_SESSION['user']);
             $assigned_orders = getAssignedOrderData($app, $auth_info['user_id']);
 
-            $html_output = $this->view->render($response,
+            return $this->view->render($response,
                 'orders.html.twig',
                 [
                     'page_title' => 'Assign Build',
@@ -40,7 +37,6 @@ $app->get('/orders', function (Request $request, Response $response) use ($app)
                     'main_page' => 'admininterface'
                 ]);
 
-            processOutput($app, $html_output);
         }else{
             return $response->withRedirect(LANDING_PAGE);
 

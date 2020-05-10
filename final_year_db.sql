@@ -67,6 +67,7 @@ CREATE TABLE `order_detail` (
   `order_date` varchar(64) NOT NULL,
   `description` TEXT,
   `total` DECIMAL(7,2) NOT NULL,
+  `quantity` int(10) NOT NULL,
   `admin_assigned` int(10) unsigned NOT NULL,
   `status` ENUM('Processing', 'Building', 'Dispatched', 'Cancelled') NOT NULL,
   `customer_id` int(10) unsigned NOT NULL,

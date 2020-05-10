@@ -18,7 +18,13 @@ $app->get('/personaldetails', function(Request $request, Response $response) use
             $personal_info_exists = true;
         }
 
-        $html_output = $this->view->render($response,
+        if (isset($_SESSION['form-error']))
+        {
+            echo "<script>alert('Please Fill Form full and correctly')</script>";
+        }
+
+        unset($_SESSION['form-error']);
+        return $this->view->render($response,
             'personaldetails.html.twig',
             [
                 'page_title' => 'Personal Details',
@@ -34,9 +40,7 @@ $app->get('/personaldetails', function(Request $request, Response $response) use
                 'action' => 'addpersonalinfoform',
             ]);
 
-        processOutput($app, $html_output);
 
-        return $html_output;
     }else{
         return $response->withRedirect(LANDING_PAGE);
     }
