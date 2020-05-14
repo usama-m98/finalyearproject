@@ -7,6 +7,7 @@
     <div class="content-div" id="login_form">
         <h2  id="login_heading">{{ heading }}</h2>
         <form action="{{ action }}" method="post">
+            <span id="error_message">{{ message }}</span>
             <label for="login_username">Username* </label>
             <input type="text" name="username" id="login_username" required />
             <label for="login_password">Password* </label>

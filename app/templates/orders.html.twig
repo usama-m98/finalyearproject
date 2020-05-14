@@ -7,43 +7,45 @@
 
     <a href="{{ main_page }}">Go Back</a>
 
-    <div>
+    <div class="assign-builds">
         <h2>All Orders</h2>
-        <table>
-            <tr>
-                <th>Actions</th><th>Order ID</th></th><th>Description</th><th>Price</th><th>quantity</th><th>address</th>
-                <th>Phone Number</th><th>Date Sold</th><th>Order Status</th><th>Customer ID</th><th>Admin Assigned</th>
-            </tr>
-            {% for order in orders %}
+        <div class="tables">
+            <table>
                 <tr>
-                    <td>
-                        <form method="post" action="{{ action }}">
-                            <div class="dropdown">
-                                <div class="dropbtn">&#x25BC;</div>
-                                <div class="order-menu">
-                                    <input type="hidden" name="orderID" value="{{ order['order_id'] }}">
-                                    {% if order['status'] != 'Processed' %}
-                                    <input type="submit" name="option" class="order-options" value="Set-Processed">
-                                    {% endif %}
-                                    <input type="submit" name="option" class="order-options" value="Building">
-                                    <input type="submit" name="option" class="order-options" value="Dispatch">
-                                    <input type="submit" name="option" class="order-options" value="Cancel-Order">
-                                </div>
-                            </div>
-                        </form>
-                    </td>
-                    <td>{{ order['order_id'] }}</td>
-                    <td>{{ order['description'] }}</td>
-                    <td>£{{ order['total'] }}</td>
-                    <td>{{ order['quantity'] }}</td>
-                    <td>{{ order['address'] }} <br> {{ order['postcode'] }} <br> {{ order['city'] }}</td>
-                    <td>{{ order['phone_number'] }}</td>
-                    <td>{{ order['order_date'] }}</td>
-                    <td>{{ order['status'] }}</td>
-                    <td>{{ order['customer_id'] }}</td>
-                    <td>{{ order['admin_assigned'] }}</td>
+                    <th>Actions</th><th>Order ID</th></th><th>Description</th><th>Price</th><th>quantity</th><th>address</th>
+                    <th>Phone Number</th><th>Date Sold</th><th>Order Status</th><th>Customer ID</th><th>Admin Assigned</th>
                 </tr>
-            {% endfor %}
-        </table>
+                {% for order in orders %}
+                    <tr>
+                        <td>
+                            <form method="post" action="{{ action }}">
+                                <div class="dropdown">
+                                    <div class="dropbtn">&#x25BC;</div>
+                                    <div class="order-menu">
+                                        <input type="hidden" name="orderID" value="{{ order['order_id'] }}">
+                                        {% if order['status'] != 'Processing' %}
+                                            <input type="submit" name="option" class="order-options" value="Set-Processed">
+                                        {% endif %}
+                                        <input type="submit" name="option" class="order-options" value="Building">
+                                        <input type="submit" name="option" class="order-options" value="Dispatch">
+                                        <input type="submit" name="option" class="order-options" value="Cancel-Order">
+                                    </div>
+                                </div>
+                            </form>
+                        </td>
+                        <td>{{ order['order_id'] }}</td>
+                        <td>{{ order['description'] }}</td>
+                        <td>£{{ order['total'] }}</td>
+                        <td>{{ order['quantity'] }}</td>
+                        <td>{{ order['address'] }} <br> {{ order['postcode'] }} <br> {{ order['city'] }}</td>
+                        <td>{{ order['phone_number'] }}</td>
+                        <td>{{ order['order_date'] }}</td>
+                        <td>{{ order['status'] }}</td>
+                        <td>{{ order['customer_id'] }}</td>
+                        <td>{{ order['admin_assigned'] }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
     </div>
 {% endblock %}

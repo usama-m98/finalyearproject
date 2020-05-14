@@ -3,7 +3,7 @@
     <div class="content-div">
         <h2>{{ heading }}</h2>
 
-        <div>
+        <div class="tables">
             <table>
                 <tr>
                     <th>Order ID</th></th><th>Description</th><th>Price</th><th>Quantity</th><th>Date of Purchase</th><th>Order Status</th>
@@ -16,9 +16,6 @@
                         <td>{{ order['quantity'] }}</td>
                         <td>{{ order['order_date'] }}</td>
                         <td>{{ order['status'] }}</td>
-                        <td>
-                            <a href="contact?orderID={{ order['order_id'] }}">Contact Seller</a>
-                        </td>
                     </tr>
                 {% endfor %}
             </table>

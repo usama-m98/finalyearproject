@@ -12,7 +12,15 @@
             <input type="email" name="signup_email" id="signup_email"  />
             <label for="signup_password">Enter a Password* </label>
             <input type="password" name="signup_password" id="signup_password" />
+            <ul><span>Password Must:</span>
+                <li>Be longer than 8 Characters</li>
+                <li>Contain at least an Uppercase Character </li>
+                <li>Contain at least a Lowercase Character</li>
+                <li>Contain at least a number</li>
+                <li>Contain one of these characters !@#$%^&*_-</li>
+            </ul>
             <input type="submit" name="signup_button" value="Sign Up" id="signup_button" />
+            <span id="error_message">{{ message }}</span>
         </form>
     </div>
 {% endblock %}

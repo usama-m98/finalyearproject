@@ -4,10 +4,12 @@
         <h1><a href="{{ landing_page }}">CustomPcSpecialists</a></h1>
     </header>
 
-    <form action="{{ action }}" method="post">
-        <label for="edit-email">Enter new Email:</label>
-        <input type="text" name="edit-email" id="edit-email">
-        <br>
-        <input type="submit" name="edit-email-submit" value="submit">
-    </form>
+    <div class="edit-div">
+        <h2>Edit Email</h2>
+        <form action="{{ action }}" method="post">
+            <label for="edit-email">Enter new Email:</label>
+            <input type="text" name="edit-email" id="edit-email">
+            <button type="submit" value="submit">Submit</button>
+        </form>
+    </div>
 {% endblock %}

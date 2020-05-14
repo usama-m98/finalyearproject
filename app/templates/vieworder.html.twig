@@ -23,26 +23,33 @@
                 <button class="checkout" type="submit">{{ message }}</button>
             </a>
                 {% else %}
+                    <h3>Personal Info Form</h3>
                     <form class="info-form" action="{{ action }}" method="post">
-                        <label for="firstname">Enter Firstname:</label>
-                        <input type="text" name="firstname" id="firstname">
-                        <br>
-                        <label for="surname">Enter Surname:</label>
-                        <input type="text" name="surname" id="surname">
-                        <br>
-                        <label for="address">Enter Address:</label>
-                        <input type="text" name="address" id="address">
-                        <br>
-                        <label for="postcode">Enter Postcode:</label>
-                        <input type="text" name="postcode" id="postcode">
-                        <br>
-                        <label for="city">Enter City:</label>
-                        <input type="text" name="city" id="city">
-                        <br>
-                        <label for="phone-number">Enter Phone number:</label>
-                        <input type="text" name="phone-number" id="phone-number">
-                        <br>
-                        <input type="submit" name="checkout_address_sumbit" value="Submit Address Details">
+                        <div class="account-row">
+                            <label for="firstname">Enter Firstname:</label>
+                            <input type="text" name="firstname" id="firstname">
+                        </div>
+                        <div class="account-row">
+                            <label for="surname">Enter Surname:</label>
+                            <input type="text" name="surname" id="surname">
+                        </div>
+                        <div class="account-row">
+                            <label for="address">Enter Address:</label>
+                            <input type="text" name="address" id="address">
+                        </div>
+                        <div class="account-row">
+                            <label for="postcode">Enter Postcode:</label>
+                            <input type="text" name="postcode" id="postcode">
+                        </div>
+                        <div class="account-row">
+                            <label for="city">Enter City:</label>
+                            <input type="text" name="city" id="city">
+                        </div>
+                        <div class="account-row">
+                            <label for="phone-number">Enter Phone number:</label>
+                            <input type="text" name="phone-number" id="phone-number">
+                        </div>
+                        <input class="form-submit" type="submit" name="personal-info-submit" value="submit">
                     </form>
             {% endif %}
         {% else %}
