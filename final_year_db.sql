@@ -38,12 +38,12 @@ CREATE TABLE `users` (
 
 CREATE TABLE `customers` (
   `customer_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `first_name` varchar(255) NOT NULL,
+  `firstname` varchar(255) NOT NULL,
   `surname` varchar(255) NOT NULL,
   `address` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `postcode` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `city` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone_number` varchar(20) NOT NULL,
+  `phonenumber` varchar(20) NOT NULL,
   `user_id` int(10) unsigned NOT NULL,
   PRIMARY KEY (`customer_id`),
   FOREIGN KEY (`user_id`) REFERENCES `users`(`user_id`)

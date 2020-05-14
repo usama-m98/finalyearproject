@@ -16,7 +16,7 @@ $app->post('/productaction', function(Request $request, Response $response) use 
                 $products = getStoredProducts($app);
                 $item = filterProduct($products, $clean_product_id);
 
-                $html_output = $this->view->render($response,
+                return $this->view->render($response,
                     'updateproduct.html.twig',
                     [
                         'page_title' => 'Update Items',
@@ -29,10 +29,6 @@ $app->post('/productaction', function(Request $request, Response $response) use 
                         'item' => $item,
                         'main_page' => 'productslist'
                     ]);
-
-                processOutput($app, $html_output);
-
-                return $html_output;
             }elseif ($product_status === 'Delete')
             {
                 removeItem($app, $clean_product_id);

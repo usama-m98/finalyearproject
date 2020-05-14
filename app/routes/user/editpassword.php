@@ -6,7 +6,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 $app->get('/editpassword', function(Request $request, Response $response) use ($app)
 {
 
-    $html_output = $this->view->render($response,
+    return $this->view->render($response,
         'editpassword.html.twig',
         [
             'page_title' => 'Edit password',
@@ -16,8 +16,4 @@ $app->get('/editpassword', function(Request $request, Response $response) use ($
             'page_heading2' => 'Edit password',
             'action' => 'passwordchanged',
         ]);
-
-    processOutput($app, $html_output);
-
-    return $html_output;
 });

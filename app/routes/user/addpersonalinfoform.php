@@ -22,8 +22,8 @@ $app->post('/addpersonalinfoform', function(Request $request, Response $response
 function personalInfoFilled($tainted)
 {
     $isEmpty = false;
-    if(empty($tainted['firstname']) || empty($tainted['surname']) || empty($tainted['address']) || empty($tainted['postcode']
-            || empty($tainted['city'])) || empty($tainted['phone-number']))
+    if(empty($tainted['firstname']) || empty($tainted['surname']) || empty($tainted['address']) || empty($tainted['postcode'])
+            || empty($tainted['city']) || empty($tainted['phone-number']))
     {
         $isEmpty = true;
         $_SESSION['form-error'] = "Please Fill Form fully";

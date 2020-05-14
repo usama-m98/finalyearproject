@@ -8,7 +8,7 @@ class Validator
 
     public function __destruct() { }
 
-    public function sanitiseString(string $string_to_sanitise): string
+    public function sanitiseString(string $string_to_sanitise)
     {
         $sanitised_string = false;
 
@@ -19,7 +19,26 @@ class Validator
         return $sanitised_string;
     }
 
-    public function sanitiseEmail(string $email_to_sanitise): string
+    public function validatePassword(string $password)
+    {
+        $password_string = false;
+        $lowercase_case = preg_match('/[a-z]/', $password);
+        $upper_case = preg_match('/[A-Z]/', $password);
+        $number = preg_match('/[0-9]/', $password);
+        $special_char = preg_match('/[!@#$%^&*_-]/', $password);
+        $length = strlen($password) > 7;
+
+        if (($lowercase_case && $upper_case && $number && $special_char) && $length)
+        {
+            $password_string = $password;
+        }else{
+            $_SESSION['failed_message'] = 'The password must follow the criteria';
+        }
+
+        return $password_string;
+    }
+
+    public function sanitiseEmail(string $email_to_sanitise)
     {
         $cleaned_string = false;
 
@@ -31,7 +50,7 @@ class Validator
         return $cleaned_string;
     }
 
-    public function sanitiseNumber(string $numbers_to_sanitise): string
+    public function sanitiseNumber(string $numbers_to_sanitise)
     {
         $cleaned_string = false;
 

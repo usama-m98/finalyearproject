@@ -10,7 +10,7 @@ $app->get('/', function(Request $request, Response $response) use ($app)
     $amd = APP_URL . '/media/homepage/AMD.jpg';
     $intel = APP_URL . '/media/homepage/Intel.jpg';
 
-    $html_output = $this->view->render($response,
+    return $this->view->render($response,
         'homepage.html.twig',
         [
             'page_title' => 'Homepage',
@@ -23,11 +23,6 @@ $app->get('/', function(Request $request, Response $response) use ($app)
             'intel' => $intel,
             'amd' => $amd
         ]);
-
-    processOutput($app, $html_output);
-
-    return $html_output;
-
 })->setName('homepage');
 
 function processOutput($app, $html_output)

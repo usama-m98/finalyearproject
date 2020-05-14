@@ -10,13 +10,7 @@ $app->post('/assignmentform', function (Request $request, Response $response) us
     $cleaned = cleanInteger($app, $tainted);
     updateOrderDetailsWithReassignment($app, $cleaned);
 
-    if (isset($_SESSION['reassigned']))
-    {
-        return $_SESSION['reassigned'];
-    }
-
-
-    return $response->withRedirect('assignbuilds');
+    return $response->withHeader('Location', 'assignbuilds');
 
 });
 

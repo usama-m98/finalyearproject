@@ -25,6 +25,8 @@ require 'routes/user/contactform.php';
 require 'routes/user/viewmessages.php';
 require 'routes/user/checkout.php';
 require 'routes/user/cartcheckout.php';
+require 'routes/user/updatepersonaldetails.php';
+require 'routes/user/personaldetailschanged.php';
 
 
 // webpage routes

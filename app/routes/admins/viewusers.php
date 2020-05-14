@@ -15,7 +15,7 @@ $app->get('/viewusers', function (Request $request, Response $response) use ($ap
                 $user_data = $_SESSION['filtered_user_data'];
             }
 
-            $html_output = $this->view->render($response,
+            return $this->view->render($response,
                 'viewusers.html.twig',
                 [
                     'page_title' => 'View users',
@@ -28,10 +28,6 @@ $app->get('/viewusers', function (Request $request, Response $response) use ($ap
                     'action2' => 'deleteuser',
                     'main_page' => 'admininterface'
                 ]);
-
-            processOutput($app, $html_output);
-
-            return $html_output;
         }
     }else{
         die();

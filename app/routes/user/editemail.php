@@ -6,7 +6,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 $app->get('/editemail', function(Request $request, Response $response) use ($app)
 {
 
-    $html_output = $this->view->render($response,
+    return $this->view->render($response,
         'editemail.html.twig',
         [
             'page_title' => 'Edit email',
@@ -16,10 +16,6 @@ $app->get('/editemail', function(Request $request, Response $response) use ($app
             'page_heading2' => 'Edit email',
             'action' => 'emailchanged',
         ]);
-
-    processOutput($app, $html_output);
-
-    return $html_output;
 });
 
 

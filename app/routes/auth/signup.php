@@ -5,8 +5,14 @@ use Psr\Http\Message\ResponseInterface as Response;
 
 $app->get('/signup', function (Request $request, Response $response) use ($app)
 {
+    $sign_up_failure_message = '';
+    if(isset($_SESSION['failed_message']))
+    {
+        $sign_up_failure_message = $_SESSION['failed_message'];
+    }
 
-    $html_ouput = $this->view->render($response,
+    unset($_SESSION['failed_message']);
+    return $this->view->render($response,
         'signup.html.twig',
         [
             'page_title' => 'Signup Form',
@@ -15,10 +21,6 @@ $app->get('/signup', function (Request $request, Response $response) use ($app)
             'js_path' => JS_PATH,
             'page_heading2' => 'Sign up',
             'action' => 'registered',
+            'message' => $sign_up_failure_message
         ]);
-
-    processOutput($app, $html_ouput);
-
-    return $html_ouput;
-
 })->setName('signup');

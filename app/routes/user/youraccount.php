@@ -6,7 +6,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 $app->get('/youraccount', function (Request $request, Response $response) use ($app)
 {
 
-    $html_output = $this->view->render($response,
+    return $this->view->render($response,
         'youraccount.html.twig',
         [
             'page_title' => 'Your Account',
@@ -15,8 +15,4 @@ $app->get('/youraccount', function (Request $request, Response $response) use ($
             'js_path' => JS_PATH,
             'page_heading2' => 'Account Homepage',
         ]);
-
-    processOutput($app, $html_output);
-
-    return $html_output;
 })->setName('youraccount');

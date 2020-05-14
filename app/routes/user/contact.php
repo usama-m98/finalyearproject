@@ -11,8 +11,7 @@ $app->get('/contact', function(Request $request, Response $response) use ($app)
             $order_id = $_GET['orderID'];
         }
 
-
-        $html_output = $this->view->render($response,
+        return $this->view->render($response,
             'contactform.html.twig',
             [
                 'page_title' => 'Contact Form',
@@ -25,10 +24,6 @@ $app->get('/contact', function(Request $request, Response $response) use ($app)
                 'action' => 'contactform',
                 'order_id' => $order_id
             ]);
-
-        processOutput($app, $html_output);
-
-        return $html_output;
     }else{
         return $response->withRedirect(LANDING_PAGE);
     }

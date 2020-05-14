@@ -85,17 +85,27 @@ class DbQueries
         return $query;
     }
 
+    public function updateCustomerDetails()
+    {
+        $query = 'UPDATE customers';
+        $query .= ' SET ';
+        $query .= 'firstname = :first_name, surname = :surname, address = :address, ';
+        $query .= 'postcode = :postcode, city = :city, phonenumber = :phone_number ';
+        $query .= 'WHERE user_id = :userid';
+
+        return $query;
+    }
 
     public function insertPersonalDetails()
     {
         $query = "INSERT INTO customers";
         $query .= " SET ";
-        $query .= "first_name = :firstname, ";
+        $query .= "firstname = :firstname, ";
         $query .= "surname = :surname, ";
         $query .= "address = :address, ";
         $query .= "postcode = :postcode, ";
         $query .= "city = :city, ";
-        $query .= "phone_number = :phonenumber, ";
+        $query .= "phonenumber = :phonenumber, ";
         $query .= "user_id = :userid";
 
         return $query;
@@ -103,7 +113,7 @@ class DbQueries
 
     public function retrievePersonalDetails()
     {
-        $query = "SELECT customer_id, first_name, surname, address, postcode, city, phone_number ";
+        $query = "SELECT customer_id, firstname, surname, address, postcode, city, phonenumber ";
         $query .= "FROM customers ";
         $query .= "WHERE user_id = :user_id";
 
@@ -183,7 +193,7 @@ class DbQueries
     public function retrieveAllOrderData()
     {
         $query = "SELECT o.order_id, o.order_date, o.description, o.total, o.quantity, o.admin_assigned, o.status, o.customer_id, ";
-        $query .= " c.address, c.postcode, c.city, c.phone_number ";
+        $query .= " c.address, c.postcode, c.city, c.phonenumber ";
         $query .= "FROM order_detail o, customers c ";
         $query .= "WHERE o.customer_id = c.customer_id";
 
@@ -193,7 +203,7 @@ class DbQueries
     public function retrieveAssignedOrderData()
     {
         $query = "SELECT o.order_id, o.order_date, o.description, o.total, o.quantity o.status, o.admin_assigned, o.customer_id, ";
-        $query .= "c.address, c.postcode, c.city, c.phone_number ";
+        $query .= "c.address, c.postcode, c.city, c.phonenumber ";
         $query .= "FROM order_detail o, customers c ";
         $query .= "WHERE c.customer_id = o.customer_id AND admin_assigned =:user_id ";
 

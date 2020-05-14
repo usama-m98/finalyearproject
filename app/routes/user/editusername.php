@@ -6,7 +6,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 $app->get('/editusername', function(Request $request, Response $response) use ($app)
 {
 
-   $html_output = $this->view->render($response,
+   return $this->view->render($response,
        'editusername.html.twig',
        [
            'page_title' => 'Edit Username',
@@ -16,8 +16,4 @@ $app->get('/editusername', function(Request $request, Response $response) use ($
            'page_heading2' => 'Edit Username',
            'action' => 'usernamechanged',
        ]);
-
-   processOutput($app, $html_output);
-
-   return $html_output;
 });

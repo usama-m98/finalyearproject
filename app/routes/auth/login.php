@@ -5,7 +5,14 @@ use \Psr\Http\Message\ResponseInterface as Response;
 
 $app->get('/login', function(Request $request, Response $response) use ($app)
 {
-    $html_output = $this->view->render($response,
+    $error_message = '';
+    if (isset($_SESSION['failed_message']))
+    {
+        $error_message = $_SESSION['failed_message'];
+    }
+
+    unset($_SESSION['failed_message']);
+    return $this->view->render($response,
         'loginform.html.twig',
         [
             'page_title' => 'Login Form',
@@ -14,9 +21,6 @@ $app->get('/login', function(Request $request, Response $response) use ($app)
             'js_path' => JS_PATH,
             'heading' => 'Login',
             'action' => 'signin',
+            'message' => $error_message
         ]);
-
-    processOutput($app, $html_output);
-
-    return $html_output;
 })->setName('login');

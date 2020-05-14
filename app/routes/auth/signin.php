@@ -30,19 +30,6 @@ $app->post('/signin', function (Request $request, Response $response) use ($app)
     }
     return $response->withRedirect(LANDING_PAGE);
 
-//    $html_output = $this->view->render($response,
-//        'result.html.twig',
-//        [
-//            'page_title' => 'Personal Details',
-//            'css_path' => CSS_PATH,
-//            'landing_page' => LANDING_PAGE,
-//            'js_path' => JS_PATH,
-//        ]);
-//
-//    processOutput($app, $html_output);
-//
-//    return $html_output;
-
 
 });
 
@@ -88,6 +75,8 @@ function signIn( $auth_info, $password)
         $_SESSION['user'] = $auth_info['username'];
         $_SESSION['role'] = $auth_info['role'];
         $signed_in = true;
+    }else{
+        $_SESSION['failed_message'] = 'Username or Password Incorrect';
     }
 
     return $signed_in;

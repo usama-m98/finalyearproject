@@ -15,7 +15,7 @@ $app->get('/addproductsform', function (Request $request, Response $response) us
 
     if(isset($_SESSION['user'])) {
         if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Root') {
-            $html_output = $this->view->render($response,
+            return $this->view->render($response,
                 'addproductsform.html.twig',
                 [
                     'page_title' => 'Add Items',
@@ -28,10 +28,6 @@ $app->get('/addproductsform', function (Request $request, Response $response) us
                     'message' => $error_message,
                     'main_page' => 'admininterface'
                 ]);
-
-            processOutput($app, $html_output);
-
-            return $html_output;
         }else{
             die();
         }

@@ -28,8 +28,6 @@ $app->get('/checkout', function(Request $request, Response $response) use ($app)
                 'heading' => 'Checkout',
                 'message' => $message
             ]);
-
-
     }else {
         return $response->withRedirect(LANDING_PAGE);
     }

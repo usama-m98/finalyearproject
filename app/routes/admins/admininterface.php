@@ -8,7 +8,7 @@ $app->get('/admininterface', function (Request $request, Response $response) use
         if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Root')
         {
 
-            $html_output = $this->view->render($response,
+            return $this->view->render($response,
                 'admininterface.html.twig',
                 [
                     'page_title' => 'admin interface',
@@ -25,13 +25,9 @@ $app->get('/admininterface', function (Request $request, Response $response) use
                     'products_list' => 'productslist',
                     'admin_details' => 'personaldetails'
                 ]);
-
-            processOutput($app, $html_output);
-
-            return $html_output;
         }
     }else{
-        die();
+        return $response->withHeader('Location', LANDING_PAGE);
     }
 
 })->setName('admininterface');

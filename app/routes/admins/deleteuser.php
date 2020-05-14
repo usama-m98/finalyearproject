@@ -10,7 +10,7 @@ $app->post('/deleteuser', function(Request $request, Response $response) use ($a
     $clean_id = cleanInteger($app, $tainted);
 
     removeUsers($app, $clean_id);
-    $html_output = $this->view->render($response,
+    return $this->view->render($response,
         'result.html.twig',
         [
             'page_title' => 'Personal Details',
@@ -18,10 +18,6 @@ $app->post('/deleteuser', function(Request $request, Response $response) use ($a
             'landing_page' => LANDING_PAGE,
             'js_path' => JS_PATH,
         ]);
-
-    processOutput($app, $html_output);
-
-    return $html_output;
 });
 
 function removeUsers($app, $users)

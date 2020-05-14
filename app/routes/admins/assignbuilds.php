@@ -13,8 +13,9 @@ $app->get('/assignbuilds', function (Request $request, Response $response) use (
             $orders = ordersToBeAssigned($app);
             $count_of_assigned = countOfAssigned($app);
             $admins = filterUser($app, 'Admin');
+            unset($_SESSION['reassigned']);
 
-            $html_output = $this->view->render($response,
+            return $this->view->render($response,
                 'assignbuilds.html.twig',
                 [
                     'page_title' => 'Assign Build',
@@ -27,10 +28,6 @@ $app->get('/assignbuilds', function (Request $request, Response $response) use (
                     'admins' => $admins,
                     'main_page' => 'admininterface'
                 ]);
-
-            processOutput($app, $html_output);
-            unset($_SESSION['reassigned']);
-            return $html_output;
         }else{
             return $response->withHeader('Location', 'homepage');
         }

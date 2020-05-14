@@ -10,25 +10,9 @@ $app->post('/emailchanged', function(Request $request, Response $response) use (
 
     var_dump($cleaned_email);
     $auth_info = getAuthInfo($app, $_SESSION['user']);
-    $update_username = updateEmailInDatabase($app, $cleaned_email, $auth_info);
-
+    updateEmailInDatabase($app, $cleaned_email, $auth_info);
 
     return $response->withRedirect('personaldetails');
-
-//    $html_output = $this->view->render($response,
-//        'result.html.twig',
-//        [
-//            'page_title' => 'Personal Details',
-//            'css_path' => CSS_PATH,
-//            'landing_page' => LANDING_PAGE,
-//            'js_path' => JS_PATH,
-//        ]);
-//
-//    processOutput($app, $html_output);
-//
-//    return $html_output;
-
-
 });
 
 function validateEmail($app, $tainted)

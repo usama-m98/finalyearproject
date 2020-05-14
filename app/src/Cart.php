@@ -55,7 +55,6 @@ class Cart
             'product_image' => $this->img
         ];
         $_SESSION['cart'][$this->index] = $name;
-
     }
 
     public function removeSessionCartValue($index)

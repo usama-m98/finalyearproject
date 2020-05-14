@@ -10,17 +10,37 @@ $app->post('/registered', function(Request $request, Response $response) use ($a
 
    if (empty($tainted['signup_username']) || empty($tainted['signup_email']) || empty($tainted['signup_password']))
    {
-
+        $_SESSION['failed_message'] = 'Please Fill the Form Completely';
        return $response->withRedirect('signup');
-   }else{
+   }else {
        $clean_parameters = cleanSignUpParameters($app, $tainted);
-       $hashed_password = hash_password($app, $clean_parameters['password']);
+       $auth = getUserAccountDetails($app);
+       $account_exists = usernameAndEmailExists($clean_parameters['sanitised_email'], $clean_parameters['sanitised_username'],
+           $auth);
 
-       $stored_user_details = storeUserAccountDetails($app, $clean_parameters, $hashed_password);
+       if($account_exists['username'])
+       {
+           $_SESSION['failed_message'] = 'Username exists';
+           return $response->withRedirect('signup');
+       }
 
-       return $response->withRedirect(LANDING_PAGE);
+       if ($account_exists['email']) {
+           $_SESSION['failed_message'] = 'Email exists';
+           return $response->withRedirect('signup');
+       }
+
+       if ($clean_parameters['password'] === false) {
+           return $response->withRedirect('signup');
+       } else {
+           $hashed_password = hash_password($app, $clean_parameters['password']);
+
+           $stored_user_details = storeUserAccountDetails($app, $clean_parameters, $hashed_password);
+
+           return $response->withRedirect(LANDING_PAGE);
+       }
    }
 });
+
 
 
 function cleanSignUpParameters($app, $tainted_parameters)
@@ -31,6 +51,7 @@ function cleanSignUpParameters($app, $tainted_parameters)
 
     $tainted_username = $tainted_parameters['signup_username'];
     $tainted_email = $tainted_parameters['signup_email'];
+    $tainted_password = $tainted_parameters['signup_password'];
     $tainted_role = '';
 
     if (array_key_exists('role', $tainted_parameters))
@@ -40,7 +61,7 @@ function cleanSignUpParameters($app, $tainted_parameters)
         $tainted_role = 'Member';
     }
 
-    $cleaned_parameters['password'] = $tainted_parameters['signup_password'];
+    $cleaned_parameters['password'] = $validator->validatePassword($tainted_password);
     $cleaned_parameters['sanitised_username'] = $validator->sanitiseString($tainted_username);
     $cleaned_parameters['sanitised_email'] = $validator->sanitiseEmail($tainted_email);
     $cleaned_parameters['role'] = $validator->sanitiseRole($tainted_role);
@@ -50,10 +71,29 @@ function cleanSignUpParameters($app, $tainted_parameters)
 
 function hash_password($app, $password_to_hash): string
 {
-    $bcrypt_wrapper = $app->getContainer()->get('bcryptWrapper');
-    $hashed_password = $bcrypt_wrapper->createHashedPassword($password_to_hash);
+    $password_hashing = $app->getContainer()->get('passwordHashing');
+    $hashed_password = $password_hashing->createHashedPassword($password_to_hash);
 
     return $hashed_password;
+}
+
+function usernameAndEmailExists($email_to_check,$username_to_check, $account_details)
+{
+    $exists = array();
+    $exists['username'] = false;
+    $exists['email'] = false;
+    foreach($account_details as $key)
+    {
+        if ($key['username'] === $username_to_check)
+        {
+            $exists['username'] = true;
+        }
+        if($key['email'] === $email_to_check)
+        {
+            $exists['email'] = true;
+        }
+    }
+    return $exists;
 }
 
 function storeUserAccountDetails($app, $clean_parameters, $hashed_password)

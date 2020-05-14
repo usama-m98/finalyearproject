@@ -9,7 +9,7 @@ $app->get('/addadmin', function (Request $request, Response $response) use ($app
     if(isset($_SESSION['user'])){
         if ($_SESSION['role'] == 'Root')
         {
-            $html_output = $this->view->render($response,
+            return $this->view->render($response,
                 'addadmin.html.twig',
                 [
                     'page_title' => 'add admin',
@@ -20,13 +20,9 @@ $app->get('/addadmin', function (Request $request, Response $response) use ($app
                     'action' => 'addadminuser',
                     'main_page' => 'admininterface'
                 ]);
-
-            processOutput($app, $html_output);
-
-            return $html_output;
         }
     }else{
-        die();
+        return $response->withHeader('Location', LANDING_PAGE);
     }
 
 })->setName('addadmin');

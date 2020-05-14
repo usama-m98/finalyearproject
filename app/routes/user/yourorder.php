@@ -14,8 +14,9 @@ $app->get('/yourorder', function(Request $request, Response $response) use ($app
         $auth_info = getAuthInfo($app, $_SESSION['user']);
         $customer_details = getUserPersonalInfo($app, $auth_info);
         $order_detail_history = getOrderDetails($app, $customer_details['customer_id']);
+        unset($_SESSION['message_store']);
 
-        $html_output = $this->view->render($response,
+        return $this->view->render($response,
             'yourorder.html.twig',
             [
                 'page_title' => 'Configure Form',
@@ -25,10 +26,6 @@ $app->get('/yourorder', function(Request $request, Response $response) use ($app
                 'heading' => 'Order Details',
                 'orders' => $order_detail_history,
             ]);
-
-        processOutput($app, $html_output);
-        unset($_SESSION['message_store']);
-        return $html_output;
     }else{
         return $response->withRedirect(LANDING_PAGE);
     }

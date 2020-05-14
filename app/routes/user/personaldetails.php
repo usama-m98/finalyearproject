@@ -14,13 +14,15 @@ $app->get('/personaldetails', function(Request $request, Response $response) use
         $personal_details = getUserPersonalInfo($app, $auth_info);
         $personal_info_exists = false;
 
+        $main_page = $_SERVER['HTTP_REFERER'];
         if ($personal_details) {
             $personal_info_exists = true;
         }
 
+        $error_message = '';
         if (isset($_SESSION['form-error']))
         {
-            echo "<script>alert('Please Fill Form full and correctly')</script>";
+            $error_message = 'Please Fill Form full and correctly';
         }
 
         unset($_SESSION['form-error']);
@@ -31,13 +33,14 @@ $app->get('/personaldetails', function(Request $request, Response $response) use
                 'css_path' => CSS_PATH,
                 'landing_page' => LANDING_PAGE,
                 'js_path' => JS_PATH,
+                'main_page' => $main_page,
                 'page_heading2' => 'User Account Information',
-                'page_heading3' => 'Personal Details',
                 'username' => $username,
                 'email' => $email,
                 'personal_info_exists' => $personal_info_exists,
                 'personal_info' => $personal_details,
                 'action' => 'addpersonalinfoform',
+                'message' => $error_message
             ]);
 
 

@@ -6,8 +6,7 @@ $app->get('/viewallmessages', function(Request $request, Response $response) use
 {
     $stored_messages = getAllMessages($app);
 
-
-    $html_output = $this->view->render($response,
+    return $this->view->render($response,
         'viewmessages.html.twig',
         [
             'page_title' => 'Personal Details',
@@ -17,12 +16,6 @@ $app->get('/viewallmessages', function(Request $request, Response $response) use
             'messages' => $stored_messages,
             'main_page' => 'admininterface'
         ]);
-
-    processOutput($app, $html_output);
-
-    return $html_output;
-
-
 })->setName('viewallmessages');
 
 function getAllMessages($app)

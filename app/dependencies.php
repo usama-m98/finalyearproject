@@ -29,8 +29,8 @@ $container['validator'] = function ($container) {
     return $validator;
 };
 
-$container['bcryptWrapper'] = function ($container) {
-    $wrapper = new \FinalYear\BcryptWrapper();
+$container['passwordHashing'] = function ($container) {
+    $wrapper = new \FinalYear\PasswordHashing();
     return $wrapper;
 };
 
