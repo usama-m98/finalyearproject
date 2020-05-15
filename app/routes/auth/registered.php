@@ -34,9 +34,10 @@ $app->post('/registered', function(Request $request, Response $response) use ($a
        } else {
            $hashed_password = hash_password($app, $clean_parameters['password']);
 
-           $stored_user_details = storeUserAccountDetails($app, $clean_parameters, $hashed_password);
-
-           return $response->withRedirect(LANDING_PAGE);
+           var_dump($hashed_password);
+//           $stored_user_details = storeUserAccountDetails($app, $clean_parameters, $hashed_password);
+//
+//           return $response->withRedirect(LANDING_PAGE);
        }
    }
 });

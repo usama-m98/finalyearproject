@@ -1,27 +1,27 @@
 {% extends 'banner.html.twig' %}
 {% block content %}
-    <section>
+    <div id="slide-section">
         <div class="project-slideshow" id="slides1">
             {% for slide in slideshow %}
             <div class="mySlides">
-                <img class="project-images" src="{{ slide }}" id="{{ slide }} is an image of our deals">
+                <img class="project-images" src="{{ slide }}" alt="{{ slide }} is an image of our deals">
             </div>
             {% endfor %}
             <a class="prev" id="prev-slide">&#10094;</a>
             <a class="next" id="next-slide">&#10095;</a>
         </div>
-    </section>
+    </div>
     <div id="configure">
         <div class="processor">
             <img src="{{ intel }}" alt="Intel Image">
             <a href="configureintelform">
-                <button type="submit">Build Your Intel PC</button>
+                Build Your Intel PC
             </a>
         </div>
         <div class="processor">
             <img src="{{ amd }}" alt="AMD Image" >
             <a href="configureamdform">
-                <button type="submit">Build Your AMD PC</button>
+                Build Your AMD PC
             </a>
         </div>
     </div>

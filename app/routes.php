@@ -37,6 +37,7 @@ require 'routes/pagesview/shoppingcart.php';
 require 'routes/pagesview/processconfiguration.php';
 require 'routes/pagesview/cart.php';
 require 'routes/pagesview/cartitemoption.php';
+require 'routes/pagesview/search.php';
 
 // admin routes
 require 'routes/admins/admininterface.php';

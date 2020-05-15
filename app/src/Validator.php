@@ -8,7 +8,7 @@ class Validator
 
     public function __destruct() { }
 
-    public function sanitiseString(string $string_to_sanitise)
+    public function sanitiseString(string $string_to_sanitise):string
     {
         $sanitised_string = false;
 
@@ -38,7 +38,7 @@ class Validator
         return $password_string;
     }
 
-    public function sanitiseEmail(string $email_to_sanitise)
+    public function sanitiseEmail(string $email_to_sanitise):string
     {
         $cleaned_string = false;
 
@@ -50,7 +50,7 @@ class Validator
         return $cleaned_string;
     }
 
-    public function sanitiseNumber(string $numbers_to_sanitise)
+    public function sanitiseNumber(string $numbers_to_sanitise):string
     {
         $cleaned_string = false;
 

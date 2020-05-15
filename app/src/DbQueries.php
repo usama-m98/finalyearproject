@@ -10,6 +10,15 @@ class DbQueries
 
     public function __destruct(){}
 
+    public function searchQuery()
+    {
+        $query = 'SELECT product_id, name, type, description, stock, price, product_image ';
+        $query .= 'FROM products ';
+        $query .= 'WHERE name LIKE :search';
+
+        return $query;
+    }
+
     public function storeUserLoginData()
     {
         $query = "INSERT INTO users";

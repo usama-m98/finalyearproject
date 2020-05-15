@@ -1,0 +1,25 @@
+{% extends 'banner.html.twig' %}
+{% block content %}
+    <article class="products">
+        {% for items in products %}
+                <div class="product-card">
+                <div class="product-image">
+                    <img src="{{ items['product_image'] }}">
+                </div>
+                <div class="product-info">
+                    <h5>{{ items['name'] }}</h5>
+                    <h6>£{{ items['price'] }}</h6>
+                </div>
+                {% if items['stock'] is same as (0) %}
+                    <span>Out of Stock</span>
+                {% else %}
+                    <form action="{{ action }}" method="post">
+                        <input type="hidden" name="product_id" value="{{ items['product_id'] }}">
+                        <input type="hidden" name="quantity" value="1">
+                        <input type="submit" name="add_button" value="Add to basket">
+                    </form>
+                    </div>
+                {% endif %}
+        {% endfor %}
+    </article>
+{% endblock %}
