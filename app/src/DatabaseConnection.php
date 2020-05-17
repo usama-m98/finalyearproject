@@ -19,14 +19,12 @@ use PDO;
 class DatabaseConnection
 {
     private $db_handle;
-    private $sql_queries;
     private $prepared_statement;
     private $errors;
 
     public function __construct()
     {
         $this->db_handle = null;
-        $this->sql_queries = null;
         $this->prepared_statement = null;
         $this->errors = [];
     }
