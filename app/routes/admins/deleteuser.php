@@ -22,13 +22,9 @@ $app->post('/deleteuser', function(Request $request, Response $response) use ($a
 
 function removeUsers($app, $users)
 {
-    $database = $app->getContainer()->get('databaseWrapper');
+    $database = $app->getContainer()->get('databaseConnection');
     $sql_queries = $app->getContainer()->get('dbQueries');
-    $settings = $app->getContainer()->get('settings');
 
-    $database_connection_settings = $settings['pdo_settings'];
-
-    $database->setDatabaseConnectionSettings($database_connection_settings);
     $database->makeDatabaseConnection();
 
     $query = $sql_queries->deleteUser();
@@ -39,6 +35,6 @@ function removeUsers($app, $users)
             ':user_id' => $user
         ];
 
-        $database->safeQuery($query, $parameter);
+        $database->query($query, $parameter);
     }
 }

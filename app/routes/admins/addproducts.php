@@ -28,13 +28,9 @@ $app->post('/addproducts', function (Request $request, Response $response) use (
 
 function storeProducts($app, $cleaned_data)
 {
-    $database_wrapper = $app->getContainer()->get('databaseWrapper');
+    $database_wrapper = $app->getContainer()->get('databaseConnection');
     $sql_queries = $app->getContainer()->get('dbQueries');
-    $settings = $app->getContainer()->get('settings');
 
-    $database_connection_settings = $settings['pdo_settings'];
-
-    $database_wrapper->setDatabaseConnectionSettings($database_connection_settings);
     $database_wrapper->makeDatabaseConnection();
 
     $parameters = [
@@ -47,7 +43,7 @@ function storeProducts($app, $cleaned_data)
     ];
 
     $query = $sql_queries->storeProductData();
-    $database_wrapper->safeQuery($query, $parameters);
+    $database_wrapper->query($query, $parameters);
 }
 
 function cleanProductData($app, $product_image, $product_data)

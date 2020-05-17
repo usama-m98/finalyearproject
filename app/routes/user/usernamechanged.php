@@ -25,13 +25,9 @@ function validateUsername($app, $tainted)
 
 function updateUsernameInDatabase($app, $cleaned_username, $auth)
 {
-    $database_wrapper = $app->getContainer()->get('databaseWrapper');
+    $database_wrapper = $app->getContainer()->get('databaseConnection');
     $sql_queries = $app->getContainer()->get('dbQueries');
-    $settings = $app->getContainer()->get('settings');
 
-    $database_connection_settings = $settings['pdo_settings'];
-
-    $database_wrapper->setDatabaseConnectionSettings($database_connection_settings);
     $database_wrapper->makeDatabaseConnection();
 
     $query = $sql_queries->updateUsername();
@@ -42,7 +38,7 @@ function updateUsernameInDatabase($app, $cleaned_username, $auth)
         ':user_id' => $user_id
     ];
 
-    $database_wrapper->safeQuery($query, $parameters);
+    $database_wrapper->query($query, $parameters);
 
     $new_username = switchSessionUser($cleaned_username);
 

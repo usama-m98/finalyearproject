@@ -25,9 +25,4 @@ $app->get('/', function(Request $request, Response $response) use ($app)
         ]);
 })->setName('homepage');
 
-function processOutput($app, $html_output)
-{
-    $process_output = $app->getContainer()->get('processOutput');
-    $html_output = $process_output->processOutput($html_output);
-    return $html_output;
-}
+

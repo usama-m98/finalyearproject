@@ -36,18 +36,15 @@ $app->get('/assignbuilds', function (Request $request, Response $response) use (
 
 function ordersToBeAssigned($app)
 {
-    $database_wrapper = $app->getContainer()->get('databaseWrapper');
+    $database_wrapper = $app->getContainer()->get('databaseConnection');
     $sql_queries = $app->getContainer()->get('dbQueries');
-    $settings = $app->getContainer()->get('settings');
 
-    $database_connection_settings = $settings['pdo_settings'];
 
-    $database_wrapper->setDatabaseConnectionSettings($database_connection_settings);
     $database_wrapper->makeDatabaseConnection();
 
     $query = $sql_queries->retrieveOrderDataToBeAssigned();
 
-    $database_wrapper->safeQuery($query);
+    $database_wrapper->Query($query);
     $result =$database_wrapper->safeFetchAll();
 
     return $result;

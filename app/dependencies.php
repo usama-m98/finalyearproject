@@ -39,15 +39,11 @@ $container['dbQueries'] = function ($container){
     return $db_query;
 };
 
-$container['databaseWrapper'] = function ($container){
-    $database_wrapper = new \FinalYear\DatabaseWrapper();
+$container['databaseConnection'] = function ($container){
+    $database_wrapper = new \FinalYear\DatabaseConnection();
     return $database_wrapper;
 };
 
-$container['processOutput'] = function ($container){
-    $model = new FinalYear\ProcessOutput();
-    return $model;
-};
 
 $container['cart'] = function ($container){
     $cart = new FinalYear\Cart();

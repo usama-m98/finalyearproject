@@ -33,13 +33,9 @@ $app->get('/cartcheckout', function(Request $request, Response $response) use ($
 
 function storeOrderDetails($app, $customer_id, $cart)
 {
-    $database_wrapper = $app->getContainer()->get('databaseWrapper');
+    $database_wrapper = $app->getContainer()->get('databaseConnection');
     $sql_queries = $app->getContainer()->get('dbQueries');
-    $settings = $app->getContainer()->get('settings');
 
-    $database_connection_settings = $settings['pdo_settings'];
-
-    $database_wrapper->setDatabaseConnectionSettings($database_connection_settings);
     $database_wrapper->makeDatabaseConnection();
     $stored_products = getStoredProducts($app);
 
@@ -57,7 +53,7 @@ function storeOrderDetails($app, $customer_id, $cart)
         ];
         $query = $sql_queries->storeOrderData();
 
-        $database_wrapper->safeQuery($query, $params);
+        $database_wrapper->query($query, $params);
     }
 
     foreach($cart as $item)
@@ -70,6 +66,6 @@ function storeOrderDetails($app, $customer_id, $cart)
             ':product_id' => $item['product_id']
         ];
         $query = $sql_queries->updateStock();
-        $database_wrapper->safeQuery($query, $params);
+        $database_wrapper->query($query, $params);
     }
 }

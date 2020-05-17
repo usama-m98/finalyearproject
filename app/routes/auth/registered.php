@@ -34,10 +34,9 @@ $app->post('/registered', function(Request $request, Response $response) use ($a
        } else {
            $hashed_password = hash_password($app, $clean_parameters['password']);
 
-           var_dump($hashed_password);
-//           $stored_user_details = storeUserAccountDetails($app, $clean_parameters, $hashed_password);
-//
-//           return $response->withRedirect(LANDING_PAGE);
+           storeUserAccountDetails($app, $clean_parameters, $hashed_password);
+
+           return $response->withRedirect(LANDING_PAGE);
        }
    }
 });
@@ -99,13 +98,9 @@ function usernameAndEmailExists($email_to_check,$username_to_check, $account_det
 
 function storeUserAccountDetails($app, $clean_parameters, $hashed_password)
 {
-    $database_wrapper = $app->getContainer()->get('databaseWrapper');
+    $database_wrapper = $app->getContainer()->get('databaseConnection');
     $sql_queries = $app->getContainer()->get('dbQueries');
-    $settings = $app->getContainer()->get('settings');
 
-    $database_connection_settings = $settings['pdo_settings'];
-
-    $database_wrapper->setDatabaseConnectionSettings($database_connection_settings);
     $database_wrapper->makeDatabaseConnection();
 
     $parameters = [
@@ -116,6 +111,6 @@ function storeUserAccountDetails($app, $clean_parameters, $hashed_password)
     ];
 
     $query = $sql_queries->storeUserLoginData();
-    $database_wrapper->safeQuery($query, $parameters);
+    $database_wrapper->query($query, $parameters);
 
 }

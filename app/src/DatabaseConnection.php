@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DatabaseWrapper.phpphp
+ * DatabaseConnection.phpphp
  *
  * Access the sessions database
  *
@@ -14,14 +14,14 @@
  */
 
 namespace FinalYear;
+use PDO;
 
-class DatabaseWrapper
+class DatabaseConnection
 {
     private $db_handle;
     private $sql_queries;
     private $prepared_statement;
     private $errors;
-    private $database_connection_settings;
 
     public function __construct()
     {
@@ -33,30 +33,19 @@ class DatabaseWrapper
 
     public function __destruct() { }
 
-    public function setDatabaseConnectionSettings($database_connection_settings)
-    {
-        $this->database_connection_settings = $database_connection_settings;
-    }
 
-    /**
-     * '\' character in front of the PDO class name signifies that it is a globally available class
-     * and is not part of the Sessins namespavce
-     *
-     * @return string
-     */
     public function makeDatabaseConnection()
     {
-        $pdo = false;
         $pdo_error = '';
 
-        $database_settings = $this->database_connection_settings;
-        $host_name = $database_settings['rdbms'] . ':host=' . $database_settings['host'];
-        $port_number = ';port=' . '3306';
-        $user_database = ';dbname=' . $database_settings['db_name'];
-        $host_details = $host_name . $port_number . $user_database;
-        $user_name = $database_settings['user_name'];
-        $user_password = $database_settings['user_password'];
-        $pdo_attributes = $database_settings['options'];
+        $host_details = 'mysql:host=localhost;port=3306;dbname=final_year_db';
+        $user_name = 'final_year_user';
+        $user_password = 'final_year_pass';
+        $pdo_attributes = [
+            PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            PDO::ATTR_EMULATE_PREPARES   => true,
+            ];
 
         try
         {
@@ -72,7 +61,6 @@ class DatabaseWrapper
         return $pdo_error;
     }
 
-    public function setLogger(){}
 
     /**
      * @param $query_string
@@ -83,9 +71,9 @@ class DatabaseWrapper
      *
      * @return mixed
      */
-    public function safeQuery($query_string, $params = null)
+    public function query($query_string, $params = null)
     {
-        $this->errors['db_error'] = false;
+        $this->errors['failed'] = false;
         $query_parameters = $params;
 
         try
@@ -96,15 +84,10 @@ class DatabaseWrapper
         }
         catch (PDOException $exception_object)
         {
-            $error_message  = 'PDO Exception caught. ';
-            $error_message .= 'Error with the database access.' . "\n";
-            $error_message .= 'SQL query: ' . $query_string . "\n";
-            $error_message .= 'Error: ' . var_dump($this->prepared_statement->errorInfo(), true) . "\n";
-            // NB would usually log to file for sysadmin attention
-            $this->errors['db_error'] = true;
-            $this->errors['sql_error'] = $error_message;
+            var_dump('Database Error');
+            $this->errors['failed'] = true;
         }
-        return $this->errors['db_error'];
+        return $this->errors['failed'];
     }
 
     public function countRows()

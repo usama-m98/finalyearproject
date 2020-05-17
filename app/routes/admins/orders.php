@@ -46,18 +46,14 @@ $app->get('/orders', function (Request $request, Response $response) use ($app)
 
 function getAllOrderData($app)
 {
-    $database_wrapper = $app->getContainer()->get('databaseWrapper');
+    $database_wrapper = $app->getContainer()->get('databaseConnection');
     $sql_queries = $app->getContainer()->get('dbQueries');
-    $settings = $app->getContainer()->get('settings');
 
-    $database_connection_settings = $settings['pdo_settings'];
-
-    $database_wrapper->setDatabaseConnectionSettings($database_connection_settings);
     $database_wrapper->makeDatabaseConnection();
 
     $query = $sql_queries->retrieveAllOrderData();
 
-    $database_wrapper->safeQuery($query);
+    $database_wrapper->query($query);
     $result = $database_wrapper->safeFetchAll();
 
     return $result;
@@ -65,13 +61,9 @@ function getAllOrderData($app)
 
 function getAssignedOrderData($app, $user_id)
 {
-    $database_wrapper = $app->getContainer()->get('databaseWrapper');
+    $database_wrapper = $app->getContainer()->get('databaseConnection');
     $sql_queries = $app->getContainer()->get('dbQueries');
-    $settings = $app->getContainer()->get('settings');
 
-    $database_connection_settings = $settings['pdo_settings'];
-
-    $database_wrapper->setDatabaseConnectionSettings($database_connection_settings);
     $database_wrapper->makeDatabaseConnection();
 
     $query = $sql_queries->retrieveAssignedOrderData();
@@ -80,7 +72,7 @@ function getAssignedOrderData($app, $user_id)
         ":user_id" => $user_id
     ];
 
-    $database_wrapper->safeQuery($query, $parameters);
+    $database_wrapper->query($query, $parameters);
     $result = $database_wrapper->safeFetchAll();
 
     return $result;

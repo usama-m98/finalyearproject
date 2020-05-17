@@ -76,13 +76,9 @@ function productActionValidation($param)
 
 function removeItem($app, $product_id)
 {
-    $database_wrapper = $app->getContainer()->get('databaseWrapper');
+    $database_wrapper = $app->getContainer()->get('databaseConnection');
     $sql_queries = $app->getContainer()->get('dbQueries');
-    $settings = $app->getContainer()->get('settings');
 
-    $database_connection_settings = $settings['pdo_settings'];
-
-    $database_wrapper->setDatabaseConnectionSettings($database_connection_settings);
     $database_wrapper->makeDatabaseConnection();
 
     $query = $sql_queries->removeProduct();
@@ -91,7 +87,7 @@ function removeItem($app, $product_id)
         ':product_id' => $product_id
     ];
 
-    $database_wrapper->safeQuery($query, $params);
+    $database_wrapper->query($query, $params);
     $_SESSION['removed_item'] = true;
 }
 

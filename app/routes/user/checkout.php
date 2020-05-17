@@ -49,13 +49,9 @@ function getOrderStringAndTotal($order)
 }
 
 function storeConfigurationDetails($app, $order_details, $customer_id){
-    $database_wrapper = $app->getContainer()->get('databaseWrapper');
+    $database_wrapper = $app->getContainer()->get('databaseConnection');
     $sql_queries = $app->getContainer()->get('dbQueries');
-    $settings = $app->getContainer()->get('settings');
 
-    $database_connection_settings = $settings['pdo_settings'];
-
-    $database_wrapper->setDatabaseConnectionSettings($database_connection_settings);
     $database_wrapper->makeDatabaseConnection();
 
     $date = date('m/d/Y');
@@ -71,18 +67,14 @@ function storeConfigurationDetails($app, $order_details, $customer_id){
     $query = $sql_queries->storeOrderData();
 
 
-    $database_wrapper->safeQuery($query, $params);
+    $database_wrapper->query($query, $params);
 }
 
 function updateQuantityAfterConfig($app, $product_array)
 {
-    $database_wrapper = $app->getContainer()->get('databaseWrapper');
+    $database_wrapper = $app->getContainer()->get('databaseConnection');
     $sql_queries = $app->getContainer()->get('dbQueries');
-    $settings = $app->getContainer()->get('settings');
 
-    $database_connection_settings = $settings['pdo_settings'];
-
-    $database_wrapper->setDatabaseConnectionSettings($database_connection_settings);
     $database_wrapper->makeDatabaseConnection();
 
     foreach($product_array as $item_array)
@@ -96,6 +88,6 @@ function updateQuantityAfterConfig($app, $product_array)
             ':product_id' => $product_id
         ];
 
-        $database_wrapper->safeQuery($query, $params);
+        $database_wrapper->query($query, $params);
     }
 }

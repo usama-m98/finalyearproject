@@ -22,13 +22,9 @@ $app->post('/updateitem', function (Request $request, Response $response) use ($
 
 function updateProduct($app, $cleaned_data)
 {
-    $database_wrapper = $app->getContainer()->get('databaseWrapper');
+    $database_wrapper = $app->getContainer()->get('databaseConnection');
     $sql_queries = $app->getContainer()->get('dbQueries');
-    $settings = $app->getContainer()->get('settings');
 
-    $database_connection_settings = $settings['pdo_settings'];
-
-    $database_wrapper->setDatabaseConnectionSettings($database_connection_settings);
     $database_wrapper->makeDatabaseConnection();
 
     $query = $sql_queries->updateItem();
@@ -43,7 +39,7 @@ function updateProduct($app, $cleaned_data)
         ':product_id' => $cleaned_data['product_id']
     ];
 
-    $database_wrapper->safeQuery($query, $parameters);
+    $database_wrapper->query($query, $parameters);
 }
 
 function setUpdated()
