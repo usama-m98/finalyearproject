@@ -37,7 +37,7 @@
                         </a>
                     {% else %}
                         <span>Total: £{{ total }}</span>
-                        <form action="{{ action }}" method="post">
+                        <form action="{{ checkout['action'] }}" method="post">
                             <div class="account-row">
                                 <label for="firstname">Enter Firstname:</label>
                                 <input type="text" name="firstname" id="firstname">
