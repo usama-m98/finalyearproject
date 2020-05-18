@@ -6,27 +6,42 @@
     </header>
 
     {% if session.role is same as ('Root') %}
-        <div class="admin-menu">
-            <h2>{{ page_heading2 }}</h2>
+        <div class="admin-interface">
+            <div class="admin-menu">
+                <h2>{{ page_heading2 }}</h2>
 
-            <a href="{{ add_admin }}">- Add Admin Users</a>
-            <a href="{{ view_user }}">- View all users</a>
-            <a href="{{ assign_build }}">- Assign Builds</a>
-            <a href="{{ order_interface }}">- Orders</a>
-            <a href="{{ add_products }}">- Add products</a>
-            <a href="{{ products_list }}">- Products List</a>
-            <a href="{{ admin_details }}">- Personal Details</a>
-            <a href="logout">- Logout</a>
+                <a href="{{ add_admin }}">- Add Admin Users</a>
+                <a href="{{ view_user }}">- View all users</a>
+                <a href="{{ assign_build }}">- Assign Builds</a>
+                <a href="{{ order_interface }}">- Orders</a>
+                <a href="{{ add_products }}">- Add products</a>
+                <a href="{{ products_list }}">- Products List</a>
+                <a href="{{ admin_details }}">- Personal Details</a>
+                <a href="logout">- Logout</a>
+            </div>
+            <div class="admin-content">
+                <div class="order-count">
+                    <span class="content-orders">Orders to Assign: <a href="{{ assign_build }}">{{ count['root'] }}</a></span>
+                </div>
+            </div>
         </div>
-    {% elseif session.role is same as ('Admin')%}
-        <div class="admin-menu">
-            <h2>{{ page_heading2 }}</h2>
 
-            <a href="{{ order_interface }}">- Orders</a>
-            <a href="{{ add_products }}">- Add products</a>
-            <a href="{{ products_list }}">- Products List</a>
-            <a href="{{ admin_details }}">- Personal Details</a>
-            <a href="logout">- Logout</a>
+    {% elseif session.role is same as ('Admin')%}
+        <div class="admin-interface">
+            <div class="admin-menu">
+                <h2>{{ page_heading2 }}</h2>
+
+                <a href="{{ order_interface }}">- Orders</a>
+                <a href="{{ add_products }}">- Add products</a>
+                <a href="{{ products_list }}">- Products List</a>
+                <a href="{{ admin_details }}">- Personal Details</a>
+                <a href="logout">- Logout</a>
+            </div>
+            <div class="admin-content">
+                <div class="order-count">
+                    <span class="content-orders">Orders to Process: <a href="{{ order_interface }}">{{ count['admin'] }}</a></span>
+                </div>
+            </div>
         </div>
     {% endif %}
 

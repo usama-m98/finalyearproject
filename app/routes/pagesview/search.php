@@ -26,6 +26,24 @@ $app->get('/search', function(Request $request, Response $response) use ($app)
         ]);
 });
 
+function cleanString($app, $tainted)
+{
+    $validator = $app->getContainer()->get('validator');
+    $not_clean = $tainted;
+    $clean_string = null;
+    if(is_array($not_clean))
+    {
+        foreach ($not_clean as $key => $value)
+        {
+            $clean_string[$key] = $validator->sanitiseString($value);
+        }
+    }else{
+        $clean_string = $validator->sanitiseString($not_clean);
+    }
+
+    return $clean_string;
+}
+
 function getSearchQuery($app, $search)
 {
     $database_wrapper = $app->getContainer()->get('databaseConnection');

@@ -7,6 +7,14 @@ $app->get('/admininterface', function (Request $request, Response $response) use
     if(isset($_SESSION['user'])){
         if ($_SESSION['role'] == 'Admin' || $_SESSION['role'] == 'Root')
         {
+            $orders = array();
+            $orders['Root'] = ordersToBeAssigned($app);
+            $auth_info = getAuthInfo($app, $_SESSION['user']);
+            $orders['admin'] = getAssignedOrderData($app, $auth_info['user_id']);
+
+            $count['root'] = sizeof($orders['Root']);
+            $count['admin'] = sizeof($orders['admin']);
+
 
             return $this->view->render($response,
                 'admininterface.html.twig',
@@ -23,7 +31,8 @@ $app->get('/admininterface', function (Request $request, Response $response) use
                     'order_interface' => 'orders',
                     'add_products' => 'addproductsform',
                     'products_list' => 'productslist',
-                    'admin_details' => 'personaldetails'
+                    'admin_details' => 'personaldetails',
+                    'count' => $count
                 ]);
         }
     }else{
